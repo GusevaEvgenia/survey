@@ -1,0 +1,64 @@
+.margine-botton15{
+    margin-bottom: 15px;
+}
+
+.margine-botton0{
+    margin-bottom: 0px;
+}
+
+.margine-cenrto{
+    margin: 0 auto;
+}
+.margine-left50{
+    margin-left: 50px;
+}
+
+.margine-left30{
+    margin-left: 30px;
+}
+
+.margine-left60{
+    margin-left: 60px;
+}
+
+.margine-left0{
+    margin-left: 0px;
+}
+
+.margine-top20{
+    margin-top: 20px;
+}
+.width530{
+    width: 530px;
+    margin-bottom: 0px;
+}
+
+.width-height{
+    width: 300px;
+    height: 200px;
+}
+
+#result-analys th{
+    width: 300px;
+
+}
+
+#result-analys tr.no-border td,
+#result-analys tr.no-border th
+{
+    border: none;
+}
+
+.margine{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.width220{
+    width: 220px;
+}
+
+.firstText{
+    font-size: 15px;
+    line-height: 25px;
+}
