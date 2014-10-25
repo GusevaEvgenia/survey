@@ -2,7 +2,6 @@
 <div class="row-fluid">
     <div class="span10 offset1">
         <div class="thumbnail">
-
             <div class="page-header">
                 <h1 class="text-center">Название анкеты<br>
                     <small>
@@ -55,7 +54,6 @@
                     </p>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

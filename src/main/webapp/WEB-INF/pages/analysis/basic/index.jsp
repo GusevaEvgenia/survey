@@ -5,7 +5,7 @@
 
 <div class="row-fluid">
     <div class="span10 offset1">
-        <div class="page-header height120" style="background-image: url(/images/background.jpg); padding: 30px; color: #ffffff">
+        <div class="page-header height120 hero">
             <h1>Анализ собранных данных по выбранной анкете<!--br><small>Каталог сохраненных анкет:</small--></h1>
         </div>
         <jsp:include page="/WEB-INF/pages/analysis/_menu.jsp"/>
@@ -25,6 +25,7 @@
                 });
             });
         </script>
+
         <h4>Выберите вопросы для проведения анализа</h4>
         <form class="margine-left50" action="/forms/123/analysis/basic/methods" id="questions-form" method="GET">
             <input type="hidden" name="page" value="2">

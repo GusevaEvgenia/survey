@@ -5,7 +5,7 @@
 
 <div class="row-fluid">
     <div class="span10 offset1">
-        <div class="page-header height120" style="background-image: url(/images/background.jpg); padding: 30px; color: #ffffff">
+        <div class="page-header height120 hero">
             <h1>Анализ собранных данных по выбранной анкете<!--br><small>Каталог сохраненных анкет:</small--></h1>
         </div>
         <jsp:include page="/WEB-INF/pages/analysis/_menu.jsp"/>
@@ -66,7 +66,7 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="questionAll">
-                    <!--Предупреждение методах-->
+                    <!--Предупреждение о методах-->
                     <div class="alert <%if (false) {%>hidden<%}%>">
                         <button type="button" class="close" data-dismiss="alert">х</button>
                         <strong>Внимание!</strong> Выбор статистик зависит от шкалы вопроса

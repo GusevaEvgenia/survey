@@ -1,20 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--Подключение хейдера--%>
 <jsp:include page="/WEB-INF/pages/partials/header.jsp">
-    <jsp:param name="title" value="show"/>
+    <jsp:param name="title" value="Анкета"/>
 </jsp:include>
 
 <div class="row-fluid">
     <div class="span10 offset1">
-        <!--Заголовок страницы-->
-        <div class="page-header" style="background-image: url(/images/background.jpg); padding: 30px; color: #ffffff">
+        <%--Заголовок страницы--%>
+        <div class="page-header hero">
             <h1>Управляние анкетой<br>
-                <small style="color: #ffffff">
+                <small id="black_color">
                     Легко и быстро просматривайте свои анкеты, редактируйте и за ненадобностью удаляйте их.
                 </small>
             </h1>
         </div>
         <!--Предупреждение о новых ответах-->
-        <!--ПОДКЛЮЧИТЬ ЛОГИКУ-->
         <div class="alert <%if (false) {%>hidden<%}%>" >
             <button type="button" class="close" data-dismiss="alert">х</button>
             <strong>Внимание!</strong> У Вас есть новые ответы по текущей анкете.
@@ -52,6 +52,7 @@
                 </div>
             </div>
         </div>
+        <%--Управление анкетой--%>
         <div class="tab-content">
             <div class="tab-pane active" id="tab1">
                 <jsp:include page="/WEB-INF/pages/forms/_preview.jsp" />
@@ -68,5 +69,5 @@
         </div>
     </div>
 </div>
-
+<%--Подключение футера--%>
 <jsp:include page="/WEB-INF/pages/partials/footer.jsp"/>

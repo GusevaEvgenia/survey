@@ -26,12 +26,12 @@
                     <textarea class="width530" name="finish-text"  value="" rows="3"></textarea>
                 </p>
             </div>
-            <!--div class="margine-botton15">
+            <div class="margine-botton15">
                 <h4>Введите количество анкет необходимых для исследования</h4>
                 <p>
                     <input class="input-mini" name="number" type="number"  value="" >
                 </p>
-            </div-->
+            </div>
             <div>
                 <h4>Статус анкеты</h4>
                 <p>

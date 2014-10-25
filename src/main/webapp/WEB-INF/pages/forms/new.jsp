@@ -1,15 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--Подключение хейдера--%>
 <jsp:include page="/WEB-INF/pages/partials/header.jsp">
     <jsp:param name="title" value=""/>
 </jsp:include>
 
 <div class="row-fluid">
-    <!--УДАЛИТЬ СТИЛЬ-->
     <div class="span10 offset1">
-        <div class="page-header" style="background-image: url(/images/background.jpg); padding: 30px; color: #ffffff">
+        <%--Заголовок страницы--%>
+        <div class="page-header hero">
             <h1>Создание анкеты<!--br><small>Каталог сохраненных анкет:</small--></h1>
         </div>
+        <%--Форма для создания новой анкеты--%>
         <div class="row-fluid">
+            <%--Ввод информации--%>
             <div class="span8">
                 <form class="margine-botton0" id="save-form" action="/forms" method="POST">
                     <div class="margine-botton15">
@@ -38,11 +41,12 @@
                     </div>
                 </form>
             </div>
+            <%--Выбор логотипа анкеты--%>
             <div class="span4">
                 <h4>
                     Вставьте свой логотип анкеты
                     <br>
-                    <small>Его будете видеть только вы</small>
+                    <small>Его будете видеть только Вы</small>
                 </h4>
                 <form action="" enctype="multipart/form-data" method="post">
                     <p>
@@ -50,7 +54,7 @@
                         <input class="btn btn-primary" type="submit" value="Загрузить">
                     </p>
                 </form>
-                <img src="${false ? param.picture : "/img/form.jpg"}" width="180" height="200"  alt="">
+                <img src="${false ? param.picture : "/images/form.jpg"}" width="180" height="200"  alt="">
             </div>
         </div>
         <div class="row-fluid" >
@@ -60,5 +64,5 @@
         </div>
     </div>
 </div>
-
+<%--Подключение футера--%>
 <jsp:include page="/WEB-INF/pages/partials/footer.jsp"/>

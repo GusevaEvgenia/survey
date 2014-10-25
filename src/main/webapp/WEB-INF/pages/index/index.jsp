@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!--ИЗМЕНИТЬ ТИТЛ СТРАНИЦЫ-->
+<%--Подключение хейдера--%>
 <jsp:include page="/WEB-INF/pages/partials/header.jsp">
     <jsp:param name="title" value="Главная страница"/>
 </jsp:include>
-<!--Элемент Hero-->
-<div class="hero-unit" style="background-image: url('/images/background.jpg'); padding: 30px; color: #ffffff">
+<%--Элемент Hero--%>
+<div class="hero-unit hero">
     <h1>Проведи опрос легко с нами!</h1>
     <p>Зарегистрируйтесь и начните работать прямо сейчас.</p>
     <p>
@@ -13,9 +13,9 @@
         </a>
     </p>
 </div>
-<!--Колонки страницы-->
+<%--Колонки страницы--%>
 <div class="row-fluid">
-    <div class="span10 offset1" style="background-color: ">
+    <div class="span10 offset1">
         <div class="firstText" >
             <p>
                 <strong>Опрос</strong> – это метод сбора первичной информации, основанный на непосредственном (беседа, интервью)
@@ -36,10 +36,8 @@
             <img src="/images/firstPage1.png">
             <img src="/images/firstPage2.png">
             <img src="/images/firstPage3.png">
-            <div >
-
-            </div>
         </div>
     </div>
 </div>
+<%--Подключение футера--%>
 <jsp:include page="/WEB-INF/pages/partials/footer.jsp" />

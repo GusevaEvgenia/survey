@@ -9,11 +9,11 @@
             $('#preview-popup').modal('show');
         });
     });
-
 </script>
+
 <div class="thumbnail">
     <div class="row-fluid">
-
+        <%--Выбор вопроса--%>
         <div class="span3">
             <ul class="nav nav-list margine-top20">
                 <li class="nav-header">Типы вопросов</li>
@@ -26,6 +26,7 @@
                 <li><a href="#">Вопрос "шкала"</a></li>
             </ul>
         </div>
+        <%--Создание анкеты--%>
         <div class="span9">
             <div class="btn-group pull-right">
                 <a class="btn btn-info" id="form-preview" href="#">Просмотр анкеты</a>
@@ -193,7 +194,7 @@
     </div>
 </div>
 
-
+<%--всплывающее окно просмотра анкеты--%>
 <div class="modal fade" id="preview-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

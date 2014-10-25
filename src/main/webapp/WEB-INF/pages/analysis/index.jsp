@@ -4,9 +4,8 @@
 </jsp:include>
 
 <div class="row-fluid">
-    <!--УДАЛИТЬ СТИЛЬ-->
     <div class="span10 offset1">
-        <div class="page-header height120" style="background-image: url(/images/background.jpg); padding: 30px; color: #ffffff">
+        <div class="page-header height120 hero">
             <h1>Анализ данных<!--br><small>Каталог сохраненных анкет:</small--></h1>
         </div>
         <div class="row-fluid">

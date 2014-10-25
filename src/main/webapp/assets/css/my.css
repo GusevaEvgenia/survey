@@ -1,3 +1,13 @@
+.hero{
+    background-image: url('/images/background.jpg');
+    padding: 30px;
+    color: #ffffff
+}
+
+#black_color{
+    color: #ffffff;
+}
+
 .margine-botton15{
     margin-bottom: 15px;
 }
