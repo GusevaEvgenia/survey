@@ -15,6 +15,13 @@ public class IndexController extends AbstractController{
         return getView("index");
     }
 
+    @RequestMapping(method = RequestMethod.POST)
+    public String registerAction(ModelMap model) {
+        //model.addAttribute("message", "Hello world!");
+        return getView("index");
+    }
+
+
     @Override
     protected String getViewPath() {
         return "index";

@@ -5,8 +5,8 @@
 
 <div class="row-fluid">
     <div class="span10 offset1">
-        <div class="page-header height120" style="background-image: url(/images/background.jpg); padding: 30px; color: #ffffff">
-            <h1>Анализ собранных данных по выбранной анкете<!--br><small>Каталог сохраненных анкет:</small--></h1>
+        <div class="hero-unit hero">
+            <h2>Анализ собранных данных по выбранной анкете<!--br><small>Каталог сохраненных анкет:</small--></h2>
         </div>
 
         <jsp:include page="/WEB-INF/pages/analysis/_menu.jsp"/>

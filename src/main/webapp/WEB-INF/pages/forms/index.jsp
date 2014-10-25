@@ -7,8 +7,8 @@
 <div class="row-fluid">
     <div class="span10 offset1">
         <%--Заголовок страницы--%>
-        <div class="page-header hero">
-            <h1>Создавайте свои анкеты и управляйте ими прямо сейчас!<!--br><small>Каталог сохраненных анкет:</small--></h1>
+        <div class="hero-unit hero">
+            <h2>Создавайте свои анкеты и управляйте ими прямо сейчас!<!--br><small>Каталог сохраненных анкет:</small--></h2>
         </div>
         <%--Меню страницы--%>
         <div class="row-fluid">

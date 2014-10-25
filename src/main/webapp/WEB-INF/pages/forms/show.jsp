@@ -7,12 +7,12 @@
 <div class="row-fluid">
     <div class="span10 offset1">
         <%--Заголовок страницы--%>
-        <div class="page-header hero">
-            <h1>Управляние анкетой<br>
+        <div class="hero-unit hero">
+            <h2>Управляние анкетой<br>
                 <small id="black_color">
                     Легко и быстро просматривайте свои анкеты, редактируйте и за ненадобностью удаляйте их.
                 </small>
-            </h1>
+            </h2>
         </div>
         <!--Предупреждение о новых ответах-->
         <div class="alert <%if (false) {%>hidden<%}%>" >

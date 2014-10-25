@@ -1,43 +1,45 @@
 .hero{
     background-image: url('/images/background.jpg');
-    padding: 30px;
-    color: #ffffff
+    padding: 20px;
+    color: #ffffff;
+    margin-top: 45px;
 }
 
 #black_color{
     color: #ffffff;
 }
 
-.margine-botton15{
+.margin-botton15{
     margin-bottom: 15px;
 }
 
-.margine-botton0{
+.margin-botton0{
     margin-bottom: 0px;
 }
 
-.margine-cenrto{
+.margin-cenrto{
     margin: 0 auto;
 }
-.margine-left50{
+.margin-left50{
     margin-left: 50px;
 }
 
-.margine-left30{
+.margin-left30{
     margin-left: 30px;
 }
 
-.margine-left60{
+.margin-left60{
     margin-left: 60px;
 }
 
-.margine-left0{
+.margin-left0{
     margin-left: 0px;
 }
 
-.margine-top20{
-    margin-top: 20px;
-}
+.margin-top20{
+     margin-top: 20px;
+ }
+
 .width530{
     width: 530px;
     margin-bottom: 0px;
@@ -59,7 +61,7 @@
     border: none;
 }
 
-.margine{
+.margin{
     margin-bottom: 10px;
     margin-top: 10px;
 }
@@ -71,4 +73,10 @@
 .firstText{
     font-size: 15px;
     line-height: 25px;
+}
+
+.vertical-line{
+    height: 60px;
+    border-right: 1px solid #ffffff;
+    border-left: 1px solid #f2f2f2;
 }

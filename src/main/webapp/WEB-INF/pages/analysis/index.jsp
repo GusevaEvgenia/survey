@@ -5,8 +5,8 @@
 
 <div class="row-fluid">
     <div class="span10 offset1">
-        <div class="page-header height120 hero">
-            <h1>Анализ данных<!--br><small>Каталог сохраненных анкет:</small--></h1>
+        <div class="hero-unit hero">
+            <h2>Анализ данных<!--br><small>Каталог сохраненных анкет:</small--></h2>
         </div>
         <div class="row-fluid">
             <div class="span12 margine-botton15">
