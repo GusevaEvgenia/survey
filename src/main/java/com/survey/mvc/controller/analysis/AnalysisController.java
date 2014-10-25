@@ -1,5 +1,6 @@
-package com.survey.mvc.controller;
+package com.survey.mvc.controller.analysis;
 
+import com.survey.mvc.controller.AbstractController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ public class AnalysisController extends AbstractController {
     }
 
     @Override
-    String getViewPath() {
+    protected String getViewPath() {
         return "analysis";
     }
 }

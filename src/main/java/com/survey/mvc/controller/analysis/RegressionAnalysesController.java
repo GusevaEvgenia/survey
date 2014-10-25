@@ -1,5 +1,6 @@
-package com.survey.mvc.controller;
+package com.survey.mvc.controller.analysis;
 
+import com.survey.mvc.controller.AbstractController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/forms/{id}/analysis/regression")
-public class RegressionAnalysesController extends AbstractController{
+public class RegressionAnalysesController extends AbstractController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String indexAction(ModelMap model, @PathVariable("id") String id) {
@@ -26,7 +27,7 @@ public class RegressionAnalysesController extends AbstractController{
     }
 
     @Override
-    String getViewPath() {
+    protected String getViewPath() {
         return "analysis/regression";
     }
 }

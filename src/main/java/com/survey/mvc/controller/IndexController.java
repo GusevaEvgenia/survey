@@ -16,7 +16,7 @@ public class IndexController extends AbstractController{
     }
 
     @Override
-    String getViewPath() {
+    protected String getViewPath() {
         return "index";
     }
 }

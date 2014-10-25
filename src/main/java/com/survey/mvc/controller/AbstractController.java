@@ -6,5 +6,5 @@ public abstract class AbstractController {
         return getViewPath() + "/" + viewName;
     }
 
-    abstract String getViewPath();
+    protected abstract String getViewPath();
 }

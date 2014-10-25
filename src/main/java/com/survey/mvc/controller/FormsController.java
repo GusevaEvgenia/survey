@@ -33,7 +33,7 @@ public class FormsController extends AbstractController {
     }
 
     @Override
-    String getViewPath() {
+    protected String getViewPath() {
         return "forms";
     }
 }
