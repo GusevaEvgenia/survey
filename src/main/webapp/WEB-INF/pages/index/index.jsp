@@ -43,7 +43,7 @@
 </div>
 
 <%--форма решистрации--%>
-<form class="margine-botton0" id="form-reg" action="/" method="POST">
+<form class="margine-botton0 hidden" id="form-reg" action="/" method="POST">
     <div class="margine-botton15">
         <h4>Введите Ваше имя</h4>
         <p>

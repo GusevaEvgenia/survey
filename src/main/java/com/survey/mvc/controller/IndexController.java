@@ -11,14 +11,20 @@ public class IndexController extends AbstractController{
 
     @RequestMapping(method = RequestMethod.GET)
     public String indexAction(ModelMap model) {
-        //model.addAttribute("message", "Hello world!");
+        model.addAttribute("login", "true");
         return getView("index");
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String registerAction(ModelMap model) {
-        //model.addAttribute("message", "Hello world!");
+        //model.addAttribute("login", "true");
         return getView("index");
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/user")
+    public String userAction(ModelMap model) {
+        model.addAttribute("conectSM", "true");
+        return getView("user");
     }
 
 

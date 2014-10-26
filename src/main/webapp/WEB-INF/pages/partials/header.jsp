@@ -29,24 +29,24 @@
                 <div class="navbar-inner">
                     <div class="container-fluid offset1">
                                 <a class="brand margin" href="/">Главная</a>
-                                <ul class="nav hidden">
+                                <ul class="nav ${login=="true"? "hidden": ""}">
                                     <li class="vertical-line"></li>
                                     <li class="${param.active=="forms-index"? "active": ""} margin"><a href="/forms">Анкеты</a></li>
                                     <li class="vertical-line"></li>
                                     <li class="${param.active=="analysis"? "active": ""} margin"><a href="/analysis">Анализ данных</a></li>
                                     <li class="vertical-line"></li>
                                 </ul>
-                                <form class="navbar-form pull-right inline">
-                                    <input type="text" class="span2" placeholder="Введите email">
+                                <form class="navbar-form pull-right inline ${login=="true"? "": "hidden"}">
+                                    <input type="text" class="span2" placeholder="Введите логин">
                                     <input type="text" class="span2" placeholder="Введите пароль">
                                     <button type="submit" class="btn">Войти</button>
                                     <div>
                                         <a class="pull-right" id="form-registration" >Зарегистрироватся</a>
                                     </div>
                                 </form>
-                            <%--<p class="navbar-text pull-right margin">Привет, <a class="" href="/"> Евгения!</a> &nbsp;--%>
-                                <%--<a class="navbar-link pull-right" href="/">Выйти</a>--%>
-                            <%--</p>--%>
+                                <p class="navbar-text pull-right margin ${login=="true"? "hidden": ""}">Привет, <a class="" href="/user"> Евгения!</a> &nbsp;
+                                    <a class="navbar-link pull-right" href="/">Выйти</a>
+                                </p>
                     </div>
                 </div>
             </div>
