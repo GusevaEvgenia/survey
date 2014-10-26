@@ -43,37 +43,29 @@
 </div>
 
 <%--форма решистрации--%>
-<form class="margine-botton0 hidden" id="form-reg" action="/" method="POST">
-    <div class="margine-botton15">
-        <h4>Введите Ваше имя</h4>
-        <p>
-            <input class="input-large" name="name" type="type" size="100" name="#">
-        </p>
-    </div>
-    <div class="margine-botton15">
-        <h4>Введите логин для входа в систему</h4>
-        <p>
-            <input class="input-large" name="login" type="text" size="100" name="#">
-        </p>
-    </div>
-    <div class="margine-botton15">
-        <h4>Введите email</h4>
-        <p>
-            <input class="input-large" name="email" type="text" size="100" name="#">
-        </p>
-    </div>
-    <div class="margine-botton15">
-        <h4>Введите пароль</h4>
-        <p>
-            <input class="input-large" name="pass1" type="text" size="100" name="#">
-        </p>
-    </div>
-    <div class="margine-botton15">
-        <h4>Павторите пароль</h4>
-        <p>
-            <input class="input-large" name="pass2" type="password" size="100" name="#">
-        </p>
-    </div>
+<form class="margin-button0 hid " id="form-reg" action="/" method="POST">
+    <table class="width">
+        <tr>
+            <td><legend>Ваше имя </legend></td>
+            <td><input class="input-large" name="name" type="text" size="100"></td>
+        </tr>
+        <tr>
+            <td><legend>Логин для входа в систему</legend></td>
+            <td><input class="input-large" name="login" type="text" size="100"></td>
+        </tr>
+        <tr>
+            <td><legend>Email </legend></td>
+            <td><input class="input-large" name="email" type="email" size="100"></td>
+        </tr>
+        <tr>
+            <td><legend>Введите пароль </legend></td>
+            <td><input class="input-large" name="pass1" type="password" size="100"></td>
+        </tr>
+        <tr>
+            <td><legend>Павторите пароль </legend></td>
+            <td><input class="input-large" name="pass2" type="password" size="100"></td>
+        </tr>
+    </table>
 </form>
 <%--всплывающее окно регистрации--%>
 <div class="modal fade" id="reg-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -81,7 +73,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title text-center" id="myModalLabel">Регистрация</h4>
+                <h4 class="text-center font-size21" id="myModalLabel">Регистрация</h4>
             </div>
             <div class="modal-body">
 

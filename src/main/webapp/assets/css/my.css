@@ -9,11 +9,11 @@
     color: #ffffff;
 }
 
-.margin-botton15{
+.margin-button15{
     margin-bottom: 15px;
 }
 
-.margin-botton0{
+.margin-button0{
     margin-bottom: 0px;
 }
 
@@ -82,4 +82,8 @@
 }
 .width{
     width: 100%;
+}
+
+.font-size21{
+    font-size: 21px;
 }
