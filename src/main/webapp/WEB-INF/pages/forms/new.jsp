@@ -14,20 +14,20 @@
         <div class="row-fluid">
             <%--Ввод информации--%>
             <div class="span8">
-                <form class="margine-botton0" id="save-form" action="/forms" method="POST">
-                    <div class="margine-botton15">
+                <form class="margin-button0" id="save-form" action="/forms" method="POST">
+                    <div class="margin-button15">
                         <h4>Введите название анкеты</h4>
                         <p>
                             <input class="input-xxlarge" name="name" type="type" size="100" name="#">
                         </p>
                     </div>
-                    <div class="margine-botton15">
+                    <div class="margin-button15">
                         <h4>Введите краткое описание анкеты</h4>
                         <p>
                             <textarea class="width530" name="description" rows="3" ></textarea>
                         </p>
                     </div>
-                    <div class="margine-botton15">
+                    <div class="margin-button15">
                         <h4>Введите вводный текст анкеты:</h4>
                         <p>
                             <textarea class="width530" name="start-text" rows="3"></textarea>

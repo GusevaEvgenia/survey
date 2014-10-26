@@ -130,14 +130,14 @@
                 <%}%>
             </tr>
         </table>
-        <div class="dependence hidden margine-botton15">
+        <div class="dependence hidden margin-button15">
             <strong>Зависимость наблюдаемой связи</strong><br>
             Расчитаное значение хи-квадрата = 3.88<br>
             Критического значение хи-квадрата = 3.77<br>
             3.77>3.88
         </div>
 
-        <div class="strength_links hidden margine-botton15">
+        <div class="strength_links hidden margin-button15">
             <strong>Теснота связи</strong><br>
             Теснота связи = 0.55<br>
 

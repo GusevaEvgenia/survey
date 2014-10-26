@@ -106,7 +106,7 @@
         <div class="tab-pane active" id="step1">
             <h3>Поле корреляции</h3>
 
-            <div class="thumbnail margine-cenrto">
+            <div class="thumbnail margin-cenrto">
                 <img src="/images/graf2.png" alt="">
             </div>
             <br>

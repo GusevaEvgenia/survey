@@ -100,7 +100,7 @@
                         <input class="d_statictic" type="checkbox" name="dependence" value="1">
                         Статистическая зависимость наблюдаемой связи
                     </label>
-                    <div class="margine-left30 level hidden">
+                    <div class="margin-left30 level hidden">
                         Выберите уровень значимости
                         <select>
                             <option>0,5</option>

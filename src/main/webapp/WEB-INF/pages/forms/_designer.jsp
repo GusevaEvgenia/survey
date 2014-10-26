@@ -15,7 +15,7 @@
     <div class="row-fluid">
         <%--Выбор вопроса--%>
         <div class="span3">
-            <ul class="nav nav-list margine-top20">
+            <ul class="nav nav-list margin-top20">
                 <li class="nav-header">Типы вопросов</li>
                 <li><a href="#"><!--i class="icon-search"></i-->Вопрос с единичным выбором</a></li>
                 <li><a href="#">Вопрос с множественным выбором</a></li>

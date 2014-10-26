@@ -27,7 +27,7 @@
         </script>
 
         <h4>Выберите вопросы для проведения анализа</h4>
-        <form class="margine-left50" action="/forms/123/analysis/basic/methods" id="questions-form" method="GET">
+        <form class="margin-left50" action="/forms/123/analysis/basic/methods" id="questions-form" method="GET">
             <input type="hidden" name="page" value="2">
             <label class="checkbox">
                 <input id="all-questions" type="checkbox" checked="checked">

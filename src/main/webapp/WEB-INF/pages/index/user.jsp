@@ -10,7 +10,7 @@
             <h2>Персанальная страничка пользователя<!--br><small>Каталог сохраненных анкет:</small--></h2>
         </div>
         <div>
-            <form class="margin-botton0" id="" action="" method="POST">
+            <form class="margin-button0" id="" action="" method="POST">
                 <div class="row-fluid">
                     <div class="span8 offset2">
                         <legend>Информация о Вас</legend>

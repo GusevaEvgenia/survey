@@ -22,7 +22,7 @@
         </script>
     </head>
 
-    <body style="padding: 30px">
+    <body class="padding30">
         <div class="container-fluid">
             <!--Основная навигационная панель-->
             <div class="navbar navbar-fixed-top">

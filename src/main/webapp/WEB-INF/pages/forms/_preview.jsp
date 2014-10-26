@@ -10,7 +10,7 @@
                 </h1>
             </div>
             <!--Вопрос с одним вариантом ответа-->
-            <div class="row-fluid margine-botton15">
+            <div class="row-fluid margin-button15">
                 <div class="span10 offset1">
                     <p><strong>Введите сдесь текст вашего вопроса...</strong></p>
                     <p>
@@ -29,7 +29,7 @@
             </div>
             <!--Вопрос с несколькими вариантами ответа-->
             <div class="row-fluid">
-                <div class="span10 offset1 margine-botton15">
+                <div class="span10 offset1 margin-button15">
                     <p><strong>Введите сдесь текст вашего вопроса...</strong></p>
                     <p>
                         <label class="checkbox">
@@ -47,7 +47,7 @@
             </div>
             <!--Открытый вопрос-->
             <div class="row-fluid">
-                <div class="span10 offset1 margine-botton15">
+                <div class="span10 offset1 margin-button15">
                     <p><strong>Введите сдесь текст вашего вопроса...</strong></p>
                     <p>
                         <input type="type">

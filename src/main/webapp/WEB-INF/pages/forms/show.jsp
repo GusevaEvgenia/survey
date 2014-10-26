@@ -30,7 +30,7 @@
                     <option>Версия№1 От 14.05.2014</option>
                 </select>
             </div>
-            <div class="span5 margine">
+            <div class="span5 margin">
                 Последняя версия опроса: 3!
             </div>
         </div-->

@@ -3,12 +3,12 @@
     <div class="row-fluid">
         <div class="span10">
             <h5>Вариационный ряд:</h5>
-            <label class="checkbox margine-left30 type-method">
+            <label class="checkbox margin-left30 type-method">
                 <input class="type-method" type="checkbox" name="type" value="1">
                 Распределение частот значений переменной
             </label>
         </div>
-        <div class="span2 margine-top20">
+        <div class="span2 margin-top20">
             <label class="checkbox">
                 <input class="all-types ${param.types=="0" ? "all-settings" : ""}" type="checkbox"  data-container-id="${param.tab_name}">
                 Выбрать все
@@ -19,7 +19,7 @@
     <div class="row-fluid">
         <div class="span4">
             <em class="">Показатели центра распределения:</em>
-            <div class="margine-left30">
+            <div class="margin-left30">
                 <label class="checkbox ${(param.types=="0" || param.types=="1" || param.types=="2") ? "" : "hidden"}">
                     <input class="type-method" type="checkbox" name="type" value="2">
                     Среднее арифметическое
@@ -37,7 +37,7 @@
         <div class="span4 ${(param.types=="0" || param.types=="1" || param.types=="2") ? "" : "hidden"}">
             <em class="">Показатели вариации:</em>
             <br>
-            <div class="margine-left30">
+            <div class="margin-left30">
                 <label class="checkbox">
                     <input class="type-method" type="checkbox" name="type" value="5">
                     Размах вариации
@@ -63,7 +63,7 @@
         <div class="span4">
             <em class="">Показатели формы распределения:</em>
             <br>
-            <div class="margine-left30">
+            <div class="margin-left30">
                 <label class="checkbox">
                     <input class="type-method" type="checkbox" name="type" value="10">
                     Асимметрия
