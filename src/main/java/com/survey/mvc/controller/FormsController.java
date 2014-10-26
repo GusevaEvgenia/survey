@@ -35,6 +35,7 @@ public class FormsController extends AbstractController {
     @RequestMapping(method = RequestMethod.GET, value = "/{id:[0-9]+}")
       public String showAction(ModelMap model, @PathVariable("id") Integer id) {
         model.addAttribute("formId", id);
+        model.addAttribute("SMform", "false");
         return getView("show");
     }
 

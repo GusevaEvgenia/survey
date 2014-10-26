@@ -1,11 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="thumbnail">
+    <div ${SMform=="true"? "hidden": ""}>
     Статус ответа
     <select>
         <option>Новый</option>
         <option>Просмотренный</option>
         <option>Игнорировать при анализе</option>
     </select>
+        </div>
     <table class="table table-bordered">
         <tr>
             <th>№</th>

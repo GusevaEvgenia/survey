@@ -38,15 +38,17 @@
             <div class="span7">
                 <ul class="nav nav-pills">
                     <li class="active"><a href="#tab1" data-toggle="tab"><i class="icon-list-alt"></i> Анкета</a></li>
-                    <li><a href="#tab2" data-toggle="tab"><i class="icon-pencil"></i> Конструктор</a></li>
+                    <li class="${SMform=="true"? "hidden": ""}"><a href="#tab2" data-toggle="tab"><i class="icon-pencil"></i> Конструктор</a></li>
                     <li><a href="#tab3" data-toggle="tab"><i class="icon-check"></i> Ответы</a></li>
-                    <li><a href="#tab4" data-toggle="tab"><i class="icon-wrench"></i> Настройки</a></li>
+                    <li class="${SMform=="true"? "hidden": ""}"><a href="#tab4" data-toggle="tab"><i class="icon-wrench"></i> Настройки</a></li>
                     <li><a href="/forms/123/analysis/basic"><i class="icon-tasks"></i> Анализ</a></li>
                 </ul>
             </div>
             <div class="span5">
                 <div class="btn-group pull-right">
-                    <a class="btn btn-info" href=""><i class="icon-remove"></i> Удалить</a>
+                    ${SMform=="true"?
+                    "<a class=\"btn btn-info\" href=\"#\"><i class=\"icon-globe\"></i> Открыть в SM</a>" :
+                    "<a class=\"btn btn-info\" href=\"#\"><i class=\"icon-remove\"></i> Удалить</a>"}
                     <a class="btn btn-info" href=""><i class="icon-globe"></i> Получить ссылку</a>
                     <a class="btn btn-info" href=""><i class="icon-download-alt"></i> Сохранить в файл</a>
                 </div>
