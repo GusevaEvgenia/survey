@@ -4,10 +4,10 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.url">jdbc:mysql://localhost:3306</property>
+    <property name="connection.url">jdbc:mysql://localhost:3306/research</property>
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="connection.username">root</property>
-    <property name="connection.password">3385505405</property>
+      <property name="connection.password">3385505405</property>
       <mapping class="com.survey.mvc.entity.AnswerOptionsEntity"/>
       <mapping class="com.survey.mvc.entity.AnswersEntity"/>
       <mapping class="com.survey.mvc.entity.CompletedFormsEntity"/>

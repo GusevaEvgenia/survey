@@ -91,7 +91,7 @@ public class CompletedFormsEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_form", referencedColumnName = "id_form", nullable = false)
+    @JoinColumn(name = "id_form", referencedColumnName = "id_form", nullable = false, insertable = false, updatable = false)
     public FormsEntity getFormsByIdForm() {
         return formsByIdForm;
     }

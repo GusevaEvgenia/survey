@@ -68,7 +68,7 @@ public class AnswerOptionsEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_question", referencedColumnName = "id_question", nullable = false)
+    @JoinColumn(name = "id_question", referencedColumnName = "id_question", nullable = false, insertable = false, updatable = false)
     public QuestionsEntity getQuestionsByIdQuestion() {
         return questionsByIdQuestion;
     }

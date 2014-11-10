@@ -68,7 +68,7 @@ public class AnswersEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_cform", referencedColumnName = "id_cform", nullable = false)
+    @JoinColumn(name = "id_cform", referencedColumnName = "id_cform", nullable = false, insertable = false, updatable = false)
     public CompletedFormsEntity getCompletedFormsByIdCform() {
         return completedFormsByIdCform;
     }
@@ -78,7 +78,7 @@ public class AnswersEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_option", referencedColumnName = "id_option", nullable = false)
+    @JoinColumn(name = "id_option", referencedColumnName = "id_option", nullable = false, insertable = false, updatable = false)
     public AnswerOptionsEntity getAnswerOptionsByIdOption() {
         return answerOptionsByIdOption;
     }

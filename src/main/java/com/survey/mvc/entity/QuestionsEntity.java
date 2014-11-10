@@ -104,7 +104,7 @@ public class QuestionsEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_form", referencedColumnName = "id_form", nullable = false)
+    @JoinColumn(name = "id_form", referencedColumnName = "id_form", nullable = false, insertable = false, updatable = false)
     public FormsEntity getFormsByIdForm() {
         return formsByIdForm;
     }
@@ -114,7 +114,7 @@ public class QuestionsEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_qtype", referencedColumnName = "id_qtype", nullable = false)
+    @JoinColumn(name = "id_qtype", referencedColumnName = "id_qtype", nullable = false, insertable = false, updatable = false)
     public QuestionTypesEntity getQuestionTypesByIdQtype() {
         return questionTypesByIdQtype;
     }

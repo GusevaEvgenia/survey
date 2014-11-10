@@ -209,7 +209,7 @@ public class FormsEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_user", referencedColumnName = "id_user", nullable = false)
+    @JoinColumn(name = "id_user", referencedColumnName = "id_user", nullable = false, insertable = false, updatable = false)
     public UsersEntity getUsersByIdUser() {
         return usersByIdUser;
     }
