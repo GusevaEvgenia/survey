@@ -2,6 +2,7 @@ package com.survey.mvc.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**

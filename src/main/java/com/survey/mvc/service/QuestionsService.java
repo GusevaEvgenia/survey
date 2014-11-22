@@ -11,4 +11,5 @@ public interface QuestionsService {
     public QuestionsEntity getQuestion(int id);
     public void deleteQuestion(int id);
     public List<QuestionsEntity> getQuestions();
+    public List<QuestionsEntity> getQuestionByForm(int id);
 }

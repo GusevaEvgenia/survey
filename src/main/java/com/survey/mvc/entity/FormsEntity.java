@@ -1,7 +1,7 @@
 package com.survey.mvc.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.Collection;
 
 /**
@@ -17,8 +17,8 @@ public class FormsEntity {
     private String startText;
     private String finishText;
     private String picture;
-    private Timestamp dateStart;
-    private Timestamp dateFinish;
+    private Date dateStart;
+    private Date dateFinish;
     private Integer maximumForms;
     private Byte draft;
     private String link;
@@ -90,7 +90,7 @@ public class FormsEntity {
     @Basic
     @Column(name = "picture")
     public String getPicture() {
-        return picture;
+        return picture; //@TODO add here something normal
     }
 
     public void setPicture(String picture) {
@@ -99,21 +99,21 @@ public class FormsEntity {
 
     @Basic
     @Column(name = "date_start")
-    public Timestamp getDateStart() {
+    public Date getDateStart() {
         return dateStart;
     }
 
-    public void setDateStart(Timestamp dateStart) {
+    public void setDateStart(Date dateStart) {
         this.dateStart = dateStart;
     }
 
     @Basic
     @Column(name = "date_finish")
-    public Timestamp getDateFinish() {
+    public Date getDateFinish() {
         return dateFinish;
     }
 
-    public void setDateFinish(Timestamp dateFinish) {
+    public void setDateFinish(Date dateFinish) {
         this.dateFinish = dateFinish;
     }
 
@@ -218,7 +218,7 @@ public class FormsEntity {
         this.usersByIdUser = usersByIdUser;
     }
 
-    @OneToMany(mappedBy = "formsByIdForm")
+    @OneToMany(mappedBy = "formsByIdForm", fetch = FetchType.EAGER)
     public Collection<QuestionsEntity> getQuestionsesByIdForm() {
         return questionsesByIdForm;
     }

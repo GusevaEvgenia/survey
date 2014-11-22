@@ -39,4 +39,9 @@ public class QuestionsServiceImpl implements QuestionsService {
     public List<QuestionsEntity> getQuestions() {
         return questionDAO.getQuestions();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<QuestionsEntity> getQuestionByForm(int id) {
+        return questionDAO.getQuestionsByForm(id);
+    }
 }

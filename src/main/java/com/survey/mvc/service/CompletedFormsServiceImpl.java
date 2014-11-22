@@ -20,8 +20,8 @@ public class CompletedFormsServiceImpl implements CompletedFormsService {
     }
 
     @Override
-    public void updateCompletedForm(CompletedFormsEntity completedForm) {
-        completedFormsDAO.updateCompletedForm(completedForm);
+    public void updateStatus(int id, String status) {
+        completedFormsDAO.updateStatus(id, status);
     }
 
     @Override
@@ -32,5 +32,10 @@ public class CompletedFormsServiceImpl implements CompletedFormsService {
     @Override
     public List<CompletedFormsEntity> getCompletedForms() {
         return completedFormsDAO.getCompletedForms();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CompletedFormsEntity> getCompletedFormsByForm(int id){
+        return completedFormsDAO.getCompletedFormsByForm(id);
     }
 }

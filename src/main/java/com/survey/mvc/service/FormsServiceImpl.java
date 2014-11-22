@@ -39,4 +39,9 @@ public class FormsServiceImpl implements FormsService {
     public List<FormsEntity> getForms() {
         return formsDAO.getForms();
     }
+
+    @Override
+    public List<FormsEntity> getFormsByStatus(String name) {
+        return formsDAO.getFormsByStatus(name);
+    }
 }

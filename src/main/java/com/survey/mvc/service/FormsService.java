@@ -13,4 +13,5 @@ public interface FormsService {
     public FormsEntity getForm(int id);
     public void deleteForm(int id);
     public List<FormsEntity> getForms();
+    public List<FormsEntity> getFormsByStatus(String name);
 }

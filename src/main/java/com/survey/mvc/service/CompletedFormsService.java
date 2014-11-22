@@ -9,7 +9,8 @@ import java.util.List;
  */
 public interface CompletedFormsService {
     public void addCompletedForm(CompletedFormsEntity completedForm);
-    public void updateCompletedForm(CompletedFormsEntity completedForm);
+    public void updateStatus(int id, String status);
     public CompletedFormsEntity getCompletedForm(int id);
     public List<CompletedFormsEntity> getCompletedForms();
+    public List<CompletedFormsEntity> getCompletedFormsByForm(int id);
 }

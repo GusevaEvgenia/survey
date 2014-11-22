@@ -14,6 +14,7 @@ public class QuestionsEntity {
     private int idQtype;
     private String text;
     private String scale;
+    private int order;
     private Collection<AnswerOptionsEntity> answerOptionsesByIdQuestion;
     private FormsEntity formsByIdForm;
     private QuestionTypesEntity questionTypesByIdQtype;
@@ -66,6 +67,16 @@ public class QuestionsEntity {
 
     public void setScale(String scale) {
         this.scale = scale;
+    }
+
+    @Basic
+    @Column(name = "order")
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 
     @Override
