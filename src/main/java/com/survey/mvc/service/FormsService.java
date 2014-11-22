@@ -11,6 +11,7 @@ public interface FormsService {
     public void addForm(FormsEntity form);
     public void updateForm(FormsEntity form);
     public FormsEntity getForm(int id);
+    public FormsEntity getLoadedForm(int id);
     public void deleteForm(int id);
     public List<FormsEntity> getForms();
     public List<FormsEntity> getFormsByStatus(String name);

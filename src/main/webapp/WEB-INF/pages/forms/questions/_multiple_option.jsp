@@ -3,17 +3,15 @@
 <div class="row-fluid">
     <div class="span10 offset1 margin-button15">
         <p><strong>${question.text}</strong></p>
-        <p>
-            <label class="checkbox">
-                <input type="checkbox" value="option1" checked>
-                Можно выбрать несколько вариантов ответа
-            </label>
-        </p>
-        <p>
-            <label class="checkbox">
-                <input type="checkbox" value="option2">
-                Можно выбрать несколько вариантов ответа
-            </label>
-        </p>
+        <div>
+            <c:forEach items='${question.answerOptionsesByIdQuestion}' var="option">
+                <p>
+                    <label class="radio">
+                        <input type="checkbox" name="option[${question.idQuestion}][${option.idOption}]" value="${option.idOption}">
+                            ${option.text}
+                    </label>
+                </p>
+            </c:forEach>
+        </div>
     </div>
 </div>

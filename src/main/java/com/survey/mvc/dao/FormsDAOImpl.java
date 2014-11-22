@@ -1,15 +1,18 @@
 package com.survey.mvc.dao;
 
 import com.survey.mvc.entity.FormsEntity;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
+@Transactional
 public class FormsDAOImpl implements FormsDAO {
     @Autowired
     private SessionFactory sessionFactory;
@@ -40,6 +43,15 @@ public class FormsDAOImpl implements FormsDAO {
     @Override
     public FormsEntity getForm(int id) {
         FormsEntity form = (FormsEntity) getCurrentSession().get(FormsEntity.class, id);
+        return form;
+    }
+
+    @Override
+    public FormsEntity getForm(int id, boolean loaded) {
+        FormsEntity form = (FormsEntity) getCurrentSession().get(FormsEntity.class, id);
+        if(loaded) {
+            Hibernate.initialize(form.getQuestionsesByIdForm());
+        }
         return form;
     }
 

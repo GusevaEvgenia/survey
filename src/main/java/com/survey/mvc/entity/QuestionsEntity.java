@@ -105,7 +105,7 @@ public class QuestionsEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "questionsByIdQuestion")
+    @OneToMany(mappedBy = "questionsByIdQuestion", fetch = FetchType.EAGER)
     public Collection<AnswerOptionsEntity> getAnswerOptionsesByIdQuestion() {
         return answerOptionsesByIdQuestion;
     }

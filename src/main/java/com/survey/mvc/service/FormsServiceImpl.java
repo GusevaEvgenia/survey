@@ -31,6 +31,11 @@ public class FormsServiceImpl implements FormsService {
     }
 
     @Override
+    public FormsEntity getLoadedForm(int id) {
+        return formsDAO.getForm(id, true);
+    }
+
+    @Override
     public void deleteForm(int id) {
         formsDAO.deleteForm(id);
     }

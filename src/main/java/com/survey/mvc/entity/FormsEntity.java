@@ -218,7 +218,7 @@ public class FormsEntity {
         this.usersByIdUser = usersByIdUser;
     }
 
-    @OneToMany(mappedBy = "formsByIdForm", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "formsByIdForm")
     public Collection<QuestionsEntity> getQuestionsesByIdForm() {
         return questionsesByIdForm;
     }
