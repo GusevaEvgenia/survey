@@ -3,7 +3,6 @@
 <jsp:include page="/WEB-INF/pages/partials/header.jsp">
     <jsp:param name="title" value=""/>
 </jsp:include>
-
 <div class="row-fluid">
     <div class="span10 offset1">
         <%--Заголовок страницы--%>
@@ -14,11 +13,11 @@
         <div class="row-fluid">
             <%--Ввод информации--%>
             <div class="span8">
-                <form class="margin-button0" id="save-form" action="/forms" method="POST">
+                <form class="margin-button0" id="save-form" action="/forms" method="POST" commandName="form">
                     <div class="margin-button15">
                         <h4>Введите название анкеты</h4>
                         <p>
-                            <input class="input-xxlarge" name="name" type="type" size="100" name="#">
+                            <input class="input-xxlarge" name="title" type="type" size="100">
                         </p>
                     </div>
                     <div class="margin-button15">
@@ -30,15 +29,17 @@
                     <div class="margin-button15">
                         <h4>Введите вводный текст анкеты:</h4>
                         <p>
-                            <textarea class="width530" name="start-text" rows="3"></textarea>
+                            <textarea class="width530" name="startText" rows="3"></textarea>
                         </p>
                     </div>
                     <div class="">
                         <h4>Отображать текст на странице завершения:</h4>
                         <p>
-                            <textarea class="width530" name="finish-text" rows="3"></textarea>
+                            <textarea class="width530" name="finishText" rows="3"></textarea>
                         </p>
                     </div>
+                    <textarea class="hidden" name="status" rows="3">active</textarea>
+                    <textarea class="hidden" name="idUser" rows="3">1</textarea>
                 </form>
             </div>
             <%--Выбор логотипа анкеты--%>

@@ -8,6 +8,7 @@
         <link href="/css/bootstrap-responsive.css" rel="stylesheet">
         <link href="/css/my.css" rel="stylesheet">
         <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/forms.js"></script>
 
         <script>
             $(document).ready(function() {

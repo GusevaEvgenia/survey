@@ -43,7 +43,7 @@
 </div>
 
 <%--форма решистрации--%>
-<form class="margin-button0 hid " id="form-reg" action="/" method="POST">
+<form class="margin-button0 hidden" id="form-reg" action="/" method="POST">
     <table class="width">
         <tr>
             <td><legend>Ваше имя </legend></td>

@@ -91,3 +91,12 @@
 .padding30{
     padding: 30px;
 }
+
+.form-size{
+    height: 400px;
+    width: 247px;
+}
+
+#popup-answers .qa-row{
+    padding-bottom: 10px;
+}

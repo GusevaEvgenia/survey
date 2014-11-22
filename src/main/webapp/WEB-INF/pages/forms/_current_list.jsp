@@ -1,31 +1,35 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%int size = Integer.parseInt(request.getParameter("size"));%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%--Отображение каталога анкет--%>
+<%--<%int type = Integer.parseInt(request.getParameter("type"));%>--%>
+<%
+    pageContext.setAttribute("data", pageContext.findAttribute(request.getParameter("type")));
+%>
 <div class="thumbnails">
     <div class="row-fluid">
-        <% for (int i = 1; i <= size; i++) { %>
+        <%int j = 0;%>
+        <c:forEach items='${data}' var="i">
+            <% j++;%>
             <div class="span3">
                 <div class="thumbnail">
-                    <a href="/forms/123"><img src="/images/form.jpg" alt=""></a> <%--Картинка и id анкеты берется из БД--%>
+                    <a href="/forms/${i.idForm}/show"><img src="${i.picture==null ? "/images/form.jpg" : i.picture}" alt=""></a>
                     <p></p>
                     <div class="caption">
-                        <h4>Название анкеты</h4> <%--Берется из БД--%>
+                        <h4>${i.title}</h4>
+                        <p>${i.description}</p>
                         <p>
-                            Краткое описание:<br>
-                            Анкета для проведения опроса <%--Берется из БД--%>
-                        </p>
-                        <p>
-                            <a href="/forms/123" class="btn btn-primary">Подробнее</a> <%--id анкеты берется из БД--%>
-                            <a href="#" class="btn btn-primary pull-right">Удалить</a>
+                            <a href="/forms/${i.idForm}/show" class="btn btn-primary">Подробнее</a>
+                            <a href="#" class="btn btn-primary pull-right remove-btn"  data-id="${i.idForm}">Удалить</a>
                         </p>
                     </div>
                 </div>
             </div>
             <%--Переход на новую строку если уже есть 4 анкеты в строке--%>
-            <% if (i % 4 == 0) {%>
+            <% if (j % 4 == 0) {%>
     </div>
     <br>
     <div class="row-fluid">
             <% }%>
-        <%}%>
+        </c:forEach>
     </div>
 </div>

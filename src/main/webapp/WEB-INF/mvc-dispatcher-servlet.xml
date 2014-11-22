@@ -18,6 +18,7 @@
     <mvc:resources mapping="/images/*.*" location="/assets/images/"/>
     <mvc:resources mapping="/img/*.*" location="/assets/images/"/>
     <mvc:resources mapping="/js/*.js" location="/assets/js/"/>
+    <mvc:resources mapping="/uploads/*.*" location="/assets/uploads/"/>
 
     <mvc:annotation-driven />
 

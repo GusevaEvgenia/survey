@@ -1,8 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--Подключение хейдера--%>
-<jsp:include page="/WEB-INF/pages/partials/header.jsp">
-    <jsp:param name="title" value="Анкета"/>
-</jsp:include>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% String requestURI = request.getRequestURI(); %>
 
 <div class="row-fluid">
     <div class="span10 offset1">
@@ -37,39 +35,41 @@
         <div class="row-fluid">
             <div class="span7">
                 <ul class="nav nav-pills">
-                    <li class="active"><a href="#tab1" data-toggle="tab"><i class="icon-list-alt"></i> Анкета</a></li>
-                    <li class="${SMform=="true"? "hidden": ""}"><a href="#tab2" data-toggle="tab"><i class="icon-pencil"></i> Конструктор</a></li>
-                    <li><a href="#tab3" data-toggle="tab"><i class="icon-check"></i> Ответы</a></li>
-                    <li class="${SMform=="true"? "hidden": ""}"><a href="#tab4" data-toggle="tab"><i class="icon-wrench"></i> Настройки</a></li>
+                    <li class="<%= requestURI.contains("/forms/${form.idForm}")? "active": "" %>">
+                        <a href="/forms/${form.idForm}">
+                            <i class="icon-list-alt"></i> Анкета
+                        </a>
+                    </li>
+                    <li class="${user.token!=null ? "hidden": ""} ${form.status=="archive" ? "hidden": ""}
+                    <%= requestURI.contains("forms/${form.idForm}/designer")? "active": "" %>">
+                        <a href="/forms/${form.idForm}/designer">
+                            <i class="icon-pencil"></i> Конструктор
+                        </a>
+                    </li>
+                    <li class="<%= requestURI.contains("forms/${form.idForm}/answers")? "active": "" %>">
+                        <a href="/forms/${form.idForm}/answers">
+                            <i class="icon-check"></i> Ответы
+                        </a>
+                    </li>
+                    <li class="${user.token!=null ? "hidden": ""} ${form.status=="archive" ? "hidden": ""}
+                     <%= requestURI.contains("forms/${form.idForm}/settings")? "active": "" %>">
+                        <a href="/forms/${form.idForm}/settings">
+                            <i class="icon-wrench"></i> Настройки
+                        </a>
+                    </li>
                     <li><a href="/forms/123/analysis/basic"><i class="icon-tasks"></i> Анализ</a></li>
                 </ul>
             </div>
             <div class="span5">
                 <div class="btn-group pull-right">
-                    ${SMform=="true"?
-                    "<a class=\"btn btn-info\" href=\"#\"><i class=\"icon-globe\"></i> Открыть в SM</a>" :
-                    "<a class=\"btn btn-info\" href=\"#\"><i class=\"icon-remove\"></i> Удалить</a>"}
+                    <c:if test='${user.token!=null}'>
+                        <a class="btn btn-info" href="#"><i class="icon-globe"></i> Открыть в SM</a>
+                    </c:if>
+                    <c:if test='${user.token==null}'>
+                        <a class="btn btn-info remove-btn1" href="#" data-id="${form.idForm}"><i class="icon-remove"></i> Удалить</a>
+                    </c:if>
                     <a class="btn btn-info" href=""><i class="icon-globe"></i> Получить ссылку</a>
                     <a class="btn btn-info" href=""><i class="icon-download-alt"></i> Сохранить в файл</a>
                 </div>
             </div>
         </div>
-        <%--Управление анкетой--%>
-        <div class="tab-content">
-            <div class="tab-pane active" id="tab1">
-                <jsp:include page="/WEB-INF/pages/forms/_preview.jsp" />
-            </div>
-            <div class="tab-pane" id="tab2">
-                <jsp:include page="/WEB-INF/pages/forms/_designer.jsp" />
-            </div>
-            <div class="tab-pane" id="tab3">
-                <jsp:include page="/WEB-INF/pages/forms/_answers.jsp" />
-            </div>
-            <div class="tab-pane" id="tab4">
-                <jsp:include page="/WEB-INF/pages/forms/_settings.jsp" />
-            </div>
-        </div>
-    </div>
-</div>
-<%--Подключение футера--%>
-<jsp:include page="/WEB-INF/pages/partials/footer.jsp"/>

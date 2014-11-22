@@ -14,9 +14,10 @@
         <div class="row-fluid">
             <div class="span5">
                 <ul class="nav nav-pills">
-                    <li class="active"><a href="#tab1" data-toggle="tab">Каталог новых анкет</a></li>
-                    <li><a class="" href="#tab2" data-toggle="tab">Архив</a></li>
-                    <li><a class="" href="#tab3" data-toggle="tab">Анкеты SurveyMonkey</a></li>
+                    <li class="active"><a href="#tab1" data-toggle="tab">Активные анкеты</a></li>
+                    <li><a class="" href="#tab2" data-toggle="tab">Новые анкеты</a></li>
+                    <li><a class="" href="#tab3" data-toggle="tab">Архив</a></li>
+                    <li><a class="${user.token==null ? "hidden" : ""}" href="#tab4" data-toggle="tab">Анкеты SurveyMonkey</a></li>
                 </ul>
             </div>
             <div class="span3 offset4">
@@ -27,17 +28,28 @@
         </div>
         <%--Каталог анкет--%>
         <div class="tab-content">
-            <%--Новые анкеты--%>
+            <%--Активные анкеты--%>
             <div class="tab-pane active" id="tab1">
-                <jsp:include page="/WEB-INF/pages/forms/_current_list.jsp?size=${new}"  />
+                <jsp:include page="/WEB-INF/pages/forms/_current_list.jsp">
+                    <jsp:param name="type" value="active" />
+                </jsp:include>
+            </div>
+            <%--Новые анкеты--%>
+            <div class="tab-pane" id="tab2">
+                <jsp:include page="/WEB-INF/pages/forms/_current_list.jsp">
+                    <jsp:param name="type" value="new" />
+                </jsp:include>
             </div>
             <%--Архив--%>
-            <div class="tab-pane" id="tab2">
-                <jsp:include page="/WEB-INF/pages/forms/_current_list.jsp?size=${archive}" />
+            <div class="tab-pane" id="tab3">
+                <jsp:include page="/WEB-INF/pages/forms/_current_list.jsp" >
+                    <jsp:param name="type" value="archive" />
+                </jsp:include>
             </div>
             <%--Анкеты SurveyMonkey--%>
+            <%--@TODO спрятать таб и вывод анкет--%>
             <div class="tab-pane" id="tab3">
-                <jsp:include page="/WEB-INF/pages/forms/_current_list.jsp?size=${monkey}" />
+                <%--<jsp:include page="/WEB-INF/pages/forms/_current_list.jsp?type=${monkey}" />--%>
             </div>
         </div>
     </div>

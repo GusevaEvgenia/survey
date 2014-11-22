@@ -1,4 +1,10 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%--Подключение хейдера--%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="/WEB-INF/pages/partials/header.jsp">
+    <jsp:param name="title" value="Анкета"/>
+</jsp:include>
+
 <script>
     $(document).ready(function() {
         $("#form-preview").click(function() {
@@ -10,6 +16,8 @@
         });
     });
 </script>
+
+<jsp:include page="/WEB-INF/pages/forms/form/_menu.jsp"/>
 
 <div class="thumbnail">
     <div class="row-fluid">
@@ -211,3 +219,9 @@
         </div>
     </div>
 </div>
+
+
+</div>
+</div>
+<%--Подключение футера--%>
+<jsp:include page="/WEB-INF/pages/partials/footer.jsp"/>
