@@ -30,7 +30,7 @@ public class UserDAOImpl implements UserDAO {
         getCurrentSession().update(userToUpdate);
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
     public UsersEntity getUser(int id) {
         UsersEntity user = (UsersEntity) getCurrentSession().get(UsersEntity.class, id);
         return user;
