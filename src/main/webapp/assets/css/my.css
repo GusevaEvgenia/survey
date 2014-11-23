@@ -100,3 +100,9 @@
 #popup-answers .qa-row{
     padding-bottom: 10px;
 }
+
+#question-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
