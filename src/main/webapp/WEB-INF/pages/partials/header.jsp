@@ -4,11 +4,15 @@
     <head>
         <title>${param.title}</title>
         <meta charset="UTF-8">
+        <link href="/css/jquery-ui.css" rel="stylesheet">
         <link href="/css/bootstrap.css" rel="stylesheet">
         <link href="/css/bootstrap-responsive.css" rel="stylesheet">
         <link href="/css/my.css" rel="stylesheet">
         <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
         <script type="text/javascript" src="/js/forms.js"></script>
+        <script type="text/javascript" src="/js/designer.js"></script>
+        <script type="text/javascript" src="/js/template.js"></script>
 
         <script>
             $(document).ready(function() {
