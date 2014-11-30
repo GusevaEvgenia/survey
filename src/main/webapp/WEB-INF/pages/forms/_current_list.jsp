@@ -12,13 +12,13 @@
             <% j++;%>
             <div class="span3">
                 <div class="thumbnail">
-                    <a href="/forms/${i.idForm}/show"><img src="${i.picture==null ? "/images/form.jpg" : i.picture}" alt=""></a>
+                    <a href="/forms/${i.idForm}"><img src="${i.picture==null ? "/images/form.jpg" : i.picture}" alt=""></a>
                     <p></p>
                     <div class="caption">
                         <h4>${i.title}</h4>
                         <p>${i.description}</p>
                         <p>
-                            <a href="/forms/${i.idForm}/show" class="btn btn-primary">Подробнее</a>
+                            <a href="/forms/${i.idForm}" class="btn btn-primary">Подробнее</a>
                             <a href="#" class="btn btn-primary pull-right remove-btn"  data-id="${i.idForm}">Удалить</a>
                         </p>
                     </div>
