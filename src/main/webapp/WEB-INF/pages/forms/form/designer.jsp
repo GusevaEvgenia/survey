@@ -25,12 +25,12 @@
         <%--Создание анкеты--%>
         <div class="span9">
             <div class="btn-group pull-right">
-                <button class="btn btn-info" form="question-list" type="submit">Сохранить</button>
-                <a class="btn btn-info" id="form-preview" href="#">Просмотр анкеты</a>
+                <button class="btn btn-info" form="question-list" <%--id="save-form"  data-id="${form.idForm}" --%>type="submit">Сохранить</button>
+                <button class="btn btn-info" form="question-list" id="form-preview" data-id="${form.idForm}" type="submit">Просмотр анкеты</button>
                 <a class="btn btn-info" href="#">Опубликовать</a>
             </div><br><br>
             <div class="row-fluid">
-                <div class="span9 offset1" id="form-constructor">
+                <div class="span9 offset1" id="form-constructor" data-init='${form.json}'>
                     <div class="hidden" id="template-container">
                         <div id="main-template">
                             <!--Общая "коробочка" для всех типов вопросов-->
@@ -41,7 +41,7 @@
                                         <strong class="title muted"></strong>
                                         <span class="icon-remove icon-remove-option pull-right"></span>
                                     </div>
-                                    <textarea class="question" name="questions[0].text" placeholder=" Введите текст вашего вопроса"></textarea>
+                                    <textarea class="question" name="questions[0].text" placeholder="Введите текст вашего вопроса"></textarea>
                                 </div>
                                 <div class="designer-item-body">
 
@@ -50,81 +50,93 @@
                         </div>
                         <div id="single-option" data-title="Вопрос с единичным выбором">
                             <!--Вопрос с единичным выбором-->
-                            <label class="radio option-index">
-                                <input type="radio" checked>
-                                <textarea class="option" name="questions[0].options[0].text" placeholder=" Введите текст варианта ответа"></textarea>
-                                <span class="icon-plus"></span>
-                                <span class="icon-minus"></span>`
-                            </label>
-                            <label class="radio option-index">
-                                <input type="radio">
-                                <textarea class="option" name="questions[0].options[2].text" placeholder="Введите текст варианта ответа"></textarea>
-                                <span class="icon-plus"></span>
-                                <span class="icon-minus"></span>
-                            </label>
+                            <div class="options-container">
+                                <label class="radio option-index">
+                                    <input type="radio">
+                                    <textarea class="option" name="questions[0].options[0].text" placeholder=" Введите текст варианта ответа"></textarea>
+                                    <span class="icon-plus"></span>
+                                    <span class="icon-minus"></span>`
+                                </label>
+                                <label class="radio option-index">
+                                    <input type="radio">
+                                    <textarea class="option" name="questions[0].options[1].text" placeholder="Введите текст варианта ответа"></textarea>
+                                    <span class="icon-plus"></span>
+                                    <span class="icon-minus"></span>
+                                </label>
+                            </div>
                         </div>
                         <div id="multiple-option" data-title="Вопрос с множественным выбором">
                             <!--Вопрос с множественным выбором-->
-                            <label class="checkbox">
-                                <input type="checkbox" checked>
-                                <textarea class="option" name="checkbox" placeholder=" Введите текст варианта ответа"></textarea>
-                                <span class="icon-plus"></span>
-                                <span class="icon-minus"></span>
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox">
-                                <textarea class="option" name="checkbox" placeholder=" Введите текст варианта ответа"></textarea>
-                                <span class="icon-plus"></span>
-                                <span class="icon-minus"></span>
-                            </label>
+                            <div class="options-container">
+                                <label class="checkbox option-index">
+                                    <input type="checkbox">
+                                    <textarea class="option" name="questions[0].options[0].text" placeholder=" Введите текст варианта ответа"></textarea>
+                                    <span class="icon-plus"></span>
+                                    <span class="icon-minus"></span>
+                                </label>
+                                <label class="checkbox option-index">
+                                    <input type="checkbox">
+                                    <textarea class="option" name="questions[0].options[1].text" placeholder=" Введите текст варианта ответа"></textarea>
+                                    <span class="icon-plus"></span>
+                                    <span class="icon-minus"></span>
+                                </label>
+                            </div>
                         </div>
                         <div id="number-option" data-title="Вопрос с числовым ответом">
                             <!--Вопрос с числовым ответом-->
-                            <label>
-                                <input type="number" placeholder="Поле для ввода чисел">
-                            </label>
+                            <div class="options-container">
+                                <label class="option-index">
+                                    <input class="option" type="number" placeholder="Поле для ввода чисел">
+                                </label>
+                            </div>
                         </div>
                         <div id="select-option" data-title="Вопрос-список">
                             <!--Вопрос-список-->
-                            <label>
-                                <textarea class="option" name="select" placeholder=" Введите текст варианта ответа"></textarea>
-                                <span class="icon-plus"></span>
-                                <span class="icon-minus"></span>
-                            </label>
-                            <label>
-                                <textarea class="option" name="select" placeholder=" Введите текст варианта ответа"></textarea>
-                                <span class="icon-plus"></span>
-                                <span class="icon-minus"></span>
-                            </label>
+                            <div class="options-container">
+                                <label class="option-index">
+                                    <textarea class="option" name="questions[0].options[0].text" placeholder=" Введите текст варианта ответа"></textarea>
+                                    <span class="icon-plus"></span>
+                                    <span class="icon-minus"></span>
+                                </label>
+                                <label class="option-index">
+                                    <textarea class="option" name="questions[0].options[1].text" placeholder=" Введите текст варианта ответа"></textarea>
+                                    <span class="icon-plus"></span>
+                                    <span class="icon-minus"></span>
+                                </label>
+                            </div>
                         </div>
                         <div id="matrix-single-option" data-title='Вопрос "матрица" с единичным выбором'>
                             <!--Вопрос "матрица" с единичным выбором-->
                             <div class="clearfix">
                                 <div class="span4">
                                     <strong>Строки матрицы</strong>
-                                    <label>
-                                        <textarea class="matrix-option" name="text" placeholder="Текст строки"></textarea>
-                                        <span class="icon-plus"></span>
-                                        <span class="icon-minus"></span>
-                                    </label>
-                                    <label>
-                                        <textarea class="matrix-option" name="text" placeholder="Текст строки"></textarea>
-                                        <span class="icon-plus"></span>
-                                        <span class="icon-minus"></span>
-                                    </label>
+                                    <div class="options-container">
+                                        <label class="option-index">
+                                            <textarea class="matrix-option" name="questions[0].options[0].text" placeholder="Текст строки"></textarea>
+                                            <span class="icon-plus"></span>
+                                            <span class="icon-minus"></span>
+                                        </label>
+                                        <label class="option-index">
+                                            <textarea class="matrix-option" name="questions[0].options[1].text" placeholder="Текст строки"></textarea>
+                                            <span class="icon-plus"></span>
+                                            <span class="icon-minus"></span>
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="span4">
                                     <strong>Столбцы матрицы</strong>
-                                    <label>
-                                        <textarea class="matrix-option" name="text" placeholder="Текст столбца"></textarea>
-                                        <span class="icon-plus"></span>
-                                        <span class="icon-minus"></span>
-                                    </label>
-                                    <label>
-                                        <textarea class="matrix-option" name="text" placeholder="Текст столбца"></textarea>
-                                        <span class="icon-plus"></span>
-                                        <span class="icon-minus"></span>
-                                    </label>
+                                    <div class="matrix-options-container">
+                                        <label class="option-index">
+                                            <textarea class="matrix-option" name="questions[0].options[0].textMatrix" placeholder="Текст столбца"></textarea>
+                                            <span class="icon-plus"></span>
+                                            <span class="icon-minus"></span>
+                                        </label>
+                                        <label class="option-index">
+                                            <textarea class="matrix-option" name="questions[0].options[1].textMatrix" placeholder="Текст столбца"></textarea>
+                                            <span class="icon-plus"></span>
+                                            <span class="icon-minus"></span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                                <%-- <table>
@@ -179,29 +191,33 @@
                             <div class="clearfix">
                                 <div class="span4">
                                     <strong>Строки матрицы</strong>
-                                    <label>
-                                        <textarea class="matrix-option" name="text" placeholder="Текст строки"></textarea>
-                                        <span class="icon-plus"></span>
-                                        <span class="icon-minus"></span>
-                                    </label>
-                                    <label>
-                                        <textarea class="matrix-option" name="text" placeholder="Текст строки"></textarea>
-                                        <span class="icon-plus"></span>
-                                        <span class="icon-minus"></span>
-                                    </label>
+                                    <div class="options-container">
+                                        <label class="option-index">
+                                            <textarea class="matrix-option" name="text" placeholder="Текст строки"></textarea>
+                                            <span class="icon-plus"></span>
+                                            <span class="icon-minus"></span>
+                                        </label>
+                                        <label class="option-index">
+                                            <textarea class="matrix-option" name="text" placeholder="Текст строки"></textarea>
+                                            <span class="icon-plus"></span>
+                                            <span class="icon-minus"></span>
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="span4">
                                     <strong>Столбцы матрицы</strong>
-                                    <label>
-                                        <textarea class="matrix-option" name="text" placeholder="Текст столбца"></textarea>
-                                        <span class="icon-plus"></span>
-                                        <span class="icon-minus"></span>
-                                    </label>
-                                    <label>
-                                        <textarea class="matrix-option" name="text" placeholder="Текст столбца"></textarea>
-                                        <span class="icon-plus"></span>
-                                        <span class="icon-minus"></span>
-                                    </label>
+                                    <div class="matrix-options-container">
+                                        <label class="option-index">
+                                            <textarea class="matrix-option" name="text" placeholder="Текст столбца"></textarea>
+                                            <span class="icon-plus"></span>
+                                            <span class="icon-minus"></span>
+                                        </label>
+                                        <label class="option-index">
+                                            <textarea class="matrix-option" name="text" placeholder="Текст столбца"></textarea>
+                                            <span class="icon-plus"></span>
+                                            <span class="icon-minus"></span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <%--<table>
@@ -252,7 +268,9 @@
                             </table>--%>
                         </div>
                     </div>
-                    <form:form id="question-list" action="/forms/${form.idForm}/designer" method="post" commandName="form">
+                    <%--method="post"  action="/forms/${form.idForm}/designer"--%>
+                    <form:form id="question-list" method="post" action="/forms/${form.idForm}/designer" commandName="form">
+
                     </form:form>
                 </div>
             </div>

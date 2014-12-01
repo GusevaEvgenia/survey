@@ -1,5 +1,8 @@
 package com.survey.mvc.entity;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
@@ -225,5 +228,17 @@ public class FormsEntity {
 
     public void setQuestionsesByIdForm(Collection<QuestionsEntity> questionsesByIdForm) {
         this.questionsesByIdForm = questionsesByIdForm;
+    }
+    @Transient
+    public JsonObject getJson() {
+        JsonObject result = new JsonObject();
+        if (questionsesByIdForm != null) {
+            JsonArray questions = new JsonArray();
+            for(QuestionsEntity q: getQuestionsesByIdForm()) {
+                questions.add(q.getJson());
+            }
+            result.add("questions", questions);
+        }
+        return result;
     }
 }

@@ -1,5 +1,8 @@
 package com.survey.mvc.entity;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -132,5 +135,51 @@ public class QuestionsEntity {
 
     public void setQuestionTypesByIdQtype(QuestionTypesEntity questionTypesByIdQtype) {
         this.questionTypesByIdQtype = questionTypesByIdQtype;
+    }
+
+    @Transient
+    public String getTemplateName(){
+        String name = "";
+        switch(idQtype){
+            case 1 :
+                name = "single-option";
+                break;
+            case 2 :
+                name = "multiple-option";
+                break;
+            case 3 :
+                name = "number-option";
+                break;
+            case 4 :
+                name = "select-option";
+                break;
+            case 5 :
+                name = "matrix-single-option";
+                break;
+            case 6 :
+                name = "matrix-multiple-option";
+                break;
+        }
+        return name;
+    }
+
+    @Transient
+    public JsonObject getJson() {
+        JsonObject result = new JsonObject();
+        result.addProperty("idForm", getIdForm());
+        result.addProperty("idQuestion", getIdQuestion());
+        result.addProperty("idQtype", getIdQtype());
+        result.addProperty("text", getText());
+        result.addProperty("scale", getScale());
+        result.addProperty("order", getOrder());
+        result.addProperty("templateName", getTemplateName());
+        if (answerOptionsesByIdQuestion != null) {
+            JsonArray options = new JsonArray();
+            for(AnswerOptionsEntity ao: getAnswerOptionsesByIdQuestion()) {
+                options.add(ao.getJson());
+            }
+            result.add("options", options);
+        }
+        return result;
     }
 }

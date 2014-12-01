@@ -5,6 +5,7 @@ package com.survey.mvc.model.designer;
  */
 public class Question {
     protected String text;
+    protected int idType;
     protected Option[] options;
 
     public Question() {
@@ -16,6 +17,14 @@ public class Question {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public int getIdType() {
+        return idType;
+    }
+
+    public void setIdType(int idType) {
+        this.idType = idType;
     }
 
     public Option[] getOptions() {

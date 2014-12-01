@@ -1,5 +1,7 @@
 package com.survey.mvc.entity;
 
+import com.google.gson.JsonObject;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -12,6 +14,8 @@ public class AnswerOptionsEntity {
     private int idOption;
     private int idQuestion;
     private String text;
+    private String textMatrix;
+    private Integer order;
     private QuestionsEntity questionsByIdQuestion;
     private Collection<AnswersEntity> answersesByIdOption;
 
@@ -43,6 +47,26 @@ public class AnswerOptionsEntity {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Basic
+    @Column(name = "text_matrix")
+    public String getTextMatrix() {
+        return textMatrix;
+    }
+
+    public void setTextMatrix(String textMatrix) {
+        this.textMatrix = textMatrix;
+    }
+
+    @Basic
+    @Column(name = "order")
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 
     @Override
@@ -84,5 +108,16 @@ public class AnswerOptionsEntity {
 
     public void setAnswersesByIdOption(Collection<AnswersEntity> answersesByIdOption) {
         this.answersesByIdOption = answersesByIdOption;
+    }
+
+    @Transient
+    public JsonObject getJson() {
+        JsonObject result = new JsonObject();
+        result.addProperty("idOption", getIdOption());
+        result.addProperty("idQuestion", getIdQuestion());
+        result.addProperty("text", getText());
+        result.addProperty("textMatrix", getTextMatrix());
+        result.addProperty("order", getOrder());
+        return result;
     }
 }
