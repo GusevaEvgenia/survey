@@ -56,6 +56,7 @@ public class FormsController extends AbstractController {
     @RequestMapping(method = RequestMethod.GET, value = "/{id:[0-9]+}")
       public String showAction(ModelMap model, @PathVariable("id") Integer id) {
         model.addAttribute("form", formsService.getLoadedForm(id));
+        model.addAttribute("designer", formsService.getDesignerByFormId(id));
         model.addAttribute("user", userService.getUser(1));
         return getView("form/show");
     }

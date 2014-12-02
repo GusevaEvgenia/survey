@@ -28,6 +28,13 @@ public class FormsDAOImpl implements FormsDAO {
 
     @Override
     public void updateForm(FormsEntity form) {
+        if(!getCurrentSession().contains(form)) {
+            form = prepareEntity(form);
+        }
+        getCurrentSession().update(form);
+    }
+
+    protected FormsEntity prepareEntity(FormsEntity form) {
         FormsEntity formToUpdate = getForm(form.getIdForm());
         formToUpdate.setTitle(form.getTitle());
         formToUpdate.setDescription(form.getDescription());
@@ -37,7 +44,7 @@ public class FormsDAOImpl implements FormsDAO {
         formToUpdate.setDateFinish(form.getDateFinish());
         formToUpdate.setMaximumForms(form.getMaximumForms());
         formToUpdate.setStatus(form.getStatus());
-        getCurrentSession().update(formToUpdate);
+        return formToUpdate;
     }
 
     @Override

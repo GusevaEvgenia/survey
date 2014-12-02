@@ -26,7 +26,7 @@
         <div class="span9">
             <div class="btn-group pull-right">
                 <button class="btn btn-info" form="question-list" <%--id="save-form"  data-id="${form.idForm}" --%>type="submit">Сохранить</button>
-                <button class="btn btn-info" form="question-list" id="form-preview" data-id="${form.idForm}" type="submit">Просмотр анкеты</button>
+                <a class="btn btn-info" id="form-preview" data-id="${form.idForm}" >Просмотр анкеты</a>
                 <a class="btn btn-info" href="#">Опубликовать</a>
             </div><br><br>
             <div class="row-fluid">
@@ -84,9 +84,9 @@
                         </div>
                         <div id="number-option" data-title="Вопрос с числовым ответом">
                             <!--Вопрос с числовым ответом-->
-                            <div class="options-container">
-                                <label class="option-index">
-                                    <input class="option" type="number" placeholder="Поле для ввода чисел">
+                            <div>
+                                <label>
+                                    <input type="number" placeholder="Поле для ввода чисел">
                                 </label>
                             </div>
                         </div>
@@ -268,9 +268,9 @@
                             </table>--%>
                         </div>
                     </div>
+                    <%--<form:form method="post" action="/forms/${form.idForm}/preview" commandName="form" />--%>
                     <%--method="post"  action="/forms/${form.idForm}/designer"--%>
-                    <form:form id="question-list" method="post" action="/forms/${form.idForm}/designer" commandName="form">
-
+                    <form:form id="question-list" method="post" commandName="form">
                     </form:form>
                 </div>
             </div>

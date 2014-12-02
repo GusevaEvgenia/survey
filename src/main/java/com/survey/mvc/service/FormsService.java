@@ -1,6 +1,7 @@
 package com.survey.mvc.service;
 
 import com.survey.mvc.entity.FormsEntity;
+import com.survey.mvc.model.designer.Designer;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface FormsService {
     public void deleteForm(int id);
     public List<FormsEntity> getForms();
     public List<FormsEntity> getFormsByStatus(String name);
+    public Designer getDesignerByFormId(int id);
+    public void designer(Designer designer, int formId);
 }

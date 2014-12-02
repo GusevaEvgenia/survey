@@ -2,6 +2,7 @@ package com.survey.mvc.entity;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -173,7 +174,7 @@ public class QuestionsEntity {
         result.addProperty("scale", getScale());
         result.addProperty("order", getOrder());
         result.addProperty("templateName", getTemplateName());
-        if (answerOptionsesByIdQuestion != null) {
+        if (Hibernate.isInitialized(answerOptionsesByIdQuestion)) {
             JsonArray options = new JsonArray();
             for(AnswerOptionsEntity ao: getAnswerOptionsesByIdQuestion()) {
                 options.add(ao.getJson());

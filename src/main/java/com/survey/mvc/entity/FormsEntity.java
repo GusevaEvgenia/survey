@@ -2,6 +2,7 @@ package com.survey.mvc.entity;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -232,7 +233,7 @@ public class FormsEntity {
     @Transient
     public JsonObject getJson() {
         JsonObject result = new JsonObject();
-        if (questionsesByIdForm != null) {
+        if (Hibernate.isInitialized(questionsesByIdForm)) {
             JsonArray questions = new JsonArray();
             for(QuestionsEntity q: getQuestionsesByIdForm()) {
                 questions.add(q.getJson());

@@ -5,7 +5,7 @@
 </jsp:include>
 
 <jsp:include page="/WEB-INF/pages/forms/form/_menu.jsp"/>
-<jsp:include page="/WEB-INF/pages/forms/form/_form.jsp"/>
+<jsp:include page="/WEB-INF/pages/forms/form/form.jsp"/>
 
     </div>
 </div>

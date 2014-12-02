@@ -19,10 +19,9 @@ var Designer = {
             var id = $(this).data('id');
             designer.preview(id);
         });
-        /*$("#save-form").click(function() {
-            var id = $(this).data('id');
-            designer.save(id);
-        });*/
+        $("#save-form").click(function() {
+            designer.save($(this).attr('form'));
+        });
         $(this.questionList).sortable({
             handle: ".icon-resize-vertical",
             revert: true,
@@ -80,22 +79,18 @@ var Designer = {
     preview: function(id) {
         $.ajax('/forms/' + id + '/designer/preview', {
             method: 'POST',
-            commandName: 'form',
-            success: function() {
-                // var name = $("input[name='name']").val();
-                var form = $(".popup_form").html();
-                this.modalPopup.find(".modal-body").html(/*"<h2>" + name + "</h2>" + */form);
+            data: $("#question-list").serialize(),
+            success: function(response) {
+                this.modalPopup.find(".modal-body").html(/*"<h2>" + name + "</h2>" + */response);
                 this.modalPopup.modal('show');
             }
         });
-    }
+    },
 
-   /* save: function(id){
-        $.ajax('/forms/' + id + '/designer', {
-            method: 'POST',
-            commandName: 'form'
-        });
-    }*/
+    save: function(id, formId){
+        var form = $("#"+formId);
+        form.submit();
+    }
 };
 
 $(document).ready(function() {

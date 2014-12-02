@@ -2,13 +2,16 @@
 <!--Вопрос с несколькими вариантами ответа-->
 <div class="row-fluid">
     <div class="span10 offset1 margin-button15">
-        <p><strong>${question.text}</strong></p>
+        <p><strong>${designer.questions[i].text}</strong></p>
         <div>
-            <c:forEach items='${question.answerOptionsesByIdQuestion}' var="option">
+            <c:forEach var="j" begin="0" end="${designer.questions[i].size}">
                 <p>
                     <label class="radio">
-                        <input type="checkbox" name="option[${question.idQuestion}][${option.idOption}]" value="${option.idOption}">
-                            ${option.text}
+                        <input
+                                type="checkbox"
+                                name="option[${designer.questions[i].idQuestion}][${designer.questions[i].options[j].idOption}]"
+                                value="${designer.questions[i].options[j].idOption}">
+                        ${designer.questions[i].options[j].text}
                     </label>
                 </p>
             </c:forEach>
