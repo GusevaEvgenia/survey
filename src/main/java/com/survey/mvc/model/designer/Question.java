@@ -11,7 +11,7 @@ public class Question {
     protected String text;
     protected int idType;
     protected Option[] options;
-    protected int size;
+    protected String scale;
 
     public Question() {
     }
@@ -20,6 +20,7 @@ public class Question {
         this.idQuestion = entity.getIdQuestion();
         this.text = entity.getText();
         this.idType = entity.getIdQtype();
+        this.scale = entity.getScale();
         AnswerOptionsEntity[] entities = entity.getAnswerOptionsesByIdQuestion().toArray(new AnswerOptionsEntity[0]);
         Option[] options = new Option[entities.length];
         for (int i = 0; i < entities.length; i++) {
@@ -27,7 +28,6 @@ public class Question {
         }
 
         this.options = options;
-        this.size = options.length - 1;
     }
 
     public int getIdQuestion() {
@@ -62,11 +62,15 @@ public class Question {
         this.options = options;
     }
 
-    public int getSize() {
-        return size;
+    public String getScale() {
+        return scale;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public void setScale(String scale) {
+        this.scale = scale;
+    }
+
+    public int getSize() {
+        return options.length-1;
     }
 }

@@ -68,8 +68,27 @@
                     <c:if test='${user.token==null}'>
                         <a class="btn btn-info remove-btn1" href="#" data-id="${form.idForm}"><i class="icon-remove"></i> Удалить</a>
                     </c:if>
-                    <a class="btn btn-info" href=""><i class="icon-globe"></i> Получить ссылку</a>
+                    <a class="btn btn-info" id="btn-link" data-href="${form.link}"><i class="icon-globe"></i> Получить ссылку</a>
                     <a class="btn btn-info" href=""><i class="icon-download-alt"></i> Сохранить в файл</a>
                 </div>
             </div>
         </div>
+
+
+            <%--всплывающее окно ссылки на анкету--%>
+            <div class="modal fade" id="link-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Ваша ссылка на текущую анкету</h4>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>

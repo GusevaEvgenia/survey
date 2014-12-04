@@ -7,6 +7,7 @@ import com.survey.mvc.entity.QuestionsEntity;
 import com.survey.mvc.model.designer.Designer;
 import com.survey.mvc.model.designer.Option;
 import com.survey.mvc.model.designer.Question;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Transactional
@@ -62,6 +64,10 @@ public class FormsServiceImpl implements FormsService {
         return new Designer(getForm(id));
     }
 
+    public Designer getDesignerByForm(FormsEntity form) {
+        return new Designer(form);
+    }
+
     @Override
     public void designer(Designer designer, int formId) {
         Question[] questions = designer.getQuestions();
@@ -90,5 +96,16 @@ public class FormsServiceImpl implements FormsService {
         }
         f.setQuestionsesByIdForm(questionsEntities);
         updateForm(f);
+    }
+
+    @Override
+    public FormsEntity getFormByLink(String hash) {
+        List<FormsEntity> forms = formsDAO.getFormByLink(hash);
+        if(forms.size() != 1) {
+            return null;
+        }
+        FormsEntity form= forms.get(0);
+        Hibernate.initialize(form.getQuestionsesByIdForm());
+        return form;
     }
 }

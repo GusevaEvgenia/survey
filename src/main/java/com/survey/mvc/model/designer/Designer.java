@@ -7,7 +7,6 @@ import com.survey.mvc.entity.QuestionsEntity;
  */
 public class Designer {
     protected Question[] questions;
-    protected int size;
 
     public Designer() {
     }
@@ -20,7 +19,6 @@ public class Designer {
         }
 
         this.questions = questions;
-        this.size = questions.length - 1;
     }
 
     public Question[] getQuestions() {
@@ -32,10 +30,6 @@ public class Designer {
     }
 
     public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
+        return questions.length-1;
     }
 }

@@ -32,4 +32,17 @@ $(document).ready(function(){
         window.location.href = url;
 
     });
+    $("#btn_hash").click(function(){
+        var hash ='';
+        while(hash.length < 20)
+            hash += Math.random().toString(36);
+        //$("link").text(hash);
+        $('#link').attr('value', hash);
+    });
+    $('#btn-link').click(function(){
+        var href = $(this).data('href');
+        var link = "http://localhost:8080/forms/link/" + href;
+        $('#link-popup').find(".modal-body").html("<a href='"+link+"'target='_blank'>"+link+"</a>");
+        $('#link-popup').modal('show');
+    });
 });

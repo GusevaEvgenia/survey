@@ -33,6 +33,9 @@
                         <c:when test="${designer.questions[i].idType == 6}">
                             <%@include file="/WEB-INF/pages/forms/questions/_matrix_multiple_option.jsp"%>
                         </c:when>
+                        <c:otherwise>
+                           Неизвестный тип<br>
+                        </c:otherwise>
                     </c:choose>
                 </c:forEach>
             </div>

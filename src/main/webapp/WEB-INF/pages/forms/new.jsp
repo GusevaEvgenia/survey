@@ -38,8 +38,9 @@
                             <textarea class="width530" name="finishText" rows="3"></textarea>
                         </p>
                     </div>
-                    <textarea class="hidden" name="status" rows="3">active</textarea>
-                    <textarea class="hidden" name="idUser" rows="3">1</textarea>
+                    <textarea class="hidden" name="status">active</textarea>
+                    <textarea class="hidden" name="idUser">1</textarea>
+                    <input type="hidden" id="link" name="link" value="1111">
                 </form>
             </div>
             <%--Выбор логотипа анкеты--%>
@@ -60,7 +61,7 @@
         </div>
         <div class="row-fluid" >
             <div class="span2">
-                <button class="btn btn-primary btn-block" type="submit" form="save-form">Создать</button>
+                <button class="btn btn-primary btn-block" id="btn_hash" type="submit" form="save-form">Создать</button>
             </div>
         </div>
     </div>

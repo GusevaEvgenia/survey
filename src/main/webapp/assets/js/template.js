@@ -30,6 +30,7 @@ DesignerTemplate.prototype.initEvents = function() {
 };
 DesignerTemplate.prototype.initValues = function(data) {
     this.$('.question').val(data['text']);
+    this.$('.question-scale').val(data['scale']);
     var template = this.$('.option-index').first().clone();
     var optionsContainer = this.$('.options-container');
     optionsContainer.empty();
@@ -47,12 +48,14 @@ DesignerTemplate.prototype.reindex = function(question){
         var questionId = typeof question == "undefined" ? "$1" : question;
         var newName = name.replace(/questions\[(\d+)\].options\[(\d+)\](\..*)/, "questions[" + questionId + "].options[" + i + "]$3");
         option.attr("name", newName);
-    }
+    };
     this.$('.options-container').find(".option-index").each(indexer);
     this.$('.matrix-options-container').find(".option-index").each(indexer);
 
     if (typeof question != "undefined") {
         this.$(".question").attr("name", "questions[" + question + "].text");
+        this.$(".type-question").attr("name", "questions[" + question + "].idType");
+        this.$(".question-scale").attr("name", "questions[" + question + "].scale");
     }
 };
 DesignerTemplate.prototype.remove = function() {

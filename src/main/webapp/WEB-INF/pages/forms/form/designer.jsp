@@ -6,6 +6,11 @@
     <jsp:param name="title" value="Анкета"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/pages/forms/form/_menu.jsp"/>
+<script>
+    $(document).ready(function() {
+        Designer.init();
+    });
+</script>
 
 <div class="thumbnail">
     <div class="row-fluid">
@@ -46,9 +51,18 @@
                                 <div class="designer-item-body">
 
                                 </div>
+                                <div>
+                                    <select class="question-scale" name="question[0].scale">
+                                        <option value="nominal">номинальная</option>
+                                        <option value="ordinal">ординарная</option>
+                                        <option value="interval">интервальная</option>
+                                        <option value="ratio">абсолютная</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div id="single-option" data-title="Вопрос с единичным выбором">
+                            <input class="type-question" type="hidden" name="questions[0].idType" value="1">
                             <!--Вопрос с единичным выбором-->
                             <div class="options-container">
                                 <label class="radio option-index">
@@ -66,6 +80,7 @@
                             </div>
                         </div>
                         <div id="multiple-option" data-title="Вопрос с множественным выбором">
+                            <input class="type-question" type="hidden" name="questions[0].idType" value="2">
                             <!--Вопрос с множественным выбором-->
                             <div class="options-container">
                                 <label class="checkbox option-index">
@@ -83,6 +98,7 @@
                             </div>
                         </div>
                         <div id="number-option" data-title="Вопрос с числовым ответом">
+                            <input class="type-question" type="hidden" name="questions[0].idType" value="3">
                             <!--Вопрос с числовым ответом-->
                             <div>
                                 <label>
@@ -91,6 +107,7 @@
                             </div>
                         </div>
                         <div id="select-option" data-title="Вопрос-список">
+                            <input class="type-question" type="hidden" name="questions[0].idType" value="4">
                             <!--Вопрос-список-->
                             <div class="options-container">
                                 <label class="option-index">
@@ -106,6 +123,7 @@
                             </div>
                         </div>
                         <div id="matrix-single-option" data-title='Вопрос "матрица" с единичным выбором'>
+                            <input class="type-question" type="hidden" name="questions[0].idType" value="5">
                             <!--Вопрос "матрица" с единичным выбором-->
                             <div class="clearfix">
                                 <div class="span4">
@@ -187,6 +205,7 @@
                                 </table>--%>
                         </div>
                         <div id="matrix-multiple-option" data-title='Вопрос "матрица" с множественным выбором'>
+                            <input class="type-question" type="hidden" name="questions[0].idType" value="6">
                             <!--Вопрос "матрица" с множественным выбором-->
                             <div class="clearfix">
                                 <div class="span4">

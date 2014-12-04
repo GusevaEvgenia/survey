@@ -77,4 +77,10 @@ public class FormsDAOImpl implements FormsDAO {
         return getCurrentSession().createQuery("from FormsEntity forms where forms.status like :name")
                 .setString("name", statusName).list();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<FormsEntity> getFormByLink(String hash) {
+        return getCurrentSession().createQuery("from FormsEntity forms where forms.link like :hash")
+                .setString("hash", hash).list();
+    }
 }

@@ -39,6 +39,7 @@ public class DesignerController extends AbstractController{
 
     @RequestMapping(method = RequestMethod.POST, value = "/preview")
     public String previewAction(ModelMap model, @ModelAttribute("form") Designer designer, @PathVariable("id") Integer id) {
+        model.addAttribute("form", formsService.getForm(id));
         model.addAttribute("designer", designer);
         return getView("form");
     }

@@ -77,12 +77,13 @@ var Designer = {
     },
 
     preview: function(id) {
+        var self = this;
         $.ajax('/forms/' + id + '/designer/preview', {
             method: 'POST',
             data: $("#question-list").serialize(),
             success: function(response) {
-                this.modalPopup.find(".modal-body").html(/*"<h2>" + name + "</h2>" + */response);
-                this.modalPopup.modal('show');
+                self.modalPopup.find(".modal-body").html(/*"<h2>" + name + "</h2>" + */response);
+                self.modalPopup.modal('show');
             }
         });
     },
@@ -92,7 +93,3 @@ var Designer = {
         form.submit();
     }
 };
-
-$(document).ready(function() {
-    Designer.init();
-});

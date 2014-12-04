@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!--Вопрос с одним вариантом ответа-->
 <div class="row-fluid margin-button15">
     <div class="span10 offset1">

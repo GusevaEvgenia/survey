@@ -15,4 +15,5 @@ public interface FormsDAO {
     public void deleteForm(int id);
     public List<FormsEntity> getForms();
     public List<FormsEntity> getFormsByStatus(String name);
+    public List<FormsEntity> getFormByLink(String hash);
 }
