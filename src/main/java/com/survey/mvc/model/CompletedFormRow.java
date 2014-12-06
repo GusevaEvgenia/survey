@@ -15,6 +15,11 @@ public class CompletedFormRow {
         this.status = status;
     }
 
+    public CompletedFormRow(int id, String status, ArrayList<CompleteAnswer> answers) {
+        this(id, status);
+        this.answers = answers;
+    }
+
     public ArrayList<CompleteAnswer> getAnswers() {
         return answers;
     }

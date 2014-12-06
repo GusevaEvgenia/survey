@@ -3,6 +3,7 @@ package com.survey.mvc.dao;
 import com.survey.mvc.entity.AnswersEntity;
 import com.survey.mvc.model.CompleteAnswer;
 import com.survey.mvc.model.CompletedFormRow;
+import com.survey.mvc.model.analysis.data.AnalysisData;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -87,6 +88,25 @@ public class AnswersDAOImpl implements AnswersDAO {
     @SuppressWarnings("unchecked")
     public ArrayList<CompletedFormRow> getAnswersByIdCompletedForm(int id, int idCompForm) {
         return processAnswers(getQuery().setInteger("id", id).setInteger("idCF", idCompForm));
+    }
+
+    @Override
+    public ArrayList<AnalysisData> getAnalysisData(int id) {
+        Query q = getCurrentSession().createQuery("SELECT new map(q.idQuestion as id, q.scale as scale, a.idOption as answer,  a.text as answerT) \n" +
+                "FROM QuestionsEntity q, AnswerOptionsEntity ao, AnswersEntity a \n" +
+                "WHERE ao.idQuestion=:id and q.idQuestion = ao.idQuestion and ao.idOption = a.idOption")
+                .setInteger("id", id);
+        ArrayList<HashMap<String, String>> result = (ArrayList<HashMap<String, String>>) q.list();
+        ArrayList<AnalysisData> data = new ArrayList<AnalysisData>();
+        for(HashMap r : result){
+            AnalysisData a = new AnalysisData(
+                    (Integer) (r.get("answer") == null ? r.get("answerT") : r.get("answer")),
+                    (String) r.get("scale"),
+                    (Integer) r.get("id")
+            );
+            data.add(a);
+        }
+        return data;
     }
 
     private Query getQuery() {
