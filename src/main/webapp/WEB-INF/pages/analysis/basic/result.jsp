@@ -1,6 +1,8 @@
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.ArrayList" %>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%
     String[] raw_types = request.getParameterValues("type");
     if (raw_types == null) {
@@ -18,39 +20,39 @@
     });
 </script>
 <button class="bb pull-left btn btn-primary">Назад</button><br><br>
-<!--Вариационны ряд-->
-<div class="<%= types.contains("1") ? "" : "hidden"%>">
-    <h5 >Вариационны ряд:</h5>
-    <table class="table table-bordered">
-        <tr>
-            <th>№</th>
-            <th>Вариант ответа</th>
-            <th>Выбранное количество</th>
-            <th>Выбрано(%)</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>10</td>
-            <td>0.66%</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>2</td>
-            <td>5</td>
-            <td>0.33%</td>
-        </tr>
-    </table>
+<c:if test="${fn:contains(basic.types,1)}">
+    <!--Вариационны ряд-->
+    <div>
+        <h5 >Вариационны ряд:</h5>
+        <table class="table table-bordered">
+            <tr>
+                <th>№</th>
+                <th>Вариант ответа</th>
+                <th>Выбранное количество</th>
+                <th>Выбрано(%)</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>10</td>
+                <td>0.66%</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2</td>
+                <td>5</td>
+                <td>0.33%</td>
+            </tr>
+        </table>
 
-    <img src="/images/graf.png" alt="">
+        <img src="/images/graf.png" alt="">
 
-</div>
-<br>
-
+    </div>
+</c:if>
 <table id="result-analys" class="table">
     <tr class="<%= types.contains("2") ? "" : "hidden"%>">
         <th>Среднее арифметическое</th>
-        <td>7.5</td>
+        <td>${basic.average}</td>
     </tr>
     <tr class="<%= types.contains("3") ? "" : "hidden"%>">
         <th>Мода</th>

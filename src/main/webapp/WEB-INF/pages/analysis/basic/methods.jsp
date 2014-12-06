@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="/WEB-INF/pages/partials/header.jsp">
     <jsp:param name="title" value=""/>
 </jsp:include>
@@ -19,12 +21,13 @@
                 });
                 $(".analys-all").click(function() {
                     var form = $("#questionAll").find(".analys-method");
+                    var id = $(this).data('id-form');
                     if (form.serialize() === '') {
                         alert('Необходимо выбрать хотя бы 1 параметр для анализа');
                         return;
                     }
                     $(".ba-quation-tab").each(function() {
-                        analys_data($(this), form);
+                        analys_data($(this), id, form);
                     });
                     setTimeout(function() {
                         $('.question-lable a').first().click();
@@ -32,21 +35,30 @@
                 });
                 $(".analys-quation").click(function() {
                     var tab = $("#" + $(this).data('tab-name'));
-                    analys_data(tab);
+                    var id = $(this).data('id-form');
+                    analys_data(tab, id);
                 });
             });
 
-            function analys_data(tab, form) {
+            function analys_data(tab, id, form) {
+                var data, single = false;
                 if (typeof form === "undefined") {
                     form = $(tab).find(".analys-method");
+                    single=true;
                 }
-                var data = form.serialize();
+
+                data = form.serialize();
+
                 if (data === '') {
                     alert('Необходимо выбрать хотя бы 1 параметр для анализа');
                     return;
                 }
+                if (!single){
+                    data += "&idQuestion=" + $(tab).find(".analys-method").find('input[name="idQuestion"]').val();
+                }
+
                 $.ajax({
-                    url: "/forms/123/analysis/basic/result",
+                    url: "/forms/"+id+"/analysis/basic/result",
                     data: data,
                     success: function(analys_data) {
                         $(tab).find(".ba-settings").addClass("hidden");
@@ -58,11 +70,12 @@
         <div class="tabbable tabs-left">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#questionAll" data-toggle="tab">Настройки</a></li>
-                <% int size = request.getParameterValues("questions").length;
-                    for (int i = 1; i <= size; i++) {
-                        String value = request.getParameterValues("questions")[i - 1];%>
-                <li class="question-lable"><a href="#question<%=value%>" data-toggle="tab">Вопрос№<%=value%></a></li>
-                <%}%>
+                <%--<c:forEach begin="0" end="${fn:length(selectQ)-1}" var="q">--%>
+                <c:forEach begin="0" end="${questions.size()-1}" var="q">
+                    <li class="question-lable">
+                        <a href="#question${questions[q].idQuestion}" data-toggle="tab">Вопрос№${q+1}</a>
+                    </li>
+                </c:forEach>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="questionAll">
@@ -79,30 +92,30 @@
                         <jsp:param name="types" value="0"/>
                         <jsp:param name="tab_name" value="questionAll"/>
                     </jsp:include>
-                    <button class="analys-all pull-left btn btn-primary">Провести анализ</button>
+                    <button class="analys-all pull-left btn btn-primary" data-id-form="${form.idForm}">Провести анализ</button>
 
                 </div>
-                <%for (int i = 1; i <= size; i++) {
-                    String value = request.getParameterValues("questions")[i - 1];
-                    String tab_id = "question" + value;%>
-                <div class="tab-pane ba-quation-tab" id="<%=tab_id%>">
-                    <div class="ba-settings">
-                        Доступны только те статистики которые допустимы для данного вопроса
-                        <jsp:include page="/WEB-INF/pages/analysis/basic/_types.jsp">
-                            <jsp:param name="types" value="1"/>
-                            <jsp:param name="tab_name" value="<%=tab_id%>" />
-                        </jsp:include>
-                        <button class="analys-quation pull-left btn btn-primary" data-tab-name="<%=tab_id%>">Провести анализ</button>
+                <c:forEach begin="0" end="${questions.size()-1}" var="q1">
+                    <div class="tab-pane ba-quation-tab" id="question${questions[q1].idQuestion}">
+                        <div class="ba-settings">
+                            <h4>Вопрос: ${questions[q1].text} </h4>
+                            Доступны только те статистики которые допустимы для данного вопроса
+                            <jsp:include page="/WEB-INF/pages/analysis/basic/_types.jsp">
+                                <jsp:param name="types" value="${questions[q1].scale}"/>
+                                <jsp:param name="tab_name" value="question${questions[q1].idQuestion}"/>
+                                <jsp:param name="idQuestion" value="${questions[q1].idQuestion}"/>
+                            </jsp:include>
+                            <button class="analys-quation pull-left btn btn-primary" data-tab-name="question${questions[q1].idQuestion}" data-id-form="${form.idForm}">Провести анализ</button>
+                        </div>
+                        <div class="ba-analyse-result hidden"></div>
                     </div>
-                    <div class="ba-analyse-result hidden"></div>
-                </div>
-                <%}%>
+                </c:forEach>
             </div>
 
         </div>
         <ul class="pager">
             <li class="previous">
-                <a href="/forms/123/analysis/basic">&larr; Назад</a>
+                <a href="/forms/${form.idForm}/analysis/basic">&larr; Назад</a>
             </li>
         </ul>
 

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="/WEB-INF/pages/partials/header.jsp">
     <jsp:param name="title" value=""/>
 </jsp:include>
@@ -27,18 +28,18 @@
         </script>
 
         <h4>Выберите вопросы для проведения анализа</h4>
-        <form class="margin-left50" action="/forms/123/analysis/basic/methods" id="questions-form" method="GET">
-            <input type="hidden" name="page" value="2">
+        <form class="margin-left50" action="/forms/${form.idForm}/analysis/basic/methods" id="questions-form" method="GET">
+           <%-- <input type="hidden" name="page" value="2">--%>
             <label class="checkbox">
                 <input id="all-questions" type="checkbox" checked="checked">
                 Выбрать все
             </label>
-            <% for (int i = 1; i < 6; i++) {%>
-            <label class="checkbox">
-                <input class="questions" type="checkbox" name="questions" value="<%=i%>" checked="checked">
-                Вопрос№<%=i%>
-            </label>
-            <%}%>
+            <c:forEach items='${questions}' var="question">
+                <label class="checkbox">
+                    <input class="questions" type="checkbox" name="question" value="${question.idQuestion}" checked="checked">
+                        ${question.text}
+                </label>
+            </c:forEach>
         </form>
         <ul class="pager">
             <li class="next">

@@ -57,7 +57,7 @@
                             <i class="icon-wrench"></i> Настройки
                         </a>
                     </li>
-                    <li><a href="/forms/123/analysis/basic"><i class="icon-tasks"></i> Анализ</a></li>
+                    <li><a href="/forms/${form.idForm}/analysis/basic"><i class="icon-tasks"></i> Анализ</a></li>
                 </ul>
             </div>
             <div class="span5">

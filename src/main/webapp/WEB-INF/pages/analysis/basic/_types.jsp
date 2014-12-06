@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
 <form class="analys-method">
+    <input type="hidden" name="idQuestion" value="${param.idQuestion}">
     <div class="row-fluid">
         <div class="span10">
             <h5>Вариационный ряд:</h5>
@@ -20,21 +21,21 @@
         <div class="span4">
             <em class="">Показатели центра распределения:</em>
             <div class="margin-left30">
-                <label class="checkbox ${(param.types=="0" || param.types=="1" || param.types=="2") ? "" : "hidden"}">
+                <label class="checkbox ${(param.types=="0" || param.types=="nominal" || param.types=="ordinal") ? "" : "hidden"}">
                     <input class="type-method" type="checkbox" name="type" value="2">
                     Среднее арифметическое
                 </label>
-                <label class="checkbox ${(param.types=="0" || param.types=="3") ? "" : "hidden"}">
+                <label class="checkbox ${(param.types=="0" || param.types=="interval") ? "" : "hidden"}">
                     <input class="type-method" type="checkbox" name="type" value="3">
                     Мода
                 </label>
-                <label class="checkbox ${(param.types=="0" || param.types=="1"||param.types=="2"||param.types=="4") ? "" : "hidden"}">
+                <label class="checkbox ${(param.types=="0" || param.types=="nominal"||param.types=="ordinal"||param.types=="ratio") ? "" : "hidden"}">
                     <input class="type-method" type="checkbox" name="type" value="4">
                     Медиана
                 </label>
             </div>
         </div>
-        <div class="span4 ${(param.types=="0" || param.types=="1" || param.types=="2") ? "" : "hidden"}">
+        <div class="span4 ${(param.types=="0" || param.types=="nominal" || param.types=="ordinal") ? "" : "hidden"}">
             <em class="">Показатели вариации:</em>
             <br>
             <div class="margin-left30">
