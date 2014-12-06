@@ -17,6 +17,7 @@ public class Question {
     }
 
     public Question(QuestionsEntity entity) {
+        this();
         this.idQuestion = entity.getIdQuestion();
         this.text = entity.getText();
         this.idType = entity.getIdQtype();
@@ -71,6 +72,6 @@ public class Question {
     }
 
     public int getSize() {
-        return options.length-1;
+        return options.length == 0 ? 0 : options.length-1;
     }
 }

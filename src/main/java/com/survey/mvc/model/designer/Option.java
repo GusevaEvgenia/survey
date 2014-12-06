@@ -14,6 +14,7 @@ public class Option {
     }
 
     public Option(AnswerOptionsEntity entity) {
+        this();
         this.idOption = entity.getIdOption();
         this.text = entity.getText();
         this.textMatrix = entity.getTextMatrix();

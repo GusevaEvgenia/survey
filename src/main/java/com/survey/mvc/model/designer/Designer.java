@@ -12,6 +12,7 @@ public class Designer {
     }
 
     public Designer(FormsEntity entity) {
+        this();
         QuestionsEntity[] entities = entity.getQuestionsesByIdForm().toArray(new QuestionsEntity[0]);
         Question[] questions = new Question[entities.length];
         for (int i = 0; i < entities.length; i++) {
@@ -30,6 +31,6 @@ public class Designer {
     }
 
     public int getSize() {
-        return questions.length-1;
+        return questions.length == 0 ? 0 : questions.length-1;
     }
 }

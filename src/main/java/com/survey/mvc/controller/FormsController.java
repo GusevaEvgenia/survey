@@ -81,7 +81,7 @@ public class FormsController extends AbstractController {
         return "redirect:/forms/"+id+"/settings";
     }
 
-    @RequestMapping(value = "/link/{hash:[0-9a-zA-Z]+}")
+    @RequestMapping(value = "/link/{hash:[0-9a-zA-Z.]+}")
     public String linkAction(ModelMap model, @PathVariable("hash") String hash) {
         FormsEntity form = formsService.getFormByLink(hash);
         model.addAttribute("form", form);
