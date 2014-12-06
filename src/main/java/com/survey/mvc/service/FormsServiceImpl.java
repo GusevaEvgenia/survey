@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Random;
 
 @Service
 @Transactional
@@ -26,7 +24,7 @@ public class FormsServiceImpl implements FormsService {
 
     @Override
     public void addForm(FormsEntity form) {
-        formsDAO.addForm(form);
+        formsDAO.saveForm(form);
     }
 
     @Override
@@ -69,33 +67,48 @@ public class FormsServiceImpl implements FormsService {
     }
 
     @Override
-    public void designer(Designer designer, int formId) {
+    public FormsEntity designer(Designer designer, int formId) {
         Question[] questions = designer.getQuestions();
         FormsEntity f = getForm(formId);
+        if(!f.getDraft()){
+            f = formsDAO.clone(f);
+            formsDAO.saveOrUpdateForm(f, true);
+            formId = f.getIdForm();
+        }
+
         ArrayList<QuestionsEntity> questionsEntities = new ArrayList<QuestionsEntity>();
         for(int i=0; i<questions.length; i++) {
             int orderQ = i + 1;
             QuestionsEntity q = new QuestionsEntity();
             q.setIdForm(formId);
+            q.setFormsByIdForm(f);
             q.setIdQtype(questions[i].getIdType());
             q.setText(questions[i].getText());
             q.setOrder(orderQ);
+            q.setScale(questions[i].getScale());
+
+            questionsEntities.add(q);
+        }
+        f.setQuestionsesByIdForm(questionsEntities);
+        formsDAO.saveOrUpdateForm(f);
+
+        for(QuestionsEntity qe : f.getQuestionsesByIdForm()) {
             ArrayList<AnswerOptionsEntity> ansOp = new ArrayList<AnswerOptionsEntity>();
-            Option[] options = questions[i].getOptions();
+            Option[] options = questions[qe.getOrder()-1].getOptions();
             for(int j = 0; j < options.length; j++ ) {
                 int orderO = j + 1;
                 AnswerOptionsEntity a = new AnswerOptionsEntity();
-                //a.setIdQuestion(); //код вопроса
+                a.setIdQuestion(qe.getIdQuestion());
+                a.setQuestionsByIdQuestion(qe);
                 a.setText(options[j].getText());
                 a.setTextMatrix(options[j].getTextMatrix());
                 a.setOrder(orderO);
                 ansOp.add(a);
             }
-            q.setAnswerOptionsesByIdQuestion(ansOp);
-            questionsEntities.add(q);
+            qe.setAnswerOptionsesByIdQuestion(ansOp);
         }
-        f.setQuestionsesByIdForm(questionsEntities);
-        updateForm(f);
+        formsDAO.saveForm(f);
+        return f;
     }
 
     @Override

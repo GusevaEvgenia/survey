@@ -1,14 +1,17 @@
 package com.survey.mvc.dao;
 
 import com.survey.mvc.entity.FormsEntity;
+import com.survey.mvc.entity.QuestionsEntity;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.collection.internal.PersistentBag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -22,7 +25,7 @@ public class FormsDAOImpl implements FormsDAO {
     }
 
     @Override
-    public void addForm(FormsEntity form) {
+    public void saveForm(FormsEntity form) {
         getCurrentSession().save(form);
     }
 
@@ -32,6 +35,20 @@ public class FormsDAOImpl implements FormsDAO {
             form = prepareEntity(form);
         }
         getCurrentSession().update(form);
+    }
+
+    @Override
+    public void saveOrUpdateForm(FormsEntity form) {
+        getCurrentSession().saveOrUpdate(form);
+        getCurrentSession().flush();
+    }
+
+    @Override
+    public void saveOrUpdateForm(FormsEntity form, boolean refresh) {
+        saveOrUpdateForm(form);
+        if(refresh) {
+            getCurrentSession().refresh(form);
+        }
     }
 
     protected FormsEntity prepareEntity(FormsEntity form) {
@@ -45,6 +62,24 @@ public class FormsDAOImpl implements FormsDAO {
         formToUpdate.setMaximumForms(form.getMaximumForms());
         formToUpdate.setStatus(form.getStatus());
         return formToUpdate;
+    }
+
+    public FormsEntity clone(FormsEntity form){
+        FormsEntity newForm = new FormsEntity();
+        newForm.setIdUser(form.getIdUser());
+        newForm.setTitle(form.getTitle());
+        newForm.setDescription(form.getDescription());
+        newForm.setStartText(form.getStartText());
+        newForm.setFinishText(form.getFinishText());
+        newForm.setPicture(form.getPicture());
+        newForm.setDateStart(form.getDateStart());
+        newForm.setDateFinish(form.getDateFinish());
+        newForm.setMaximumForms(form.getMaximumForms());
+        newForm.setDraft(true);
+        //newForm.setLink(form.getLink());
+//        newForm.setQuestionsesByIdForm(new PersistentBag());
+        newForm.setStatus("new");
+        return newForm;
     }
 
     @Override

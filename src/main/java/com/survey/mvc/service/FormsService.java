@@ -18,6 +18,6 @@ public interface FormsService {
     public List<FormsEntity> getFormsByStatus(String name);
     public Designer getDesignerByFormId(int id);
     public Designer getDesignerByForm(FormsEntity form);
-    public void designer(Designer designer, int formId);
+    public FormsEntity designer(Designer designer, int formId);
     public FormsEntity getFormByLink(String hash);
 }

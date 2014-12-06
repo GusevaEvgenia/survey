@@ -9,6 +9,7 @@ public class Designer {
     protected Question[] questions;
 
     public Designer() {
+        questions = new Question[0];
     }
 
     public Designer(FormsEntity entity) {

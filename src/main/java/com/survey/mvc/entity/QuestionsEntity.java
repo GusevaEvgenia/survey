@@ -25,6 +25,7 @@ public class QuestionsEntity {
 
     @Id
     @Column(name = "id_question")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getIdQuestion() {
         return idQuestion;
     }
@@ -74,7 +75,7 @@ public class QuestionsEntity {
     }
 
     @Basic
-    @Column(name = "order")
+    @Column(name = "`order`")
     public int getOrder() {
         return order;
     }
@@ -109,7 +110,7 @@ public class QuestionsEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "questionsByIdQuestion", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "questionsByIdQuestion", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Collection<AnswerOptionsEntity> getAnswerOptionsesByIdQuestion() {
         return answerOptionsesByIdQuestion;
     }

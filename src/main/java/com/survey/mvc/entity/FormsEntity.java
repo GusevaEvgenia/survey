@@ -24,7 +24,7 @@ public class FormsEntity {
     private Date dateStart;
     private Date dateFinish;
     private Integer maximumForms;
-    private Byte draft;
+    private Boolean draft;
     private String link;
     private String status;
     private Collection<CompletedFormsEntity> completedFormsesByIdForm;
@@ -33,6 +33,7 @@ public class FormsEntity {
 
     @Id
     @Column(name = "id_form")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getIdForm() {
         return idForm;
     }
@@ -133,11 +134,11 @@ public class FormsEntity {
 
     @Basic
     @Column(name = "draft")
-    public Byte getDraft() {
+    public Boolean getDraft() {
         return draft;
     }
 
-    public void setDraft(Byte draft) {
+    public void setDraft(Boolean draft) {
         this.draft = draft;
     }
 
@@ -222,13 +223,23 @@ public class FormsEntity {
         this.usersByIdUser = usersByIdUser;
     }
 
-    @OneToMany(mappedBy = "formsByIdForm")
+    @OneToMany(mappedBy = "formsByIdForm", cascade = CascadeType.ALL, orphanRemoval = true)
     public Collection<QuestionsEntity> getQuestionsesByIdForm() {
         return questionsesByIdForm;
     }
 
     public void setQuestionsesByIdForm(Collection<QuestionsEntity> questionsesByIdForm) {
-        this.questionsesByIdForm = questionsesByIdForm;
+        if(this.questionsesByIdForm == null) {
+            this.questionsesByIdForm = questionsesByIdForm;
+        } else {
+            this.questionsesByIdForm.clear();
+            this.questionsesByIdForm.addAll(questionsesByIdForm);
+        }
+    }
+
+    public void emptyQuestions() {
+
+        this.questionsesByIdForm.clear();
     }
     @Transient
     public JsonObject getJson() {

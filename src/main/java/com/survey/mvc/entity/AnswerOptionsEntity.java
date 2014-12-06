@@ -21,6 +21,7 @@ public class AnswerOptionsEntity {
 
     @Id
     @Column(name = "id_option")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getIdOption() {
         return idOption;
     }
@@ -60,7 +61,7 @@ public class AnswerOptionsEntity {
     }
 
     @Basic
-    @Column(name = "order")
+    @Column(name = "`order`")
     public Integer getOrder() {
         return order;
     }
