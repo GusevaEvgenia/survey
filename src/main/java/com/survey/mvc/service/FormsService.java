@@ -20,4 +20,5 @@ public interface FormsService {
     public Designer getDesignerByForm(FormsEntity form);
     public FormsEntity designer(Designer designer, int formId);
     public FormsEntity getFormByLink(String hash);
+    public void publication(int id);
 }

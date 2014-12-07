@@ -94,6 +94,13 @@ public class FormsController extends AbstractController {
         return getView("link");
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/{id:[0-9]+}/public")
+    public String publicationFormAction(ModelMap model, @PathVariable("id") Integer id) {
+        formsService.publication(id);
+        model.addAttribute("form", formsService.getForm(id));
+        return "redirect:/forms/"+id;
+    }
+
     @Override
     protected String getViewPath() {
         return "forms";

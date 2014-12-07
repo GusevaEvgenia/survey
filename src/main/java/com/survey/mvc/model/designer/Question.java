@@ -14,6 +14,7 @@ public class Question {
     protected String scale;
 
     public Question() {
+        options = new Option[0];
     }
 
     public Question(QuestionsEntity entity) {

@@ -121,4 +121,8 @@ public class FormsServiceImpl implements FormsService {
         Hibernate.initialize(form.getQuestionsesByIdForm());
         return form;
     }
+
+    public void publication(int id){
+        formsDAO.getForm(id).setDraft(false);
+    }
 }
