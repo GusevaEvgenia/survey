@@ -9,8 +9,12 @@ public class CompleteAnswer {
     String text;
 
     public CompleteAnswer(int idQuestion, int order, String text) {
+        this(text);
         this.idQuestion = idQuestion;
         this.order = order;
+    }
+
+    public CompleteAnswer(String text) {
         this.text = text;
     }
 

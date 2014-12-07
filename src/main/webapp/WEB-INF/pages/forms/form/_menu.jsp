@@ -18,20 +18,6 @@
             <strong>Внимание!</strong> У Вас есть новые ответы по текущей анкете.
             Чтобы их обработать перейдите по ссылке "Ответы".
         </div>
-        <!--Кнопки управления анкетой-->
-        <!--div class="row-fluid">
-            <div class="span7">
-                Текущая версия опроса:
-                <select>
-                    <option>Версия№3 От 25.05.2014</option>
-                    <option>Версия№2 От 20.05.2014</option>
-                    <option>Версия№1 От 14.05.2014</option>
-                </select>
-            </div>
-            <div class="span5 margin">
-                Последняя версия опроса: 3!
-            </div>
-        </div-->
         <div class="row-fluid">
             <div class="span7">
                 <ul class="nav nav-pills">
@@ -40,7 +26,7 @@
                             <i class="icon-list-alt"></i> Анкета
                         </a>
                     </li>
-                    <li class="${user.token!=null ? "hidden": ""} ${form.status=="archive" ? "hidden": ""}
+                    <li class="${form.status=="archive" ? "hidden": ""}
                     <%= requestURI.contains("forms/${form.idForm}/designer")? "active": "" %>">
                         <a href="/forms/${form.idForm}/designer">
                             <i class="icon-pencil"></i> Конструктор
@@ -51,7 +37,7 @@
                             <i class="icon-check"></i> Ответы
                         </a>
                     </li>
-                    <li class="${user.token!=null ? "hidden": ""} ${form.status=="archive" ? "hidden": ""}
+                    <li class="${form.status=="archive" ? "hidden": ""}
                      <%= requestURI.contains("forms/${form.idForm}/settings")? "active": "" %>">
                         <a href="/forms/${form.idForm}/settings">
                             <i class="icon-wrench"></i> Настройки
@@ -62,12 +48,7 @@
             </div>
             <div class="span5">
                 <div class="btn-group pull-right">
-                    <c:if test='${user.token!=null}'>
-                        <a class="btn btn-info" href="#"><i class="icon-globe"></i> Открыть в SM</a>
-                    </c:if>
-                    <c:if test='${user.token==null}'>
-                        <a class="btn btn-info remove-btn1" href="#" data-id="${form.idForm}"><i class="icon-remove"></i> Удалить</a>
-                    </c:if>
+                    <a class="btn btn-info remove-btn1" href="#" data-id="${form.idForm}"><i class="icon-remove"></i> Удалить</a>
                     <c:if test='${form.draft}'>
                         <a class="btn btn-info" href="/forms/${form.idForm}/public"><i class=""></i> Опубликовать</a>
                     </c:if>

@@ -10,7 +10,11 @@ public class CompletedFormRow {
     String status;
     ArrayList<CompleteAnswer> answers = new ArrayList<CompleteAnswer>();
 
+    public CompletedFormRow() {
+    }
+
     public CompletedFormRow(int id, String status) {
+        this();
         this.id = id;
         this.status = status;
     }

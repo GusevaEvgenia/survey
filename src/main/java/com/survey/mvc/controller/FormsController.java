@@ -1,10 +1,14 @@
 package com.survey.mvc.controller;
 
 import com.survey.mvc.entity.FormsEntity;
+import com.survey.mvc.entity.UsersEntity;
+import com.survey.mvc.model.integration.SurveyMonkey;
+import com.survey.mvc.model.integration.ThirdPartySurvey;
 import com.survey.mvc.service.CompletedFormsService;
 import com.survey.mvc.service.FormsService;
 import com.survey.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -26,11 +30,11 @@ public class FormsController extends AbstractController {
     // Просмотр каталога анкет
     @RequestMapping(method = RequestMethod.GET)
     public String indexAction(ModelMap model) {
-        model.addAttribute("user", userService.getUser(1));
+        UsersEntity user = userService.getUser(1);
+        model.addAttribute("user", user);
         model.addAttribute("active", formsService.getFormsByStatus("active"));
         model.addAttribute("new", formsService.getFormsByStatus("new"));
         model.addAttribute("archive", formsService.getFormsByStatus("archive"));
-        model.addAttribute("monkey", 7);
         return getView("index");
     }
 

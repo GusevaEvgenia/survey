@@ -42,6 +42,10 @@
         <property name="configLocation" value="classpath:hibernate.cfg.xml" />
     </bean>
 
+    <bean id="surveyMonkey" class="com.survey.mvc.model.integration.SurveyMonkey">
+        <constructor-arg name="apiKey" value="h72xc3wm4svxkvuuhm4eeu6m" type="java.lang.String" />
+    </bean>
+
     <tx:annotation-driven />
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
