@@ -32,8 +32,13 @@
             <div class="btn-group pull-right">
                 <button class="btn btn-info" form="question-list" <%--id="save-form"  data-id="${form.idForm}" --%>type="submit">Сохранить</button>
                 <a class="btn btn-info" id="form-preview" data-id="${form.idForm}" >Просмотр анкеты</a>
-                <a class="btn btn-info" href="#">Опубликовать</a>
+                <%--<a class="btn btn-info" href="#">Опубликовать</a>--%>
             </div><br><br>
+            <div class="alert alert-error ${flag ? "" : "hidden"}" >
+                <button type="button" class="close" data-dismiss="alert">х</button>
+                <strong>Внимание!</strong> Вы изменили анкеты и изменения были сохранены в новой анкете.
+                Перейдити к ней по <a href="/forms/${newForm.idForm}" target="_blank">ссылке</a>
+            </div>
             <div class="row-fluid">
                 <div class="span9 offset1" id="form-constructor" data-init='${form.json}'>
                     <div class="hidden" id="template-container">

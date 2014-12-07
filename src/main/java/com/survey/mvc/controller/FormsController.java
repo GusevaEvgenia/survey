@@ -1,6 +1,7 @@
 package com.survey.mvc.controller;
 
 import com.survey.mvc.entity.FormsEntity;
+import com.survey.mvc.service.CompletedFormsService;
 import com.survey.mvc.service.FormsService;
 import com.survey.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class FormsController extends AbstractController {
     private UserService userService;
     @Autowired
     private FormsService formsService;
+    @Autowired
+    private CompletedFormsService completedFormsService;
 
     // Просмотр каталога анкет
     @RequestMapping(method = RequestMethod.GET)
@@ -55,6 +58,7 @@ public class FormsController extends AbstractController {
     //Просмотр анкеты
     @RequestMapping(method = RequestMethod.GET, value = "/{id:[0-9]+}")
       public String showAction(ModelMap model, @PathVariable("id") Integer id) {
+        model.addAttribute("newAnsEx", completedFormsService.newAnswersExist(id));
         model.addAttribute("form", formsService.getLoadedForm(id));
         model.addAttribute("designer", formsService.getDesignerByFormId(id));
         model.addAttribute("user", userService.getUser(1));
@@ -70,6 +74,7 @@ public class FormsController extends AbstractController {
     // Форма изменения настроек анкеты
     @RequestMapping(method = RequestMethod.GET, value = "/{id:[0-9]+}/settings")
     public String updateFormAction(ModelMap model, @PathVariable("id") Integer id) {
+        model.addAttribute("newAnsEx", completedFormsService.newAnswersExist(id));
         model.addAttribute("form", formsService.getForm(id));
         return getView("form/settings");
     }

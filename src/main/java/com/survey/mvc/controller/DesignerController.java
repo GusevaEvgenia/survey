@@ -1,8 +1,10 @@
 package com.survey.mvc.controller;
 
 import com.google.gson.Gson;
+import com.survey.mvc.entity.CompletedFormsEntity;
 import com.survey.mvc.entity.FormsEntity;
 import com.survey.mvc.model.designer.Designer;
+import com.survey.mvc.service.CompletedFormsService;
 import com.survey.mvc.service.FormsService;
 import com.survey.mvc.service.QuestionsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +24,24 @@ public class DesignerController extends AbstractController{
     @Autowired
     private FormsService formsService;
     @Autowired
-    private QuestionsService questionsService;
+    private CompletedFormsService completedFormsService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String indexAction(ModelMap model, @PathVariable("id") Integer id) {
+        model.addAttribute("newAnsEx", completedFormsService.newAnswersExist(id));
         model.addAttribute("form", formsService.getLoadedForm(id));
+        model.addAttribute("flag", false);
         return getView("designer");
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String saveAction(ModelMap model, @ModelAttribute("form") Designer designer, @PathVariable("id") Integer id) {
         model.addAttribute("form", formsService.getForm(id));
-        formsService.designer(designer, id);
+        FormsEntity newForm = formsService.designer(designer, id);
+        model.addAttribute("newForm", newForm);
+        if(!formsService.getForm(id).getDraft()){
+            model.addAttribute("flag", true);
+        }
         return getView("designer");
     }
 

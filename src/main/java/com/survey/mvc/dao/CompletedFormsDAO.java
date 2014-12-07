@@ -13,4 +13,5 @@ public interface CompletedFormsDAO {
     public CompletedFormsEntity getCompletedForm(int id);
     public List<CompletedFormsEntity> getCompletedForms();
     public List<CompletedFormsEntity> getCompletedFormsByForm(int id);
+    public List<CompletedFormsEntity> getCompletedFormsByForm(int id, String status);
 }

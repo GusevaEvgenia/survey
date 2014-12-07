@@ -1,14 +1,11 @@
 package com.survey.mvc.dao;
 
-import com.survey.mvc.model.CompleteAnswer;
 import com.survey.mvc.entity.CompletedFormsEntity;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -47,5 +44,12 @@ public class CompletedFormsDAOImpl implements CompletedFormsDAO {
     public List<CompletedFormsEntity> getCompletedFormsByForm(int id) {
         return getCurrentSession().createQuery("from CompletedFormsEntity comp where comp.idForm = :id")
                 .setInteger("id", id).list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<CompletedFormsEntity> getCompletedFormsByForm(int id, String status) {
+        return getCurrentSession().createQuery("from CompletedFormsEntity comp where comp.idForm = :id and status = :status")
+                .setInteger("id", id).setString("status", status).list();
     }
 }

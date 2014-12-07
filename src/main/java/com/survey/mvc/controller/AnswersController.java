@@ -30,6 +30,7 @@ public class AnswersController extends AbstractController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String indexAction(ModelMap model, @PathVariable("id") Integer id) {
+        model.addAttribute("newAnsEx", completedFormsService.newAnswersExist(id));
         model.addAttribute("statuses", answersService.getStatuses());
         model.addAttribute("currentStatus", "all");
         model.addAttribute("questions", questionsService.getQuestionByForm(id));
@@ -40,6 +41,7 @@ public class AnswersController extends AbstractController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{type:[a-zA-Z]+}")
     public String filtratedIndexAction(ModelMap model, @PathVariable("id") Integer id, @PathVariable("type") String type) {
+        model.addAttribute("newAnsEx", completedFormsService.newAnswersExist(id));
         model.addAttribute("questions", questionsService.getQuestionByForm(id));
         // model.addAttribute("complForms", completedFormsService.getCompletedFormsByForm(id));
         model.addAttribute("answers", answersService.getAnswersByCompletedForm(id, type));

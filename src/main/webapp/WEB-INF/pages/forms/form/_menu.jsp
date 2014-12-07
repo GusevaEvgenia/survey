@@ -13,7 +13,7 @@
             </h2>
         </div>
         <!--Предупреждение о новых ответах-->
-        <div class="alert <%if (false) {%>hidden<%}%>" >
+        <div class="alert ${newAnsEx ? "" : "hidden"}" >
             <button type="button" class="close" data-dismiss="alert">х</button>
             <strong>Внимание!</strong> У Вас есть новые ответы по текущей анкете.
             Чтобы их обработать перейдите по ссылке "Ответы".
@@ -68,7 +68,12 @@
                     <c:if test='${user.token==null}'>
                         <a class="btn btn-info remove-btn1" href="#" data-id="${form.idForm}"><i class="icon-remove"></i> Удалить</a>
                     </c:if>
-                    <a class="btn btn-info" id="btn-link" data-href="${form.link}"><i class="icon-globe"></i> Получить ссылку</a>
+                    <c:if test='${form.draft}'>
+                        <a class="btn btn-info" href="#"><i class=""></i> Опубликовать</a>
+                    </c:if>
+                    <c:if test='${!form.draft}'>
+                        <a class="btn btn-info" id="btn-link" data-href="${form.link}"><i class="icon-globe"></i> Получить ссылку</a>
+                    </c:if>
                     <a class="btn btn-info" href=""><i class="icon-download-alt"></i> Сохранить в файл</a>
                 </div>
             </div>

@@ -38,4 +38,9 @@ public class CompletedFormsServiceImpl implements CompletedFormsService {
     public List<CompletedFormsEntity> getCompletedFormsByForm(int id){
         return completedFormsDAO.getCompletedFormsByForm(id);
     }
+
+    @Override
+    public boolean newAnswersExist(int id) {
+        return completedFormsDAO.getCompletedFormsByForm(id, "new").size() > 0;
+    }
 }
