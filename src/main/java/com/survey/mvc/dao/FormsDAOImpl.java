@@ -75,10 +75,9 @@ public class FormsDAOImpl implements FormsDAO {
         newForm.setDateStart(form.getDateStart());
         newForm.setDateFinish(form.getDateFinish());
         newForm.setMaximumForms(form.getMaximumForms());
-        newForm.setDraft(true);
         //newForm.setLink(form.getLink());
 //        newForm.setQuestionsesByIdForm(new PersistentBag());
-        newForm.setStatus("new");
+        newForm.setStatus("draft");
         return newForm;
     }
 

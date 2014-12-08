@@ -27,18 +27,19 @@
                         </a>
                     </li>
                     <li class="${form.status=="archive" ? "hidden": ""}
-                    <%= requestURI.contains("forms/${form.idForm}/designer")? "active": "" %>">
+                                <%= requestURI.contains("forms/${form.idForm}/designer")? "active": "" %>">
                         <a href="/forms/${form.idForm}/designer">
                             <i class="icon-pencil"></i> Конструктор
                         </a>
                     </li>
-                    <li class="<%= requestURI.contains("forms/${form.idForm}/answers")? "active": "" %>">
+                    <li class="${form.status=="draft" ? "hidden": ""}
+                                <%= requestURI.contains("forms/${form.idForm}/answers")? "active": "" %>">
                         <a href="/forms/${form.idForm}/answers">
                             <i class="icon-check"></i> Ответы
                         </a>
                     </li>
                     <li class="${form.status=="archive" ? "hidden": ""}
-                     <%= requestURI.contains("forms/${form.idForm}/settings")? "active": "" %>">
+                                <%= requestURI.contains("forms/${form.idForm}/settings")? "active": "" %>">
                         <a href="/forms/${form.idForm}/settings">
                             <i class="icon-wrench"></i> Настройки
                         </a>
@@ -49,11 +50,13 @@
             <div class="span5">
                 <div class="btn-group pull-right">
                     <a class="btn btn-info remove-btn1" href="#" data-id="${form.idForm}"><i class="icon-remove"></i> Удалить</a>
-                    <c:if test='${form.draft}'>
-                        <a class="btn btn-info" href="/forms/${form.idForm}/public"><i class=""></i> Опубликовать</a>
+                    <c:if test='${form.status=="draft"}'>
+                        <a class="btn btn-info" href="/forms/${form.idForm}/setActive"><i class="icon-share"></i> Сделать активной</a>
                     </c:if>
-                    <c:if test='${!form.draft}'>
-                        <a class="btn btn-info" id="btn-link" data-href="${form.link}"><i class="icon-globe"></i> Получить ссылку</a>
+                    <c:if test='${form.status!="draft"}'>
+                        <c:if test='${form.status!="archive"}'>
+                            <a class="btn btn-info" id="btn-link" data-href="${form.link}"><i class="icon-globe"></i> Получить ссылку</a>
+                        </c:if>
                     </c:if>
                     <a class="btn btn-info" href=""><i class="icon-download-alt"></i> Сохранить в файл</a>
                 </div>

@@ -70,7 +70,7 @@ public class FormsServiceImpl implements FormsService {
     public FormsEntity designer(Designer designer, int formId) {
         Question[] questions = designer.getQuestions();
         FormsEntity f = getForm(formId);
-        if(!f.getDraft()){
+        if(!f.getStatus().equals("draft")){
             f = formsDAO.clone(f);
             formsDAO.saveOrUpdateForm(f, true);
             formId = f.getIdForm();
@@ -122,7 +122,7 @@ public class FormsServiceImpl implements FormsService {
         return form;
     }
 
-    public void publication(int id){
-        formsDAO.getForm(id).setDraft(false);
+    public void setActive(int id){
+        formsDAO.getForm(id).setStatus("active");
     }
 }

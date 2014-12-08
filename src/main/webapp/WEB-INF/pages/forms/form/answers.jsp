@@ -42,34 +42,39 @@
 <jsp:include page="/WEB-INF/pages/forms/form/_menu.jsp"/>
 
         <div class="thumbnail">
-            <div class="${token!=null ? "hidden": ""}">
-                Статус ответа
-                <select id="select_type">
-                    <c:forEach items='${statuses}' var="s">
-                        <option value="${s.key}" ${s.key == currentStatus ? "selected='selected'" : ''}>${s.value}</option>
-                    </c:forEach>
-                </select>
-            </div>
-            <table class="table table-bordered">
-                <tr class="questions">
-                    <th>№</th>
-                    <c:forEach items='${questions}' var="q">
-                        <th class="question">${q.text}</th>
-                    </c:forEach>
-                    <th>Статус</th>
-                    <th></th>
-                </tr>
-                <c:forEach items='${answers}' var="cForm">
-                    <tr>
-                        <td>${cForm.id}</td>
-                        <c:forEach items='${cForm.answers}' var="answ">
-                             <td class="answer">${answ.text}</td>
+            <c:if test='${answers.size()>0}'>
+                <div class="${token!=null ? "hidden": ""}">
+                    Статус ответа
+                    <select id="select_type">
+                        <c:forEach items='${statuses}' var="s">
+                            <option value="${s.key}" ${s.key == currentStatus ? "selected='selected'" : ''}>${s.value}</option>
                         </c:forEach>
-                        <td class="status-cell">${cForm.status}</td>
-                        <td><a class="show-answer" data-id="${cForm.id}" href="#">Посмотреть</a></td>
+                    </select>
+                </div>
+                <table class="table table-bordered">
+                    <tr class="questions">
+                        <th>№</th>
+                        <c:forEach items='${questions}' var="q">
+                            <th class="question">${q.text}</th>
+                        </c:forEach>
+                        <th>Статус</th>
+                        <th></th>
                     </tr>
-                </c:forEach>
-            </table>
+                    <c:forEach items='${answers}' var="cForm">
+                        <tr>
+                            <td>${cForm.id}</td>
+                            <c:forEach items='${cForm.answers}' var="answ">
+                                <td class="answer">${answ.text}</td>
+                            </c:forEach>
+                            <td class="status-cell">${cForm.status}</td>
+                            <td><a class="show-answer" data-id="${cForm.id}" href="#">Посмотреть</a></td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:if>
+            <c:if test='${answers.size()==0}'>
+                <h4 class="text-center">У вас еще нет ответов на анкету.</h4>
+            </c:if>
         </div>
 
     </div>

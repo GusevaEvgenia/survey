@@ -24,7 +24,6 @@
                 <li><a data-type="select-option" href="#">Вопрос "список"</a></li>
                 <li><a data-type="matrix-single-option" href="#">Вопрос "матрица" с единичным выбором</a></li>
                 <li><a data-type="matrix-multiple-option" href="#">Вопрос "матрица" с множественным выбором</a></li>
-                <%--<li><a data-type="single-option" href="#">Вопрос "шкала"</a></li>--%>
             </ul>
         </div>
         <%--Создание анкеты--%>
@@ -32,7 +31,6 @@
             <div class="btn-group pull-right">
                 <button class="btn btn-info" form="question-list" <%--id="save-form"  data-id="${form.idForm}" --%>type="submit">Сохранить</button>
                 <a class="btn btn-info" id="form-preview" data-id="${form.idForm}" >Просмотр анкеты</a>
-                <%--<a class="btn btn-info" href="#">Опубликовать</a>--%>
             </div><br><br>
             <div class="alert alert-error ${flag ? "" : "hidden"}" >
                 <button type="button" class="close" data-dismiss="alert">х</button>

@@ -24,7 +24,6 @@ public class FormsEntity {
     private Date dateStart;
     private Date dateFinish;
     private Integer maximumForms;
-    private Boolean draft;
     private String link;
     private String status;
     private Collection<CompletedFormsEntity> completedFormsesByIdForm;
@@ -133,16 +132,6 @@ public class FormsEntity {
     }
 
     @Basic
-    @Column(name = "draft")
-    public Boolean getDraft() {
-        return draft;
-    }
-
-    public void setDraft(Boolean draft) {
-        this.draft = draft;
-    }
-
-    @Basic
     @Column(name = "link")
     public String getLink() {
         return link;
@@ -174,7 +163,6 @@ public class FormsEntity {
         if (dateFinish != null ? !dateFinish.equals(that.dateFinish) : that.dateFinish != null) return false;
         if (dateStart != null ? !dateStart.equals(that.dateStart) : that.dateStart != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (draft != null ? !draft.equals(that.draft) : that.draft != null) return false;
         if (finishText != null ? !finishText.equals(that.finishText) : that.finishText != null) return false;
         if (link != null ? !link.equals(that.link) : that.link != null) return false;
         if (maximumForms != null ? !maximumForms.equals(that.maximumForms) : that.maximumForms != null) return false;
@@ -198,7 +186,6 @@ public class FormsEntity {
         result = 31 * result + (dateStart != null ? dateStart.hashCode() : 0);
         result = 31 * result + (dateFinish != null ? dateFinish.hashCode() : 0);
         result = 31 * result + (maximumForms != null ? maximumForms.hashCode() : 0);
-        result = 31 * result + (draft != null ? draft.hashCode() : 0);
         result = 31 * result + (link != null ? link.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
@@ -237,10 +224,6 @@ public class FormsEntity {
         }
     }
 
-    public void emptyQuestions() {
-
-        this.questionsesByIdForm.clear();
-    }
     @Transient
     public JsonObject getJson() {
         JsonObject result = new JsonObject();

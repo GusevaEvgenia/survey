@@ -26,6 +26,7 @@ public class DesignerController extends AbstractController{
     @Autowired
     private CompletedFormsService completedFormsService;
 
+    //страница конструктора
     @RequestMapping(method = RequestMethod.GET)
     public String indexAction(ModelMap model, @PathVariable("id") Integer id) {
         model.addAttribute("newAnsEx", completedFormsService.newAnswersExist(id));
@@ -34,17 +35,19 @@ public class DesignerController extends AbstractController{
         return getView("designer");
     }
 
+    //сохранение изменений
     @RequestMapping(method = RequestMethod.POST)
     public String saveAction(ModelMap model, @ModelAttribute("form") Designer designer, @PathVariable("id") Integer id) {
         model.addAttribute("form", formsService.getForm(id));
         FormsEntity newForm = formsService.designer(designer, id);
         model.addAttribute("newForm", newForm);
-        if(!formsService.getForm(id).getDraft()){
+        if(!formsService.getForm(id).getStatus().equals("draft")){
             model.addAttribute("flag", true);
         }
         return getView("designer");
     }
 
+    //предпросмотр
     @RequestMapping(method = RequestMethod.POST, value = "/preview")
     public String previewAction(ModelMap model, @ModelAttribute("form") Designer designer, @PathVariable("id") Integer id) {
         model.addAttribute("form", formsService.getForm(id));

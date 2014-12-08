@@ -28,7 +28,7 @@
                 <div class="span6">
                     <ul class="nav nav-pills">
                         <li class="active"><a href="#tab1" data-toggle="tab">Активные анкеты</a></li>
-                        <li><a class="" href="#tab2" data-toggle="tab">Новые анкеты</a></li>
+                        <li><a class="" href="#tab2" data-toggle="tab">Черновики</a></li>
                         <li><a class="" href="#tab3" data-toggle="tab">Архив</a></li>
                         <li><a class="${user.token==null ? "hidden" : ""}" href="/monkey-forms/">Анкеты SurveyMonkey</a></li>
                     </ul>
@@ -50,7 +50,7 @@
                 <%--Новые анкеты--%>
                 <div class="tab-pane" id="tab2">
                     <jsp:include page="/WEB-INF/pages/forms/_current_list.jsp">
-                        <jsp:param name="type" value="new" />
+                        <jsp:param name="type" value="draft" />
                     </jsp:include>
                 </div>
                 <%--Архив--%>

@@ -27,7 +27,7 @@ public class AnswersController extends AbstractController {
     @Autowired
     private FormsService formsService;
 
-
+    //страница ответов
     @RequestMapping(method = RequestMethod.GET)
     public String indexAction(ModelMap model, @PathVariable("id") Integer id) {
         model.addAttribute("newAnsEx", completedFormsService.newAnswersExist(id));

@@ -27,24 +27,24 @@ public class FormsController extends AbstractController {
     @Autowired
     private CompletedFormsService completedFormsService;
 
-    // Просмотр каталога анкет
+    //Стариница каталога анкет
     @RequestMapping(method = RequestMethod.GET)
     public String indexAction(ModelMap model) {
         UsersEntity user = userService.getUser(1);
         model.addAttribute("user", user);
         model.addAttribute("active", formsService.getFormsByStatus("active"));
-        model.addAttribute("new", formsService.getFormsByStatus("new"));
+        model.addAttribute("draft", formsService.getFormsByStatus("draft"));
         model.addAttribute("archive", formsService.getFormsByStatus("archive"));
         return getView("index");
     }
 
-    // Форма создания анкеты
+    //Страница создания анкеты
     @RequestMapping(method = RequestMethod.GET, value = "/new")
     public String newAction(ModelMap model) {
         return getView("new");
     }
 
-    //Создание и изменение анкеты
+    //Создание анкеты
     @RequestMapping(method = RequestMethod.POST)
     public String createAction(@ModelAttribute("form") FormsEntity form) {
         formsService.addForm(form);
@@ -69,13 +69,14 @@ public class FormsController extends AbstractController {
         return getView("form/show");
     }
 
+    //удаление анкеты
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id:[0-9]+}")
     public @ResponseBody String deleteAction(ModelMap model, @PathVariable("id") Integer id) {
         formsService.deleteForm(id);
         return "success";
     }
 
-    // Форма изменения настроек анкеты
+    //Страница изменения настроек анкеты
     @RequestMapping(method = RequestMethod.GET, value = "/{id:[0-9]+}/settings")
     public String updateFormAction(ModelMap model, @PathVariable("id") Integer id) {
         model.addAttribute("newAnsEx", completedFormsService.newAnswersExist(id));
@@ -87,9 +88,14 @@ public class FormsController extends AbstractController {
     @RequestMapping(method = RequestMethod.POST, value = "/{id:[0-9]+}/settings")
     public String updateAction(@ModelAttribute("formUpdate") FormsEntity form, @PathVariable("id") Integer id) {
         formsService.updateForm(form);
-        return "redirect:/forms/"+id+"/settings";
+        if(form.getStatus().equals("archive")){
+            return "redirect:/forms/"+id;
+        }else {
+            return "redirect:/forms/" + id + "/settings";
+        }
     }
 
+    //страница сбора данных для анализа
     @RequestMapping(value = "/link/{hash:[0-9a-zA-Z.]+}")
     public String linkAction(ModelMap model, @PathVariable("hash") String hash) {
         FormsEntity form = formsService.getFormByLink(hash);
@@ -98,9 +104,10 @@ public class FormsController extends AbstractController {
         return getView("link");
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{id:[0-9]+}/public")
-    public String publicationFormAction(ModelMap model, @PathVariable("id") Integer id) {
-        formsService.publication(id);
+    //Изменение статуса анкеты на активная
+    @RequestMapping(method = RequestMethod.GET, value = "/{id:[0-9]+}/setActive")
+    public String setActiveAction(ModelMap model, @PathVariable("id") Integer id) {
+        formsService.setActive(id);
         model.addAttribute("form", formsService.getForm(id));
         return "redirect:/forms/"+id;
     }

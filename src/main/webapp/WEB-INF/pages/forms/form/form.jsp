@@ -34,7 +34,10 @@
                             <%@include file="/WEB-INF/pages/forms/questions/_matrix_multiple_option.jsp"%>
                         </c:when>
                         <c:otherwise>
-                           Неизвестный тип<br>
+                            <div class="text-center">
+                                <h4>У Вас пока нет вопросов в анкете!</h4>
+                                Можете изменить это перейдя в констурктор.
+                            </div>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>

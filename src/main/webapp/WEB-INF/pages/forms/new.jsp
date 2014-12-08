@@ -38,7 +38,7 @@
                             <textarea class="width530" name="finishText" rows="3"></textarea>
                         </p>
                     </div>
-                    <textarea class="hidden" name="status">active</textarea>
+                    <textarea class="hidden" name="status">draft</textarea>
                     <textarea class="hidden" name="idUser">1</textarea>
                     <input type="hidden" id="link" name="link" value="1111">
                 </form>
