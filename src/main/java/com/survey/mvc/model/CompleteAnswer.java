@@ -1,28 +1,39 @@
 package com.survey.mvc.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by Belkin on 16.11.2014.
  */
 public class CompleteAnswer {
     int idQuestion;
     int order;
-    String text;
+    ArrayList<String> text;
 
-    public CompleteAnswer(int idQuestion, int order, String text) {
-        this(text);
+    public CompleteAnswer() {
+        text = new ArrayList<String>();
+    }
+
+    public CompleteAnswer(int idQuestion, int order) {
+        this();
         this.idQuestion = idQuestion;
         this.order = order;
     }
 
-    public CompleteAnswer(String text) {
+    public CompleteAnswer(int idQuestion, int order, ArrayList<String> text) {
+        this(idQuestion, order);
         this.text = text;
+    }
+
+    public void putAnswer(String t) {
+        text.add(t);
     }
 
     public int getIdQuestion() {
         return idQuestion;
     }
 
-    public String getText() {
+    public ArrayList<String> getText() {
         return text;
     }
 

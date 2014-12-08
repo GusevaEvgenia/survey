@@ -16,7 +16,7 @@
                 method: 'POST',
                 data: "status=viewed",
                 success: function(){
-                    statusCell.text('viewed');
+                    statusCell.text('просмотрено');
                     $('#answer-popup').modal('show');
                 }
             });
@@ -42,15 +42,15 @@
 <jsp:include page="/WEB-INF/pages/forms/form/_menu.jsp"/>
 
         <div class="thumbnail">
+            <div class="${token!=null ? "hidden": ""}">
+                Статус ответа
+                <select id="select_type">
+                    <c:forEach items='${statuses}' var="s">
+                        <option value="${s.key}" ${s.key == currentStatus ? "selected='selected'" : ''}>${s.value}</option>
+                    </c:forEach>
+                </select>
+            </div>
             <c:if test='${answers.size()>0}'>
-                <div class="${token!=null ? "hidden": ""}">
-                    Статус ответа
-                    <select id="select_type">
-                        <c:forEach items='${statuses}' var="s">
-                            <option value="${s.key}" ${s.key == currentStatus ? "selected='selected'" : ''}>${s.value}</option>
-                        </c:forEach>
-                    </select>
-                </div>
                 <table class="table table-bordered">
                     <tr class="questions">
                         <th>№</th>
@@ -63,17 +63,21 @@
                     <c:forEach items='${answers}' var="cForm">
                         <tr>
                             <td>${cForm.id}</td>
-                            <c:forEach items='${cForm.answers}' var="answ">
-                                <td class="answer">${answ.text}</td>
+                            <c:forEach items='${cForm.answers}' var="answer">
+                                <td class="answer">
+                                    <c:forEach items='${answer.text}' var="text">
+                                        ${text}<c:if test='${answer.text.size()>2}'>; <br></c:if>
+                                    </c:forEach>
+                                </td>
                             </c:forEach>
-                            <td class="status-cell">${cForm.status}</td>
+                            <td class="status-cell">${cForm.status=="new" ? "новый" : "просмотрено"}</td>
                             <td><a class="show-answer" data-id="${cForm.id}" href="#">Посмотреть</a></td>
                         </tr>
                     </c:forEach>
                 </table>
             </c:if>
             <c:if test='${answers.size()==0}'>
-                <h4 class="text-center">У вас еще нет ответов на анкету.</h4>
+                <h4 class="text-center">У вас нет ответов на анкету.</h4>
             </c:if>
         </div>
 

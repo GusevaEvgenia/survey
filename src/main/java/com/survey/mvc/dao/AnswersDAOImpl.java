@@ -64,23 +64,35 @@ public class AnswersDAOImpl implements AnswersDAO {
     private ArrayList<CompletedFormRow> processAnswers(Query q) {
         ArrayList<HashMap<String, String>> result = (ArrayList<HashMap<String, String>>) q.list();
 
-
-
         HashMap<Integer, CompletedFormRow> response = new HashMap<Integer, CompletedFormRow>();
         for(HashMap row :result) {
             Integer idCform = (Integer) row.get("idCform");
+            Integer idQuestion = (Integer) row.get("idQuestion");
             CompletedFormRow singleRow = response.get(idCform);
             if(singleRow == null) {
                 singleRow = new CompletedFormRow(idCform, (String) row.get("status"));
                 response.put(idCform, singleRow);
             }
-            singleRow.putAnswer(new CompleteAnswer(
-                    (Integer) row.get("idQuestion"),
-                    (Integer) row.get("orderQ"),
-                    (String) (row.get("textOption") != null ? row.get("textOption") : row.get("textQ"))
-            ));
 
+            int i = 0;
+            for(CompleteAnswer ca : singleRow.getAnswers()){
+                if(ca.getIdQuestion()== idQuestion){
+                    i++;
+                }
+            }
+            if(i==0){
+                singleRow.putAnswer(new CompleteAnswer(
+                        (Integer) row.get("idQuestion"),
+                        (Integer) row.get("orderQ")
+                ));
+            }
 
+            for(CompleteAnswer ca1 : singleRow.getAnswers()){
+                if(ca1.getIdQuestion()==idQuestion){
+                    String ans = (String) (row.get("textOption") != null ? row.get("textOption") : row.get("textQ"));
+                    ca1.putAnswer(ans);
+                }
+            }
         }
         return new ArrayList<CompletedFormRow>(response.values());
     }
