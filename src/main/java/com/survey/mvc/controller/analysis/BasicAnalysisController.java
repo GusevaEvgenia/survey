@@ -31,6 +31,7 @@ public class BasicAnalysisController extends AbstractController {
     public String indexAction(ModelMap model, @PathVariable("id") Integer id) {
         model.addAttribute("form", formsService.getForm(id));
         model.addAttribute("questions", questionsService.getQuestionByForm(id));
+        //TODO SM
         return getView("index");
     }
 
@@ -52,6 +53,7 @@ public class BasicAnalysisController extends AbstractController {
     public String ResultAction(ModelMap model, @PathVariable("id") Integer id, HttpServletRequest request) {
         int idQuestion = Integer.parseInt(request.getParameter("idQuestion")); //код вопроса для анализа
         String [] types = request.getParameterValues("type"); //статистики для анализа
+        //заполнить массив
         Basic b = new Basic();
         model.addAttribute("basic", b);
         return getView("result");
