@@ -60,9 +60,9 @@
                         <th>Статус</th>
                         <th></th>
                     </tr>
-                    <c:forEach items='${answers}' var="cForm">
+                    <c:forEach items='${answers}' var="cForm" varStatus="loop">
                         <tr>
-                            <td>${cForm.id}</td>
+                            <td>${loop.index+1}</td>
                             <c:forEach items='${cForm.answers}' var="answer">
                                 <td class="answer">
                                     <c:forEach items='${answer.text}' var="text">

@@ -8,18 +8,10 @@
 <script>
     $(document).ready(function() {
         $(".show-answer").click(function(e) {
-            var statusCell = $(this).parents('tr').find('.status-cell');
-            getAnswer($(this).parents('tr'));
             e.preventDefault();
-            var url = /\/forms\/([\d]+)\/answers/.exec(window.location.pathname)[0];
-            $.ajax(url + "/" + $(this).data('id'),{
-                method: 'POST',
-                data: "status=viewed",
-                success: function(){
-                    statusCell.text('viewed');
-                    $('#answer-popup').modal('show');
-                }
-            });
+            getAnswer($(this).parents('tr'));
+            $('#answer-popup').modal('show');
+
         });
     });
 
@@ -45,16 +37,20 @@
             <table class="table table-bordered">
                 <tr class="questions">
                     <th>№</th>
-                    <c:forEach items='${form.questions}' var="q">
-                        <th class="question">${q.value.text}</th>
+                    <c:forEach items='${form.sortedQuestion}' var="q">
+                        <th class="question">${q.text}</th>
                     </c:forEach>
                     <th></th>
                 </tr>
-                <c:forEach items='${answers}' var="cForm">
+                <c:forEach items='${answers}' var="cForm" varStatus="loop">
                     <tr>
-                        <td></td>
-                        <c:forEach items='${cForm.answers}' var="answ">
-                             <td class="answer">${answ.text}</td>
+                        <td>${loop.index+1}</td>
+                        <c:forEach items='${cForm.answers}' var="answer">
+                            <td class="answer">
+                                <c:forEach items='${answer.text}' var="text">
+                                    ${text}<c:if test='${answer.text.size()>2}'>; <br></c:if>
+                                </c:forEach>
+                            </td>
                         </c:forEach>
                         <td><a class="show-answer" data-id="${cForm.id}" href="#">Посмотреть</a></td>
                     </tr>

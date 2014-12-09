@@ -86,13 +86,33 @@ public class SurveyMonkey implements ThirdPartySurvey{
                     String answerText;
                     if(formQuestion != null) {
                         long answerId = a.getAsJsonObject().get("row").getAsLong();
-                         answerText = formQuestion.getOptions().get(answerId);
+                        answerText = formQuestion.getOptions().get(answerId);
                     } else {
                          answerText = "Опять  хуйня какая-то=(";
                     }
-                    completedForm.putAnswer(new CompleteAnswer(answerText));
+
+                    int i = 0;
+                    for(CompleteAnswer ca : completedForm.getAnswers()){
+                        if(ca.getIdQuestion()== questionId){
+                            i++;
+                        }
+                    }
+                    if(i==0){
+                        CompleteAnswer complAnsw = new CompleteAnswer(questionId);
+                        if(formQuestion != null) {
+                            complAnsw.setOrder(formQuestion.getOrder());
+                        }
+                        completedForm.putAnswer(complAnsw);
+                    }
+
+                    for(CompleteAnswer ca1 : completedForm.getAnswers()){
+                        if(ca1.getIdQuestion()==questionId) {
+                            ca1.putAnswer(answerText);
+                        }
+                    }
                 }
             }
+            completedForm.answerSort();
             answers.add(completedForm);
         }
         return answers;
@@ -140,6 +160,7 @@ public class SurveyMonkey implements ThirdPartySurvey{
                     row.get("heading").getAsString()
             );
 
+            question.setOrder(row.get("position").getAsInt());
             JsonArray options = row.getAsJsonArray("answers");
             for(JsonElement o : options){
                 JsonObject optionsRow = o.getAsJsonObject();

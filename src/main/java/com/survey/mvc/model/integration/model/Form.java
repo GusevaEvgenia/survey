@@ -1,5 +1,7 @@
 package com.survey.mvc.model.integration.model;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 /**
@@ -53,4 +55,16 @@ public class Form {
     public void setQuestions(HashMap<Long, Questions> questions) {
         this.questions = questions;
     }
+
+    public ArrayList<Questions> getSortedQuestion() {
+        ArrayList<Questions> sortedQuestions = new ArrayList<Questions>(questions.values());
+        sortedQuestions.sort( new Comparator<Questions>() {
+            @Override
+            public int compare(Questions  answer1, Questions  answer2) {
+                return answer1.getOrder() - answer2.getOrder();
+            }
+        });
+        return sortedQuestions;
+    }
+
 }

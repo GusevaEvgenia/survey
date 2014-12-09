@@ -7,7 +7,7 @@
         <div>
             <c:forEach var="j" begin="0" end="${designer.questions[i].size}">
                 <p>
-                    <label class="radio">
+                    <label>
                         <input
                                 type="checkbox"
                                 name="option[${designer.questions[i].idQuestion}][${designer.questions[i].options[j].idOption}]"

@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class Questions {
     protected long id;
     protected String text;
+    protected int order;
     protected HashMap<Long, String> options;
 
 
@@ -35,6 +36,14 @@ public class Questions {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 
     public HashMap<Long, String> getOptions() {

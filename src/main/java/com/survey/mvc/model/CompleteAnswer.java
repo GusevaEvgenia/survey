@@ -6,21 +6,25 @@ import java.util.ArrayList;
  * Created by Belkin on 16.11.2014.
  */
 public class CompleteAnswer {
-    int idQuestion;
+    long idQuestion;
     int order;
-    ArrayList<String> text;
+    ArrayList<String> text = new ArrayList<String>();
 
     public CompleteAnswer() {
-        text = new ArrayList<String>();
     }
 
-    public CompleteAnswer(int idQuestion, int order) {
+    public CompleteAnswer(long idQuestion, int order) {
         this();
         this.idQuestion = idQuestion;
         this.order = order;
     }
 
-    public CompleteAnswer(int idQuestion, int order, ArrayList<String> text) {
+    public CompleteAnswer(long idQuestion) {
+        this();
+        this.idQuestion = idQuestion;
+    }
+
+    public CompleteAnswer(long idQuestion, int order, ArrayList<String> text) {
         this(idQuestion, order);
         this.text = text;
     }
@@ -29,7 +33,7 @@ public class CompleteAnswer {
         text.add(t);
     }
 
-    public int getIdQuestion() {
+    public long getIdQuestion() {
         return idQuestion;
     }
 
@@ -41,5 +45,7 @@ public class CompleteAnswer {
         return order;
     }
 
-
+    public void setOrder(int order) {
+        this.order = order;
+    }
 }
