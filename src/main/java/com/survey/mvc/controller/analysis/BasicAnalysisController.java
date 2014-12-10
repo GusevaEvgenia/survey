@@ -3,6 +3,8 @@ package com.survey.mvc.controller.analysis;
 import com.survey.mvc.controller.AbstractController;
 import com.survey.mvc.entity.QuestionsEntity;
 import com.survey.mvc.model.analysis.Basic;
+import com.survey.mvc.model.analysis.data.AnalysisData;
+import com.survey.mvc.service.AnalysisService;
 import com.survey.mvc.service.FormsService;
 import com.survey.mvc.service.QuestionsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class BasicAnalysisController extends AbstractController {
     private FormsService formsService;
     @Autowired
     private QuestionsService questionsService;
+    @Autowired
+    private AnalysisService analysisService;
+
 
     //выбор вопросов
     @RequestMapping(method = RequestMethod.GET)
@@ -51,10 +56,10 @@ public class BasicAnalysisController extends AbstractController {
     // Результат анализа
     @RequestMapping(method = RequestMethod.GET, value = "/result")
     public String ResultAction(ModelMap model, @PathVariable("id") Integer id, HttpServletRequest request) {
+        model.addAttribute("form", formsService.getForm(id));
         int idQuestion = Integer.parseInt(request.getParameter("idQuestion")); //код вопроса для анализа
         String [] types = request.getParameterValues("type"); //статистики для анализа
-        //заполнить массив
-        Basic b = new Basic();
+        Basic b = new Basic(analysisService.getAnalysisData(idQuestion), types);
         model.addAttribute("basic", b);
         return getView("result");
     }

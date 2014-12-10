@@ -4,23 +4,22 @@ import com.survey.mvc.entity.AnswersEntity;
 import com.survey.mvc.model.CompleteAnswer;
 import com.survey.mvc.model.CompletedFormRow;
 import com.survey.mvc.model.analysis.data.AnalysisData;
+import com.survey.mvc.model.analysis.data.Answer;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 @Repository
 public class AnswersDAOImpl implements AnswersDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
+
 
     private Session getCurrentSession(){
         return sessionFactory.getCurrentSession();
@@ -102,24 +101,16 @@ public class AnswersDAOImpl implements AnswersDAO {
         return processAnswers(getQuery().setInteger("id", id).setInteger("idCF", idCompForm));
     }
 
-    @Override
-    public ArrayList<AnalysisData> getAnalysisData(int id) {
-        Query q = getCurrentSession().createQuery("SELECT new map(q.idQuestion as id, q.scale as scale, a.idOption as answer,  a.text as answerT) \n" +
+    @SuppressWarnings("unchecked")
+    public ArrayList<HashMap<String, String>> getAnalysisData(int idQuestion) {
+        Query q = getCurrentSession().createQuery("SELECT new map(q.idQuestion as id, q.scale as scale, a.idOption as idAnswer, ao.order as aOrder, ao.text as answer,  a.text as answerT) \n" +
                 "FROM QuestionsEntity q, AnswerOptionsEntity ao, AnswersEntity a \n" +
                 "WHERE ao.idQuestion=:id and q.idQuestion = ao.idQuestion and ao.idOption = a.idOption")
-                .setInteger("id", id);
-        ArrayList<HashMap<String, String>> result = (ArrayList<HashMap<String, String>>) q.list();
-        ArrayList<AnalysisData> data = new ArrayList<AnalysisData>();
-        for(HashMap r : result){
-            AnalysisData a = new AnalysisData(
-                    (Integer) (r.get("answer") == null ? r.get("answerT") : r.get("answer")),
-                    (String) r.get("scale"),
-                    (Integer) r.get("id")
-            );
-            data.add(a);
-        }
-        return data;
+                .setInteger("id", idQuestion);
+
+        return (ArrayList<HashMap<String, String>>) q.list();
     }
+
 
     private Query getQuery() {
         String sql = "select new map(comF.idCform as idCform, comF.status as status, ansOp.text as textOption, ans.text as textQ, q.idQuestion as idQuestion, q.order as orderQ) " +

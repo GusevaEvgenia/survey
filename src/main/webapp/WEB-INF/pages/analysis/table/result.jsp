@@ -143,7 +143,7 @@
 
         </div>
 
-        <a class="tb pull-left btn btn-primary" href="/forms/123/analysis/table">Назад</a><br>
+        <a class="tb pull-left btn btn-primary" href="/forms/${form.idForm}/analysis/table">Назад</a><br>
 
         <br>
     </div>

@@ -1,20 +1,30 @@
 package com.survey.mvc.model.analysis.data;
 
+import com.survey.mvc.model.interfaces.IQuestion;
+
+import java.util.ArrayList;
+
 /**
  * Created by Belkin on 05.12.2014.
  */
 public class AnalysisData {
-    Integer answer;
-    String scale;
-    Integer idQuestion;
+    IQuestion question;
+    ArrayList<Answer> answers;
 
-    public AnalysisData(Integer answer, String scale, Integer idQuestion) {
+    public AnalysisData( ArrayList<Answer> answers, IQuestion question) {
         this();
-        this.answer = answer;
-        this.scale = scale;
-        this.idQuestion = idQuestion;
+        this.answers = answers;
+        this.question = question;
     }
 
     public AnalysisData() {
+    }
+
+    public IQuestion getQuestion() {
+        return question;
+    }
+
+    public ArrayList<Answer> getAnswers() {
+        return answers;
     }
 }

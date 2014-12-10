@@ -33,7 +33,7 @@
             </tr>
             <c:forEach items='${basic.frequency}' var="answer" varStatus="loop">
                 <tr>
-                    <td>${loop.index}</td>
+                    <td>${loop.index+1}</td>
                     <td>${answer.get(0)}</td>
                     <td>${answer.get(1)}</td>
                     <td>${answer.get(2)}</td>
@@ -73,7 +73,7 @@
     <c:if test="${fn:contains(basic.types,6)}">
         <tr>
             <th>Межкватериальный размах</th>
-            <td>${basic.interquartile}</td>
+            <td>${basic.interQuartile}</td>
         </tr>
     </c:if>
     <c:if test="${fn:contains(basic.types,7)}">

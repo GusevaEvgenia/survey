@@ -2,17 +2,20 @@ package com.survey.mvc.entity;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.survey.mvc.model.interfaces.IQuestion;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by Belkin on 10.11.2014.
  */
 @Entity
 @Table(name = "questions", schema = "", catalog = "research")
-public class QuestionsEntity {
+public class QuestionsEntity implements IQuestion{
     private int idQuestion;
     private int idForm;
     private int idQtype;
@@ -58,6 +61,20 @@ public class QuestionsEntity {
     @Column(name = "text")
     public String getText() {
         return text;
+    }
+
+    @Override
+    @Transient
+    public ArrayList<HashMap<String, String>> getAnswers() {
+        ArrayList<HashMap<String, String>> answers = new ArrayList<HashMap<String, String>>();
+
+        for(AnswerOptionsEntity ao: getAnswerOptionsesByIdQuestion()) {
+            HashMap<String, String> row = new HashMap<String, String>();
+            row.put("id", String.valueOf(ao.getIdOption()));
+            row.put("text", ao.getText());
+            answers.add(row);
+        }
+        return  answers;
     }
 
     public void setText(String text) {

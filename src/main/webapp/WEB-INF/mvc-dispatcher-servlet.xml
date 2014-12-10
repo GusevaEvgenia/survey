@@ -52,10 +52,10 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
- <!--   <bean id="userDAO" class="com.survey.mvc.dao.UserDAOImpl">
+ <!--   <bean idQuestion="userDAO" class="com.survey.mvc.dao.UserDAOImpl">
     </bean>
 
-    <bean id="userService" class="com.survey.mvc.service.UserServiceImpl">
+    <bean idQuestion="userService" class="com.survey.mvc.service.UserServiceImpl">
     </bean>-->
 
 </beans>

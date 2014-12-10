@@ -53,9 +53,9 @@
                     alert('Необходимо выбрать хотя бы 1 параметр для анализа');
                     return;
                 }
-                if (!single){
-                    data += "&idQuestion=" + $(tab).find(".analys-method").find('input[name="idQuestion"]').val();
-                }
+                //if (!single){
+                    data += "&idQuestion=" + $(tab).find(".analys-method").find('input[name="idQ"]').val();
+                //}
 
                 $.ajax({
                     url: "/forms/"+id+"/analysis/basic/result",

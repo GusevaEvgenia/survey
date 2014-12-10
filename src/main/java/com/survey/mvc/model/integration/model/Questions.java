@@ -1,16 +1,18 @@
 package com.survey.mvc.model.integration.model;
 
+import com.survey.mvc.model.interfaces.IQuestion;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by Belkin on 07.12.2014.
  */
-public class Questions {
+public class Questions implements IQuestion{
     protected long id;
     protected String text;
     protected int order;
     protected HashMap<Long, String> options;
-
 
     public Questions() {
         options = new HashMap<Long, String>();
@@ -32,6 +34,23 @@ public class Questions {
 
     public String getText() {
         return text;
+    }
+
+    @Override
+    public ArrayList<HashMap<String, String>> getAnswers() {
+        ArrayList<HashMap<String, String>> answers = new ArrayList<HashMap<String, String>>();
+        for (Long answerId: options.keySet()) {
+            HashMap<String, String> row = new HashMap<String, String>();
+            row.put("id", String.valueOf(answerId));
+            row.put("text", options.get(answerId));
+            answers.add(row);
+        }
+        return answers;
+    }
+
+    @Override
+    public String getScale() {
+        return "unknown";
     }
 
     public void setText(String text) {

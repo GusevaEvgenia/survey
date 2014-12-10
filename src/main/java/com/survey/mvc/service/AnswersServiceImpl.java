@@ -44,9 +44,7 @@ public class AnswersServiceImpl implements AnswersService {
 
     @Override
     public HashMap<String, String> getStatuses() {
-        answerDAO.getAnalysisData(1);
         HashMap<String, String> statuses = new HashMap<String, String>();
-
         statuses.put("all", "Все ответы");
         statuses.put("new", "Новый");
         statuses.put("viewed", "Просмотренный");

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="/WEB-INF/pages/partials/header.jsp">
     <jsp:param name="title" value=""/>
 </jsp:include>
@@ -40,7 +41,7 @@
                 }
             }
         </script>
-        <form action="/forms/123/analysis/table/result">
+        <form action="/forms/${form.idForm}/analysis/table/result">
             <div class="row-fluid">
                 <div class="span12">
                     <input type="hidden" name="page" value="2">
@@ -62,11 +63,11 @@
                             <td class="width220">Зависимая переменная</td>
                             <td>
                                 <select name="main_parameter">
-                                    <% for (int i = 1; i < 6; i++) {%>
-                                    <option value="<%=i%>">
-                                        Вопрос№<%=i%>
-                                    </option>
-                                    <%}%>
+                                    <c:forEach items='${questions}' var="question">
+                                        <option value="${question.idQuestion}">
+                                            ${question.text}
+                                        </option>
+                                    </c:forEach>
                                 </select>
                             </td>
                         </tr>
@@ -74,22 +75,22 @@
                             <td class="width220">Независимая переменная <span id="parameter-wording"></span></td>
                             <td>
                                 <select name="first_parameter">
-                                    <% for (int i = 1; i < 6; i++) {%>
-                                    <option value="<%=i%>">
-                                        Вопрос№<%=i%>
-                                    </option>
-                                    <%}%>
+                                    <c:forEach items='${questions}' var="question">
+                                        <option value="${question.idQuestion}">
+                                                ${question.text}
+                                        </option>
+                                    </c:forEach>
                                 </select>
                             </td>
                         </tr>
                         <tr class="paramert2 width220">
                             <td>Независимая переменная два</td>
                             <td><select name="second_parameter">
-                                <% for (int i = 1; i < 6; i++) {%>
-                                <option value="<%=i%>">
-                                    Вопрос№<%=i%>
-                                </option>
-                                <%}%>
+                                <c:forEach items='${questions}' var="question">
+                                    <option value="${question.idQuestion}">
+                                            ${question.text}
+                                    </option>
+                                </c:forEach>
                             </select>
                             </td>
                         </tr>

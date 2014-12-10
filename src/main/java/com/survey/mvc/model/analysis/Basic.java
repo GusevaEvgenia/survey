@@ -1,31 +1,90 @@
 package com.survey.mvc.model.analysis;
 
+import com.survey.mvc.model.analysis.data.AnalysisData;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 /**
  * Created by Belkin on 05.12.2014.
  */
 public class Basic extends Analysis {
-    Double average;
-    Double moda;
-    Double median;
-    Double variationScale;
-    Double interquartile;
-    Double dispersion;
-    Double deviation;
-    Double variation;
-    Double asymmetry;
-    Double excess;
+    public static final String SCALE_NOMINAL = "nominal";
+    public static final String SCALE_RATIO = "ratio";
+    public static final String SCALE_ORDINAL = "ordinal";
+    public static final String SCALE_INTERVAL = "interval";
+    public static final Integer[] NOMINAL_AVAILABLE  = {1, 2, 4, 5, 6, 7, 8, 9, 10, 11 };
+    public static final Integer[] RATIO_AVAILABLE    = {1, 4, 10, 11};
+    public static final Integer[] ORDINAL_AVAILABLE  = {1, 2, 4, 5, 6, 7, 8, 9, 10, 11};
+    public static final Integer[] INTERVAL_AVAILABLE = {1, 3, 10, 11};
+
+    private ArrayList<Integer> types;
+    private Double average;
+    private Double moda;
+    private Double median;
+    private Double variationScale;
+    private Double interQuartile;
+    private Double dispersion;
+    private Double deviation;
+    private Double variation;
+    private Double asymmetry;
+    private Double excess;
+
+    public Basic(Collection<AnalysisData> data, String[] types) {
+        super(data);
+        ArrayList<Integer> normalTypes = new ArrayList<Integer>();
+        for (String type : types) {
+            normalTypes.add(Integer.parseInt(type));
+        }
+        setTypes(normalTypes);
+    }
+
+    public Basic(Collection<AnalysisData> data, Integer[] types) {
+        super(data);
+        setTypes(new ArrayList<Integer>(Arrays.asList(types)));
+    }
 
     public ArrayList<Integer> getTypes(){
-        ArrayList<Integer> types = new ArrayList<Integer>();
-        types.add(1);
-        types.add(2);
         return types;
     }
-    public String getScale(){
-        return "nominal";
+
+    private void setTypes(ArrayList<Integer> types) {
+        ArrayList<Integer> response = new ArrayList<Integer>();
+        Collection<Integer> available = getAvailableTypes();
+        for(Integer type: types) {
+            if(available.contains(type)) {
+                response.add(type);
+            }
+        }
+        this.types = response;
     }
+
+    private Collection<Integer> getAvailableTypes() {
+        Collection<Integer> response;
+        String scale = getScale();
+        if(scale.equals(SCALE_NOMINAL)) {
+            response = Arrays.asList(NOMINAL_AVAILABLE);
+        } else if(scale.equals(SCALE_RATIO)) {
+            response = Arrays.asList(RATIO_AVAILABLE);
+        } else if(scale.equals(SCALE_INTERVAL)) {
+            response = Arrays.asList(INTERVAL_AVAILABLE);
+        } else if(scale.equals(SCALE_ORDINAL)) {
+            response = Arrays.asList(ORDINAL_AVAILABLE);
+        } else {
+            response = new ArrayList<Integer>();
+        }
+        return response;
+    }
+
+    public String getScale(){
+        return getAnaliseData().getQuestion().getScale();
+    }
+
+    private AnalysisData getAnaliseData() {
+        return (AnalysisData) data.toArray()[0];
+    }
+
 
     //Вариационны ряд
     public ArrayList<ArrayList<String>> getFrequency(){
@@ -71,11 +130,11 @@ public class Basic extends Analysis {
     }
 
     //Межкватериальный размах 6
-    public double getInterquartile (){
-        if (interquartile  == null) {
-            interquartile  = 7.5;
+    public double getInterQuartile (){
+        if (interQuartile == null) {
+            interQuartile = 7.5;
         }
-        return interquartile ;
+        return interQuartile;
     }
 
     //Дисперсия 7

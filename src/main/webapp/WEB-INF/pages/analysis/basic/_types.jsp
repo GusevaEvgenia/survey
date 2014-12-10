@@ -1,6 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
 <form class="analys-method">
-    <input type="hidden" name="idQuestion" value="${param.idQuestion}">
+    <input type="hidden" name="idQ" value="${param.idQuestion}">
     <div class="row-fluid">
         <div class="span10">
             <h5>Вариационный ряд:</h5>
