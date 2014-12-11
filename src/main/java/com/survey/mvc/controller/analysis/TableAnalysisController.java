@@ -1,6 +1,8 @@
 package com.survey.mvc.controller.analysis;
 
 import com.survey.mvc.controller.AbstractController;
+import com.survey.mvc.model.analysis.Table;
+import com.survey.mvc.service.AnalysisService;
 import com.survey.mvc.service.FormsService;
 import com.survey.mvc.service.QuestionsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class TableAnalysisController extends AbstractController {
     private FormsService formsService;
     @Autowired
     private QuestionsService questionsService;
+    @Autowired
+    private AnalysisService analysisService;
+
 
     @RequestMapping(method = RequestMethod.GET)
      public String indexAction(ModelMap model, @PathVariable("id") Integer id) {
@@ -32,12 +37,21 @@ public class TableAnalysisController extends AbstractController {
     @RequestMapping(method = RequestMethod.GET, value = "/result")
     public String resultAction(ModelMap model, @PathVariable("id") Integer id, HttpServletRequest request) {
         model.addAttribute("form", formsService.getForm(id));
-        int parameter_size = Integer.parseInt(request.getParameter("parameter_size"));
-        int main_parameter = Integer.parseInt(request.getParameter("main_parameter"));
-        int first_parameter = Integer.parseInt(request.getParameter("first_parameter"));
-        if(parameter_size==3){
-            int second_parameter = Integer.parseInt(request.getParameter("second_parameter"));
-        }
+        Table t;
+//        int parameter_size = Integer.parseInt(request.getParameter("parameter_size"));
+        String [] types = request.getParameterValues("types");
+        //if(parameter_size==2){
+            int[] questions = {Integer.parseInt(request.getParameter("main_parameter")),
+                               Integer.parseInt(request.getParameter("first_parameter"))};
+            t = new Table(analysisService.getAnalysisData(questions), types);
+       /* }else{
+            int[] questions = {Integer.parseInt(request.getParameter("main_parameter")),
+                    Integer.parseInt(request.getParameter("first_parameter")),
+                    Integer.parseInt(request.getParameter("second_parameter"))};
+            t = new Table(analysisService.getAnalysisData(questions), types);
+        }*/
+//        t.getVariationLine();
+        model.addAttribute("table", t);
         return getView("result");
     }
 

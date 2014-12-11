@@ -1,15 +1,6 @@
-<%@page import="java.util.Arrays"%>
-<%@page import="java.util.ArrayList" %>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%
-    String[] raw_types = request.getParameterValues("type");
-    if (raw_types == null) {
-        raw_types = new String[0];
-    }
-    ArrayList<String> types = new ArrayList(Arrays.asList(raw_types));
-%>
 <script>
     $(document).ready(function() {
         $(".bb").click(function() {
@@ -31,7 +22,7 @@
                 <th>Выбранное количество</th>
                 <th>Выбрано(%)</th>
             </tr>
-            <c:forEach items='${basic.frequency}' var="answer" varStatus="loop">
+            <c:forEach items='${basic.variationLine}' var="answer" varStatus="loop">
                 <tr>
                     <td>${loop.index+1}</td>
                     <td>${answer.get(0)}</td>

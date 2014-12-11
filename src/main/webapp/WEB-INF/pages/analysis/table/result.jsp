@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="/WEB-INF/pages/partials/header.jsp">
     <jsp:param name="title" value=""/>
 </jsp:include>
@@ -56,40 +58,36 @@
                 return null;
             }
         </script>
-        <% int size_first_param = 2;
-            int size_second_param = 2;
-            int size_fird_param = 2;
-        %>
         <table class="table table-bordered table_2parameter">
             <tr>
                 <th></th>
-                <th colspan="<%=size_second_param%>">Вопрос№${param.first_parameter} (Независимая переменная)</th>
+                <th>${table.firstQuestionData.question.text} (Независимая переменная)</th>
             </tr>
             <tr>
-                <th>Вопрос№${param.main_parameter}(Зависимая переменная)</th>
-                <%for (int i = 1; i <= size_second_param; i++) {%>
-                <td>Вариант ответа№<%=i%></td>
-                <%}%>
+                <th>${table.mainQuestionData.question.text} Зависимая переменная)</th>
+                <c:forEach items='${table.answerOptions[1]}' var="text">
+                    <td>${text}</td>
+                </c:forEach>
             </tr>
-            <%for (int i = 1; i <= size_first_param; i++) {%>
+            <c:forEach items='${table.answerOptions[0]}' var="text" varStatus="rloop">
             <tr>
-                <td>Вариант ответа№<%=i%></td>
-                <%for (int j = 1; j <= size_second_param; j++) {%>
-                <td>Значение <%=i%><%=j%></td>
-                <%}%>
+                <td>${text}</td>
+                <c:forEach begin="0" end="${table.columnsLength-1}" varStatus="cloop">
+                    <td>${table.getCellVal(cloop.index, rloop.index)}%</td>
+                </c:forEach>
             </tr>
-            <%}%>
+            </c:forEach>
             <tr>
                 <th>Итого</th>
-                <%for (int i = 1; i <= size_second_param; i++) {%>
-                <td>Сумма</td>
-                <%}%>
+                <c:forEach begin="0" end="${table.columnsLength-1}" varStatus="summ">
+                    <td>${table.getCellVal(summ.index, table.rowsLength-1)}%</td>
+                </c:forEach>
             </tr>
         </table>
-        <table class="table table-bordered table_3parameter">
+       <%-- <table class="table table-bordered table_3parameter">
             <tr>
                 <td></td>
-                <th colspan="<%=size_fird_param * 2%>">Вопрос№${param.first_parameter} (Независимая переменная 1)</th>
+                <th colspan="<%=size_fird_param * 2%>">${table.firstQuestionData.question.text} (Независимая переменная 1)</th>
             </tr>
             <tr>
                 <td></td>
@@ -100,11 +98,11 @@
             <tr>
                 <td></td>
                 <%for (int i = 1; i <= size_second_param; i++) {%>
-                <th colspan="<%=size_fird_param%>">Вопрос№${param.second_parameter} (Независимая переменная 2)</th>
+                <th colspan="<%=size_fird_param%>">${table.secondQuestionData.question.text} (Независимая переменная 2)</th>
                 <%}%>
             </tr>
             <tr>
-                <th>Вопрос№${param.main_parameter} (Зависимая переменная)</th>
+                <th>${table.questionText[0]} (Зависимая переменная)</th>
                 <%for (int i = 1; i <= size_second_param; i++) {%>
                 <%for (int j = 1; j <= size_fird_param; j++) {%>
                 <td>Вариант ответа№<%=i%></td>
@@ -129,19 +127,23 @@
                 <%}%>
                 <%}%>
             </tr>
-        </table>
-        <div class="dependence hidden margin-button15">
-            <strong>Зависимость наблюдаемой связи</strong><br>
-            Расчитаное значение хи-квадрата = 3.88<br>
-            Критического значение хи-квадрата = 3.77<br>
-            3.77>3.88
-        </div>
-
-        <div class="strength_links hidden margin-button15">
-            <strong>Теснота связи</strong><br>
-            Теснота связи = 0.55<br>
-
-        </div>
+        </table>--%>
+        <c:if test="${fn:contains(table.types,1)}">
+            <div class="dependence hidden margin-button15">
+                <strong>Зависимость наблюдаемой связи</strong><br>
+                    <%--Расчитаное значение хи-квадрата = 3.88<br>
+                    Критического значение хи-квадрата = 3.77<br>
+                    3.77>3.88--%>
+                    ${table.dependens}
+            </div>
+        </c:if>
+        <c:if test="${fn:contains(table.types,2)}">
+            <div class="strength_links hidden margin-button15">
+                <strong>Теснота связи</strong><br>
+                Теснота связи = 0.55<br>
+                ${table.strengthLinks}
+            </div>
+        </c:if>
 
         <a class="tb pull-left btn btn-primary" href="/forms/${form.idForm}/analysis/table">Назад</a><br>
 

@@ -44,9 +44,8 @@
         <form action="/forms/${form.idForm}/analysis/table/result">
             <div class="row-fluid">
                 <div class="span12">
-                    <input type="hidden" name="page" value="2">
                     <h4>Выберите параметры для построения таблиц сопряженности признаков</h4>
-                    <strong>Выберите количество переменных:</strong>
+                    <%--<strong>Выберите количество переменных:</strong>
                     <div class="form-inline">
                         <label class="radio">
                             <input class="select-parameter" type="radio" name="parameter_size" id="optionsRadios1" value="2" checked>
@@ -56,7 +55,7 @@
                             <input class="select-parameter" type="radio" name="parameter_size" id="optionsRadios2" value="3">
                             Три переменных
                         </label>
-                    </div><br>
+                    </div><br>--%>
                     <strong>Выберите переменные:</strong>
                     <table>
                         <tr>
@@ -83,7 +82,7 @@
                                 </select>
                             </td>
                         </tr>
-                        <tr class="paramert2 width220">
+                       <%-- <tr class="paramert2 width220">
                             <td>Независимая переменная два</td>
                             <td><select name="second_parameter">
                                 <c:forEach items='${questions}' var="question">
@@ -93,12 +92,12 @@
                                 </c:forEach>
                             </select>
                             </td>
-                        </tr>
+                        </tr>--%>
                     </table>
 
                     <strong>Выберите статистики</strong>
                     <label class="checkbox">
-                        <input class="d_statictic" type="checkbox" name="dependence" value="1">
+                        <input class="d_statictic" type="checkbox" name="types" value="1">
                         Статистическая зависимость наблюдаемой связи
                     </label>
                     <div class="margin-left30 level hidden">
@@ -112,7 +111,7 @@
                         </select>
                     </div>
                     <label class="checkbox">
-                        <input class="sl_statictic" type="checkbox" name="strength_links" value="2" disabled="disabled">
+                        <input class="sl_statictic" type="checkbox" name="types" value="2" disabled="disabled">
                         Тоснота связи
                     </label>
 

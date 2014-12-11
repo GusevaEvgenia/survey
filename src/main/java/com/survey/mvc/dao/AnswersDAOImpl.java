@@ -103,9 +103,11 @@ public class AnswersDAOImpl implements AnswersDAO {
 
     @SuppressWarnings("unchecked")
     public ArrayList<HashMap<String, String>> getAnalysisData(int idQuestion) {
-        Query q = getCurrentSession().createQuery("SELECT new map(q.idQuestion as id, q.scale as scale, a.idOption as idAnswer, ao.order as aOrder, ao.text as answer,  a.text as answerT) \n" +
+        String sql = "SELECT new map(q.idQuestion as id, a.idOption as idAnswer, a.idCform as cForm, q.scale as scale," +
+                                     "ao.order as aOrder, ao.text as answer,  a.text as answerT) \n" +
                 "FROM QuestionsEntity q, AnswerOptionsEntity ao, AnswersEntity a \n" +
-                "WHERE ao.idQuestion=:id and q.idQuestion = ao.idQuestion and ao.idOption = a.idOption")
+                "WHERE ao.idQuestion=:id and q.idQuestion = ao.idQuestion and ao.idOption = a.idOption";
+        Query q = getCurrentSession().createQuery(sql)
                 .setInteger("id", idQuestion);
 
         return (ArrayList<HashMap<String, String>>) q.list();

@@ -6,6 +6,7 @@ package com.survey.mvc.model.analysis.data;
 public class Answer {
     private long id;
     private String text;
+    private long idCform;
     private int code;
 
     public Answer() {
@@ -20,6 +21,11 @@ public class Answer {
     public Answer(long id, String text, int code) {
         this(id, text);
         this.code = code;
+    }
+
+    public Answer(long id, String text, int code, long idCform) {
+        this(id, text, code);
+        this.idCform = idCform;
     }
 
     public long getId() {
@@ -44,5 +50,9 @@ public class Answer {
 
     public void setCode(int code) {
         this.code = code;
+    }
+
+    public long getIdCform() {
+        return idCform;
     }
 }

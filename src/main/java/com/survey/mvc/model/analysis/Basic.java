@@ -1,10 +1,12 @@
 package com.survey.mvc.model.analysis;
 
 import com.survey.mvc.model.analysis.data.AnalysisData;
+import com.survey.mvc.model.analysis.data.Answer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by Belkin on 05.12.2014.
@@ -19,7 +21,7 @@ public class Basic extends Analysis {
     public static final Integer[] ORDINAL_AVAILABLE  = {1, 2, 4, 5, 6, 7, 8, 9, 10, 11};
     public static final Integer[] INTERVAL_AVAILABLE = {1, 3, 10, 11};
 
-    private ArrayList<Integer> types;
+    private ArrayList<Integer> types = new ArrayList<Integer>();
     private Double average;
     private Double moda;
     private Double median;
@@ -85,16 +87,35 @@ public class Basic extends Analysis {
         return (AnalysisData) data.toArray()[0];
     }
 
-
     //Вариационны ряд
-    public ArrayList<ArrayList<String>> getFrequency(){
+    public ArrayList<ArrayList<String>> getVariationLine(){
+        int size = getAnaliseData().getAnswers().size();
+        double pctSum = 0;
         ArrayList<ArrayList<String>> frequency = new ArrayList<ArrayList<String>>();
+        for(HashMap<String, String> answerOption : getAnaliseData().getQuestion().getAnswers()) {
+            double count = getFrequency(Long.parseLong(answerOption.get("id")));
+            double pct = count/size;
+            double pct1 = (int) (pct*10000);
+            double pct2 = pct1/100;
+            //double perct = Math.rint(pct*10000)/100;
+            //double jj = Math.rint(100.0 * pct) / 100.0;
+            pctSum += pct2;
+            ArrayList<String> row = new ArrayList<String>();
+            row.add(answerOption.get("text")!=null ? answerOption.get("text") : null); //TODO найти вариаты на числовой вопрос
+            row.add("" + (int)count);
+            row.add(pct2+"%");
+            frequency.add(row);
+        }
         ArrayList<String> row = new ArrayList<String>();
-        row.add("Ответ1");
-        row.add("2");
-        row.add("0.4");
+        row.add("Сумма");
+        row.add(""+size);
+        row.add(Math.rint(pctSum*100)/100 + "%");
         frequency.add(row);
         return frequency;
+    }
+
+    public int getFrequency(long id){
+        return getAnaliseData().getAnswersWithOption(id).size();
     }
 
     //Среднее арифметическое 2

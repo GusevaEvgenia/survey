@@ -31,7 +31,8 @@ public class AnalysisService {
             answers.add(new Answer(
                     (Integer) r.get("idAnswer"),
                     (String)(r.get("answer") == null ? r.get("answerT") : r.get("answer")),
-                    (Integer) r.get("aOrder")
+                    (Integer) r.get("aOrder"),
+                    (Integer) r.get("cForm")
             ));
 
         }

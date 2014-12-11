@@ -27,4 +27,16 @@ public class AnalysisData {
     public ArrayList<Answer> getAnswers() {
         return answers;
     }
+
+    public ArrayList<Answer> getAnswersWithOption(long id){
+        ArrayList<Answer> response = new ArrayList<Answer>();
+
+        for (Answer a: answers) {
+            if(a.getId() == id) {
+                response.add(a);
+            }
+        }
+
+        return response;
+    }
 }
