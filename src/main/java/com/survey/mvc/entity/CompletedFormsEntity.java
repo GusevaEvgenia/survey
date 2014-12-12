@@ -20,6 +20,7 @@ public class CompletedFormsEntity {
 
     @Id
     @Column(name = "id_cform")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getIdCform() {
         return idCform;
     }
@@ -82,7 +83,7 @@ public class CompletedFormsEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "completedFormsByIdCform")
+    @OneToMany(mappedBy = "completedFormsByIdCform", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Collection<AnswersEntity> getAnswersesByIdCform() {
         return answersesByIdCform;
     }

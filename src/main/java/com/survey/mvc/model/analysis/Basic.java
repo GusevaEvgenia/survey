@@ -32,6 +32,7 @@ public class Basic extends Analysis {
     private Double variation;
     private Double asymmetry;
     private Double excess;
+    private ArrayList<ArrayList<String>> variationLine;
 
     public Basic(Collection<AnalysisData> data, String[] types) {
         super(data);
@@ -89,39 +90,49 @@ public class Basic extends Analysis {
 
     //Вариационны ряд
     public ArrayList<ArrayList<String>> getVariationLine(){
-        int size = getAnaliseData().getAnswers().size();
-        double pctSum = 0;
-        ArrayList<ArrayList<String>> frequency = new ArrayList<ArrayList<String>>();
-        for(HashMap<String, String> answerOption : getAnaliseData().getQuestion().getAnswers()) {
-            double count = getFrequency(Long.parseLong(answerOption.get("id")));
-            double pct = count/size;
-            double pct1 = (int) (pct*10000);
-            double pct2 = pct1/100;
-            //double perct = Math.rint(pct*10000)/100;
-            //double jj = Math.rint(100.0 * pct) / 100.0;
-            pctSum += pct2;
+        if(variationLine == null) {
+            int size = getAnaliseData().getAnswers().size();
+            double pctSum = 0;
+            ArrayList<ArrayList<String>> frequency = new ArrayList<ArrayList<String>>();
+            for (HashMap<String, String> answerOption : getAnaliseData().getQuestion().getAnswers()) {
+                double count = getFrequency(Long.parseLong(answerOption.get("id")));
+                double pct = Math.floor(count/size*10000)/100;
+                pctSum += pct;
+                ArrayList<String> row = new ArrayList<String>();
+                row.add(answerOption.get("text") != null ? answerOption.get("text") : null); //TODO найти вариаты на числовой вопрос
+                row.add("" + (int) count);
+                row.add(pct + "%");
+                frequency.add(row);
+            }
             ArrayList<String> row = new ArrayList<String>();
-            row.add(answerOption.get("text")!=null ? answerOption.get("text") : null); //TODO найти вариаты на числовой вопрос
-            row.add("" + (int)count);
-            row.add(pct2+"%");
+            row.add("Сумма");
+            row.add("" + size);
+            row.add(Math.floor(pctSum * 100) / 100 + "%");
             frequency.add(row);
+            variationLine=frequency;
         }
-        ArrayList<String> row = new ArrayList<String>();
-        row.add("Сумма");
-        row.add(""+size);
-        row.add(Math.rint(pctSum*100)/100 + "%");
-        frequency.add(row);
-        return frequency;
+        return variationLine;
     }
 
     public int getFrequency(long id){
-        return getAnaliseData().getAnswersWithOption(id).size();
+        String key = "getFrequency::"+id;
+        Long value = cache.get(key);
+        if(value == null){
+            value = (long) getAnaliseData().getAnswersWithOption(id).size();
+        }
+        return value.intValue();
     }
 
     //Среднее арифметическое 2
     public double getAverage(){
         if (average == null) {
-            average = 7.5;
+            int size = getAnaliseData().getAnswers().size();
+            double count = 0;
+            for (HashMap<String, String> answer : getAnaliseData().getQuestion().getAnswers()) {
+                int c = Integer.parseInt(answer.get("order")) * getFrequency(Long.parseLong(answer.get("id")));
+                count += c;
+            }
+            average = Math.floor(count/size*100)/100;
         }
         return average;
     }

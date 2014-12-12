@@ -2,6 +2,7 @@ package com.survey.mvc.service;
 
 import com.survey.mvc.entity.CompletedFormsEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,5 +14,6 @@ public interface CompletedFormsService {
     public CompletedFormsEntity getCompletedForm(int id);
     public List<CompletedFormsEntity> getCompletedForms();
     public List<CompletedFormsEntity> getCompletedFormsByForm(int id);
+    public void save(int id, ArrayList<Integer> options);
     public boolean newAnswersExist(int id);
 }

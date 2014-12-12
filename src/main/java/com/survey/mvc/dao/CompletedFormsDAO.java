@@ -9,7 +9,9 @@ import java.util.List;
  */
 public interface CompletedFormsDAO {
     public void addCompletedForm(CompletedFormsEntity completedForm);
+    public void saveOrUpdateCompletedForm(CompletedFormsEntity completedForm);
     public void updateStatus(int id, String  status);
+    public void saveCompletedForm(CompletedFormsEntity completedForm);
     public CompletedFormsEntity getCompletedForm(int id);
     public List<CompletedFormsEntity> getCompletedForms();
     public List<CompletedFormsEntity> getCompletedFormsByForm(int id);

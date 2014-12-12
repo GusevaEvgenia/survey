@@ -70,12 +70,12 @@ public class Table extends Analysis  {
                     colum.add("0");
                 } else {
                     double percent = ((double)getFrequency(mainId, firstId)) / summ;
-                    double perc = Math.ceil(percent*10000)/100;
+                    double perc = Math.floor(percent*10000)/100;
                     colum.add(String.valueOf(perc));
                     prc += perc;
                 }
             }
-            colum.add(String.valueOf(Math.ceil(prc*100)/100));
+            colum.add(String.valueOf(Math.floor(prc*100)/100));
             frequency.add(colum);
         }
 

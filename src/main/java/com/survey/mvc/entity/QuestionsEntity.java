@@ -72,6 +72,7 @@ public class QuestionsEntity implements IQuestion{
             HashMap<String, String> row = new HashMap<String, String>();
             row.put("id", String.valueOf(ao.getIdOption()));
             row.put("text", ao.getText());
+            row.put("order", String.valueOf(ao.getOrder()));
             answers.add(row);
         }
         return  answers;
@@ -128,6 +129,7 @@ public class QuestionsEntity implements IQuestion{
     }
 
     @OneToMany(mappedBy = "questionsByIdQuestion", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OrderBy("order")
     public Collection<AnswerOptionsEntity> getAnswerOptionsesByIdQuestion() {
         return answerOptionsesByIdQuestion;
     }

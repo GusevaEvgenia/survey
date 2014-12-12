@@ -20,7 +20,6 @@
                 <li class="nav-header">Типы вопросов</li>
                 <li><a data-type="single-option" href="#"><!--i class="icon-search"></i-->Вопрос с единичным выбором</a></li>
                 <li><a data-type="multiple-option" href="#">Вопрос с множественным выбором</a></li>
-                <li><a data-type="number-option" href="#">Числовой ответ</a></li>
                 <li><a data-type="select-option" href="#">Вопрос "список"</a></li>
                 <li><a data-type="matrix-single-option" href="#">Вопрос "матрица" с единичным выбором</a></li>
                 <li><a data-type="matrix-multiple-option" href="#">Вопрос "матрица" с множественным выбором</a></li>
@@ -100,17 +99,8 @@
                                 </label>
                             </div>
                         </div>
-                        <div id="number-option" data-title="Вопрос с числовым ответом">
-                            <input class="type-question" type="hidden" name="questions[0].idType" value="3">
-                            <!--Вопрос с числовым ответом-->
-                            <div>
-                                <label>
-                                    <input type="number" placeholder="Поле для ввода чисел">
-                                </label>
-                            </div>
-                        </div>
                         <div id="select-option" data-title="Вопрос-список">
-                            <input class="type-question" type="hidden" name="questions[0].idType" value="4">
+                            <input class="type-question" type="hidden" name="questions[0].idType" value="3">
                             <!--Вопрос-список-->
                             <div class="options-container">
                                 <label class="option-index">
@@ -126,7 +116,7 @@
                             </div>
                         </div>
                         <div id="matrix-single-option" data-title='Вопрос "матрица" с единичным выбором'>
-                            <input class="type-question" type="hidden" name="questions[0].idType" value="5">
+                            <input class="type-question" type="hidden" name="questions[0].idType" value="4">
                             <!--Вопрос "матрица" с единичным выбором-->
                             <div class="clearfix">
                                 <div class="span4">
@@ -208,7 +198,7 @@
                                 </table>--%>
                         </div>
                         <div id="matrix-multiple-option" data-title='Вопрос "матрица" с множественным выбором'>
-                            <input class="type-question" type="hidden" name="questions[0].idType" value="6">
+                            <input class="type-question" type="hidden" name="questions[0].idType" value="5">
                             <!--Вопрос "матрица" с множественным выбором-->
                             <div class="clearfix">
                                 <div class="span4">

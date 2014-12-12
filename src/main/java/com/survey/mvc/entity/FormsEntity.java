@@ -211,6 +211,7 @@ public class FormsEntity {
     }
 
     @OneToMany(mappedBy = "formsByIdForm", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("order")
     public Collection<QuestionsEntity> getQuestionsesByIdForm() {
         return questionsesByIdForm;
     }

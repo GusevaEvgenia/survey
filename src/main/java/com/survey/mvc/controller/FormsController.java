@@ -14,7 +14,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/forms")
@@ -96,12 +98,29 @@ public class FormsController extends AbstractController {
     }
 
     //страница сбора данных для анализа
-    @RequestMapping(value = "/link/{hash:[0-9a-zA-Z.]+}")
+    @RequestMapping(method = RequestMethod.GET, value = "/link/{hash:[0-9a-zA-Z.]+}")
     public String linkAction(ModelMap model, @PathVariable("hash") String hash) {
         FormsEntity form = formsService.getFormByLink(hash);
         model.addAttribute("form", form);
         model.addAttribute("designer", formsService.getDesignerByForm(form));
+        model.addAttribute("btnSave", 1);
         return getView("link");
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/link/{hash:[0-9a-zA-Z.]+}")
+    public String survaySaveAction(ModelMap model, @PathVariable("hash") String hash,@RequestParam Map<String,String> allRequestParams) {
+        int idForm = formsService.getFormByLink(hash).getIdForm();
+        ArrayList<Integer> options = getOptions(allRequestParams);
+        completedFormsService.save(idForm, options);
+        model.addAttribute("form", formsService.getForm(idForm));
+        return "redirect:/forms/link/" + hash +"/thanks";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/link/{hash:[0-9a-zA-Z.]+}/thanks")
+    public String survayThanksAction(ModelMap model, @PathVariable("hash") String hash) {
+        int idForm = formsService.getFormByLink(hash).getIdForm();
+        model.addAttribute("form", formsService.getForm(idForm));
+        return getView("linkEnd");
     }
 
     //Изменение статуса анкеты на активная
@@ -112,8 +131,20 @@ public class FormsController extends AbstractController {
         return "redirect:/forms/"+id;
     }
 
+
+
     @Override
     protected String getViewPath() {
         return "forms";
+    }
+    private ArrayList<Integer> getOptions( Map<String,String> allRequestParams ) {
+        ArrayList<Integer> options = new ArrayList<Integer>();
+        for(String key: allRequestParams.keySet()) {
+            String val = allRequestParams.get(key);
+            if(key.startsWith("option") && !val.equals("")) {
+                options.add(Integer.parseInt(val));
+            }
+        }
+        return options;
     }
 }

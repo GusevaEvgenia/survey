@@ -1,6 +1,7 @@
 package com.survey.mvc.dao;
 
 import com.survey.mvc.entity.CompletedFormsEntity;
+import com.survey.mvc.entity.FormsEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,18 @@ public class CompletedFormsDAOImpl implements CompletedFormsDAO {
 
     @Override
     public void addCompletedForm(CompletedFormsEntity completedForm) {
+        saveOrUpdateCompletedForm(completedForm);
+        getCurrentSession().refresh(completedForm);
+    }
+
+    @Override
+    public void saveOrUpdateCompletedForm(CompletedFormsEntity completedForm) {
+        getCurrentSession().saveOrUpdate(completedForm);
+        getCurrentSession().flush();
+    }
+
+    @Override
+    public void saveCompletedForm(CompletedFormsEntity completedForm) {
         getCurrentSession().save(completedForm);
     }
 

@@ -140,3 +140,16 @@ textarea.option{
     width: 850px;
     margin-left: -425px;
 }
+
+.finishText{
+    min-height: 160px;
+    margin-top: 10%;
+    padding: 80px 50px;
+    font-size: 20px;
+}
+
+.startText{
+    padding: 0 50px;
+    text-align: justify;
+    line-height: 25px;
+}

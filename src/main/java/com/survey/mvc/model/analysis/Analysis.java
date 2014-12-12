@@ -9,9 +9,8 @@ import java.util.HashMap;
  * Created by Belkin on 05.12.2014.
  */
 abstract public class Analysis {
-    Collection<AnalysisData> data;
-
-    HashMap<String, Long> cache;
+    protected Collection<AnalysisData> data;
+    protected HashMap<String, Long> cache;
 
     public Analysis(Collection<AnalysisData> data) {
         this();
