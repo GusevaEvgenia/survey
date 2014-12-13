@@ -37,9 +37,9 @@ public class IndexController extends AbstractController{
         UsersEntity user = userService.tryLogin(username, password);
         if(user != null) {
             session.setAttribute("current_user", user.getIdUser());
-            return "redirect: /forms";
+            return "redirect:/forms";
         } else {
-            return "redirect: /";
+            return "redirect:/";
         }
 
     }

@@ -34,4 +34,12 @@ public abstract class AbstractController {
     public boolean isLogined() {
         return getCurrentUser() != null;
     }
+
+    protected void putIntoSession(String name, Object value) {
+        session.setAttribute(name, value);
+    }
+
+    protected Object getFromSession(String name) {
+        return session.getAttribute(name);
+    }
 }

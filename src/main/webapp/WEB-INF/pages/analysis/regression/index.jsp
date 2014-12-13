@@ -32,6 +32,13 @@
                  var id = $(this).data('id');
                  window.location.href = "/forms/"+id+"/analysis/regression/prognoz";
                  });*/
+                $('#table-reg-q').submit(function(e) {
+                    if($("select[name='main_parameter']").val() == $("select[name='first_parameter']").val()) {
+                        e.preventDefault();
+                        alert("Выберите пожайлуста разные вопросы");
+                        return false;
+                    }
+                });
             });
         </script>
         <%--<input type="hidden" name="page" value="2">--%>
@@ -40,7 +47,7 @@
             <h4>Выберите параметры для проведения регрессионого анализа</h4>
         </label>
 
-        <form action="/forms/${form.idForm}/analysis/regression/result" method="post">
+        <form action="/forms/${form.idForm}/analysis/regression/result" method="post" id="table-reg-q">
             <div class="" id="regress-analys">
                 <strong>Выберите переменные:</strong>
                 <table>

@@ -29,6 +29,13 @@
                         $(".level").addClass("hidden");
                     }
                 });
+                $('#table-an-q').submit(function(e) {
+                    if($("select[name='main_parameter']").val() == $("select[name='first_parameter']").val()) {
+                        e.preventDefault();
+                        alert("Выберите пожайлуста разные вопросы");
+                        return false;
+                    }
+                });
             });
 
             function controllToggle(val) {
@@ -41,7 +48,7 @@
                 }
             }
         </script>
-        <form action="/forms/${form.idForm}/analysis/table/result">
+        <form id="table-an-q" action="/forms/${form.idForm}/analysis/table/result">
             <div class="row-fluid">
                 <div class="span12">
                     <h4>Выберите параметры для построения таблиц сопряженности признаков</h4>

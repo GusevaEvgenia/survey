@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/forms/{id}/analysis/regression")
 public class RegressionAnalysesController extends AbstractController {
-
+    private static final String SESSION_KEY = "regression_questions";
     @Autowired
     private FormsService formsService;
     @Autowired
@@ -34,9 +34,21 @@ public class RegressionAnalysesController extends AbstractController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/result")
     public String resultAction(ModelMap model, @PathVariable("id") int id, HttpServletRequest request) {
+        int[] questions = {
+                Integer.parseInt(request.getParameter("main_parameter")),
+                Integer.parseInt(request.getParameter("first_parameter"))
+        };
+        putIntoSession(SESSION_KEY, questions);
+        return "redirect:/forms/"+id+"/analysis/regression/result";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/result")
+    public String getResultAction(ModelMap model, @PathVariable("id") int id) {
         model.addAttribute("form", formsService.getForm(id));
-        int[] questions = {Integer.parseInt(request.getParameter("main_parameter")),
-                           Integer.parseInt(request.getParameter("first_parameter"))};
+        int[] questions = getQuestions();
+        if(questions == null) {
+            return "redirect:/forms/"+id+"/analysis/regression";
+        }
         Regression r = new Regression(analysisService.getAnalysisData(questions));
         model.addAttribute("regress", r);
         return getView("result");
@@ -52,8 +64,20 @@ public class RegressionAnalysesController extends AbstractController {
         return getView("prognoz");
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/step/{step:[0-9]+}")
+    public String getPageAction(ModelMap model, @PathVariable("step") String step, HttpServletRequest request) {
+        int[] questions = getQuestions();
+        Regression r = new Regression(analysisService.getAnalysisData(questions));
+        model.addAttribute("regress", r);
+        return getView("steps/"+step);
+    }
+
     @Override
     protected String getViewPath() {
         return "analysis/regression";
+    }
+
+    protected int[] getQuestions() {
+        return (int[]) getFromSession(SESSION_KEY);
     }
 }
