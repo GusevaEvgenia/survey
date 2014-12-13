@@ -6,4 +6,5 @@ public interface UserDAO {
     public void addUser(UsersEntity user);
     public void updateUser(UsersEntity user);
     public UsersEntity getUser(int id);
+    public UsersEntity getUser(String username, String password);
 }

@@ -6,6 +6,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class UserDAOImpl implements UserDAO {
 
@@ -34,5 +36,18 @@ public class UserDAOImpl implements UserDAO {
     public UsersEntity getUser(int id) {
         UsersEntity user = (UsersEntity) getCurrentSession().get(UsersEntity.class, id);
         return user;
+    }
+    @SuppressWarnings("unchecked")
+    public UsersEntity getUser(String username, String password) {
+        List<UsersEntity> users = getCurrentSession().
+                createQuery("from UsersEntity where login = :username and password like :pass")
+                .setString("username", username)
+                .setString("pass", password).list();
+
+        if(users.isEmpty()) {
+            return null;
+        } else {
+            return users.get(0);
+        }
     }
 }

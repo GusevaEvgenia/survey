@@ -93,23 +93,100 @@
     });
 </script>
 <div class="tabbable">
+    <%--шаги анализа--%>
     <ul class="nav nav-tabs regression-tabs">
         <li class="active"><a href="#step1" data-toggle="tab">Шаг 1</a></li>
         <% int size = 7;
-            for (int i = 2; i <= size; i++) {%>
-        <li class="hidden"><a href="#step<%=i%>" data-toggle="tab">Шаг <%=i%>
-        </a></li>
+        for (int i = 2; i <= size; i++) {%>
+            <li class="hidden">
+                <a href="#step<%=i%>" data-toggle="tab">Шаг <%=i%></a>
+            </li>
         <%}%>
-        <li class="hidden" id="finish-handler"><a href="#finish" data-toggle="tab">Конец</a></li>
+        <li class="hidden" id="finish-handler">
+            <a href="#finish" data-toggle="tab">Конец</a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane active" id="step1">
+            <%--TODO график--%>
             <h3>Поле корреляции</h3>
-
-            <div class="thumbnail margin-cenrto">
+            <div class="thumbnail margin-cenrto" id="corelation-field">
                 <img src="/images/graf2.png" alt="">
             </div>
+                <script>
+                    $(function () {
+                        $('#corelation-field').highcharts({
+                            chart: {
+                                type: 'scatter',
+                                zoomType: 'xy'
+                            },
+                            title: {
+                                text: ''
+                            },
+                            xAxis: {
+                                title: {
+                                    enabled: true,
+                                    text: ''
+                                },
+                                startOnTick: true,
+                                endOnTick: true,
+                                showLastLabel: true
+                            },
+                            yAxis: {
+                                title: {
+                                    text: ''
+                                }
+                            },
+                            legend: {
+                                layout: 'vertical',
+                                align: 'left',
+                                verticalAlign: 'top',
+                                x: 100,
+                                y: 70,
+                                floating: true,
+                                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+                                borderWidth: 1
+                            },
+                            plotOptions: {
+                                scatter: {
+                                    marker: {
+                                        radius: 5,
+                                        states: {
+                                            hover: {
+                                                enabled: true,
+                                                lineColor: 'rgb(100,100,100)'
+                                            }
+                                        }
+                                    },
+                                    states: {
+                                        hover: {
+                                            marker: {
+                                                enabled: false
+                                            }
+                                        }
+                                    },
+                                    tooltip: {
+                                        headerFormat: 'Точка ',
+                                        pointFormat: '[{point.x},{point.y}]'
+                                    }
+                                }
+                            },
+                            series: [{
+                                name: 'Точки',
+                                color: 'rgba(223, 83, 83, .5)',
+                                data: [
+                                    [161.0, 53.6], [151.1, 73.2], [168.2, 53.4], [168.9, 69.0], [173.2, 58.4],
+
+                                    [176.5, 71.8], [164.4, 55.5], [160.7, 48.6], [174.0, 66.4], [163.8, 67.3]]
+
+                            }]
+                        });
+                    });
+
+
+                </script>
             <br>
+            <%--TODO рисунок нелинейных форм, если неопределена то выход--%>
             Определите форму зависимости между переменными
             <div class="row-fluid">
                 <div class="span4">
@@ -173,6 +250,7 @@
                 Уравнение в виде линейной регресии имеет вид<br><br>
                 yi = a + b * xi<br><br>
             </div>
+            <%--TODO преобразование нелинейных форм--%>
             <div class="model-regression hidden" id="function-2">
                 <h3>Модель парной регрессии</h3>
                 Нелинейная регрресия относится к степенной и имеет уравнение вида:<br>
@@ -184,8 +262,8 @@
                 <br>
             </div>
             <div>
-                где a = 0.5<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b = 4<br><br>
+                где a = ${regress.a}<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b = ${regress.b}<br><br>
 
                 Выберите уровень значимости l
                 <select name="important_level">

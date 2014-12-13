@@ -28,4 +28,8 @@ public class UserServiceImpl implements UserService {
     public UsersEntity getUser(int id) {
         return userDAO.getUser(id);
     }
+
+    public UsersEntity tryLogin(String username, String password) {
+        return userDAO.getUser(username, password);
+    }
 }

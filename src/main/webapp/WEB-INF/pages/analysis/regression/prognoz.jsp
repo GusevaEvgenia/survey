@@ -16,7 +16,7 @@
 
             <ul class="pager">
                 <li class="previous">
-                    <a href="/forms/123/analysis/regression">&larr; Назад</a>
+                    <a href="/forms/${form.idForm}/analysis/regression">&larr; Назад</a>
                 </li>
             </ul>
         </div>

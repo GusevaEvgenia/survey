@@ -13,6 +13,7 @@
         <script type="text/javascript" src="/js/forms.js"></script>
         <script type="text/javascript" src="/js/designer.js"></script>
         <script type="text/javascript" src="/js/template.js"></script>
+        <script type="text/javascript" src="/js/highcharts/highcharts.js"></script>
 
         <script>
             $(document).ready(function() {
@@ -41,9 +42,9 @@
                                     <li class="${param.active=="analysis"? "active": ""} margin"><a href="/analysis">Анализ данных</a></li>
                                     <li class="vertical-line"></li>
                                 </ul>
-                                <form class="navbar-form pull-right inline ${login=="true"? "": "hidden"}">
-                                    <input type="text" class="span2" placeholder="Введите логин">
-                                    <input type="text" class="span2" placeholder="Введите пароль">
+                                <form method="POST" action="/login" class="navbar-form pull-right inline ${login=="true"? "": "hidden"}">
+                                    <input type="text" name="username" class="span2" placeholder="Введите логин">
+                                    <input type="text" name="password" class="span2" placeholder="Введите пароль">
                                     <button type="submit" class="btn">Войти</button>
                                     <div>
                                         <a class="pull-right" id="form-registration" >Зарегистрироватся</a>

@@ -31,9 +31,67 @@
                 </tr>
             </c:forEach>
         </table>
+        <div id="variation-line-${basic.question.id}" style="width: 500px; height: 400px;"></div>
+        <script>
+            $(function () {
+                var data = [
+                    <c:forEach items='${basic.variationLine}' var="answer" varStatus="loop">
+                        <c:if test="${!loop.last}">
+                            ['${answer.get(0)}', ${answer.get(1)}],
+                        </c:if>
+                    </c:forEach>
 
-        <img src="/images/graf.png" alt="">
+                ];
 
+                $('#variation-line-${basic.question.id}').highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Вариационны ряд'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        labels: {
+                            rotation: -45,
+                            style: {
+                                fontSize: '13px',
+                                fontFamily: 'Verdana, sans-serif'
+                            }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Выбранное количество'
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        pointFormat: 'Вариант был выбран {point.y} раз(а)</b>'
+                    },
+                    series: [{
+                        name: 'Варианты ответа',
+                        data: data,
+                        dataLabels: {
+                            enabled: true,
+                            rotation: -90,
+                            color: '#FFFFFF',
+                            align: 'right',
+                            x: 4,
+                            y: 4,
+                            style: {
+                                fontSize: '13px',
+                                fontFamily: 'Verdana, sans-serif',
+                                textShadow: '0 0 3px black'
+                            }
+                        }
+                    }]
+                });
+            });
+        </script>
     </div>
 </c:if>
 <table id="result-analys" class="table">
@@ -95,7 +153,40 @@
         </tr>
         <tr>
             <td colspan="2">
-                <img src="/images/graf1.png" alt="">
+                <div id="asymmetry-${basic.question.id}" style="width: 500px; height: 400px;"></div>
+                <script>
+                    $(function () {
+                        $('#asymmetry-${basic.question.id}').highcharts({
+                            title: {
+                                text: ''
+                            },
+                            xAxis: {
+                                title: ""
+                            },
+                            yAxis: {
+                                startOnTick: false,
+                                title: {
+                                    text: ''
+                                },
+                                plotLines: [{
+                                    value: 0,
+                                    width: 1,
+                                    color: '#808080'
+                                }]
+                            },
+                            tooltip: {
+                                enabled: false
+                            },
+                            legend: {
+                                enabled: false
+                            },
+                            series: [{
+                                data: [[-7.0, 6.9], [9.5, 14.5], [18.2, 21.5]]
+                            }
+                            ]
+                        });
+                    });
+                </script>
             </td>
         </tr>
     </c:if>
@@ -109,8 +200,40 @@
         </tr>
         <tr>
             <td colspan="2">
-                <img src="/images/graf1.png" alt="">
-
+                <div id="excess-${basic.question.id}" style="width: 500px; height: 400px;"></div>
+                <script>
+                    $(function () {
+                        $('#excess-${basic.question.id}').highcharts({
+                            title: {
+                                text: ''
+                            },
+                            xAxis: {
+                                title: ""
+                            },
+                            yAxis: {
+                                startOnTick: false,
+                                title: {
+                                    text: ''
+                                },
+                                plotLines: [{
+                                    value: 0,
+                                    width: 1,
+                                    color: '#808080'
+                                }]
+                            },
+                            tooltip: {
+                                enabled: false
+                            },
+                            legend: {
+                                enabled: false
+                            },
+                            series: [{
+                                data: [[-7.0, 6.9], [9.5, 14.5], [18.2, 21.5]]
+                            }
+                            ]
+                        });
+                    });
+                </script>
             </td>
         </tr>
     </c:if>
