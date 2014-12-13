@@ -203,4 +203,8 @@ public class QuestionsEntity implements IQuestion{
         }
         return result;
     }
+    @Transient
+    public Long getId() {
+        return (long) idQuestion;
+    }
 }

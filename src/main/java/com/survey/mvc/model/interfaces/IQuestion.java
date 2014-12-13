@@ -11,4 +11,5 @@ public interface IQuestion {
     public String getText();
     public ArrayList<HashMap<String, String>> getAnswers();
     public String getScale();
+    public Long getId();
 }

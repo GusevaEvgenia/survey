@@ -37,20 +37,10 @@ public class TableAnalysisController extends AbstractController {
     @RequestMapping(method = RequestMethod.GET, value = "/result")
     public String resultAction(ModelMap model, @PathVariable("id") Integer id, HttpServletRequest request) {
         model.addAttribute("form", formsService.getForm(id));
-        Table t;
-//        int parameter_size = Integer.parseInt(request.getParameter("parameter_size"));
         String [] types = request.getParameterValues("types");
-        //if(parameter_size==2){
-            int[] questions = {Integer.parseInt(request.getParameter("main_parameter")),
-                               Integer.parseInt(request.getParameter("first_parameter"))};
-            t = new Table(analysisService.getAnalysisData(questions), types);
-       /* }else{
-            int[] questions = {Integer.parseInt(request.getParameter("main_parameter")),
-                    Integer.parseInt(request.getParameter("first_parameter")),
-                    Integer.parseInt(request.getParameter("second_parameter"))};
-            t = new Table(analysisService.getAnalysisData(questions), types);
-        }*/
-//        t.getVariationLine();
+        int[] questions = {Integer.parseInt(request.getParameter("main_parameter")),
+                           Integer.parseInt(request.getParameter("first_parameter"))};
+        Table t = new Table(analysisService.getAnalysisData(questions), types);
         model.addAttribute("table", t);
         return getView("result");
     }

@@ -2,6 +2,7 @@ package com.survey.mvc.model.analysis;
 
 import com.survey.mvc.model.analysis.data.AnalysisData;
 import com.survey.mvc.model.analysis.data.Answer;
+import com.survey.mvc.model.interfaces.IQuestion;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,25 +34,28 @@ public class Basic extends Analysis {
     private Double asymmetry;
     private Double excess;
     private ArrayList<ArrayList<String>> variationLine;
+    private AnalysisData analysisData;
 
-    public Basic(Collection<AnalysisData> data, String[] types) {
-        super(data);
+
+    public Basic(AnalysisData analysisData){
+        this.analysisData = analysisData;
+    }
+    public Basic(AnalysisData data, String[] types) {
+        this(data);
         ArrayList<Integer> normalTypes = new ArrayList<Integer>();
         for (String type : types) {
             normalTypes.add(Integer.parseInt(type));
         }
         setTypes(normalTypes);
     }
-
-    public Basic(Collection<AnalysisData> data, Integer[] types) {
+    /*public Basic(Collection<AnalysisData> data, Integer[] types) {
         super(data);
         setTypes(new ArrayList<Integer>(Arrays.asList(types)));
-    }
+    }*/
 
     public ArrayList<Integer> getTypes(){
         return types;
     }
-
     private void setTypes(ArrayList<Integer> types) {
         ArrayList<Integer> response = new ArrayList<Integer>();
         Collection<Integer> available = getAvailableTypes();
@@ -85,7 +89,7 @@ public class Basic extends Analysis {
     }
 
     private AnalysisData getAnaliseData() {
-        return (AnalysisData) data.toArray()[0];
+        return (AnalysisData) analysisData;
     }
 
     //Вариационны ряд
@@ -114,7 +118,7 @@ public class Basic extends Analysis {
         return variationLine;
     }
 
-    public int getFrequency(long id){
+    private int getFrequency(long id){
         String key = "getFrequency::"+id;
         Long value = cache.get(key);
         if(value == null){
@@ -209,7 +213,7 @@ public class Basic extends Analysis {
         return excess;
     }
 
-
-
-
+    public IQuestion getQuestion() {
+        return getAnaliseData().getQuestion();
+    }
 }

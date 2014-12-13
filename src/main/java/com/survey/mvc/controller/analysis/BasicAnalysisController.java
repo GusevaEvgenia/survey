@@ -59,7 +59,7 @@ public class BasicAnalysisController extends AbstractController {
         model.addAttribute("form", formsService.getForm(id));
         int idQuestion = Integer.parseInt(request.getParameter("idQuestion")); //код вопроса для анализа
         String [] types = request.getParameterValues("type"); //статистики для анализа
-        Basic b = new Basic(analysisService.getAnalysisData(idQuestion), types);
+        Basic b = new Basic((AnalysisData)analysisService.getAnalysisData(idQuestion).toArray()[0], types);
         model.addAttribute("basic", b);
         return getView("result");
     }

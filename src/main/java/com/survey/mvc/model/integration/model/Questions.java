@@ -24,7 +24,7 @@ public class Questions implements IQuestion{
         this.text = text;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
