@@ -12,7 +12,7 @@
             <% j++;%>
             <div class="span3">
                 <div class="thumbnail">
-                    <a href="/forms/${i.idForm}"><img src="${i.picture==null ? "/images/form.jpg" : i.picture}" alt=""></a>
+                    <a href="/forms/${i.idForm}"><img src="${i.picture}" alt=""></a>
                     <p></p>
                     <div class="caption">
                         <h4>${i.title}</h4>

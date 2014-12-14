@@ -122,7 +122,14 @@ public class FormsServiceImpl implements FormsService {
         return form;
     }
 
+    @Override
     public void setActive(int id){
         formsDAO.getForm(id).setStatus("active");
+        setPicture("/uploads/active.jpg", id);
+    }
+
+    @Override
+    public void setPicture(String name, int id) {
+        formsDAO.getForm(id).setPicture(name);
     }
 }

@@ -21,4 +21,5 @@ public interface FormsService {
     public FormsEntity designer(Designer designer, int formId);
     public FormsEntity getFormByLink(String hash);
     public void setActive(int id);
+    public void setPicture(String name, int id);
 }

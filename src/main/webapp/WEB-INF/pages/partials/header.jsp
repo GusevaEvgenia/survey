@@ -44,7 +44,7 @@
                                 </ul>
                                 <form method="POST" action="/login" class="navbar-form pull-right inline ${login=="true"? "": "hidden"}">
                                     <input type="text" name="username" class="span2" placeholder="Введите логин">
-                                    <input type="text" name="password" class="span2" placeholder="Введите пароль">
+                                    <input type="password" name="password" class="span2" placeholder="Введите пароль">
                                     <button type="submit" class="btn">Войти</button>
                                     <div>
                                         <a class="pull-right" id="form-registration" >Зарегистрироватся</a>

@@ -41,10 +41,11 @@
                     <textarea class="hidden" name="status">draft</textarea>
                     <textarea class="hidden" name="idUser">1</textarea>
                     <input type="hidden" id="link" name="link" value="1111">
+                    <input type="hidden" name="picture" value="/uploads/draft.jpg">
                 </form>
             </div>
             <%--Выбор логотипа анкеты--%>
-            <div class="span4">
+            <%--<div class="span4">
                 <h4>
                     Вставьте свой логотип анкеты
                     <br>
@@ -56,8 +57,8 @@
                         <input class="btn btn-primary" type="submit" value="Загрузить">
                     </p>
                 </form>
-                <img src="${false ? param.picture : "/images/form.jpg"}" width="180" height="200"  alt="">
-            </div>
+                <img src="${false ? param.picture : "/images/active.jpg"}" width="180" height="200"  alt="">
+            </div>--%>
         </div>
         <div class="row-fluid" >
             <div class="span2">

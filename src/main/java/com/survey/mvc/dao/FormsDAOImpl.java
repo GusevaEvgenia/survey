@@ -57,7 +57,6 @@ public class FormsDAOImpl implements FormsDAO {
         formToUpdate.setDescription(form.getDescription());
         formToUpdate.setStartText(form.getStartText());
         formToUpdate.setFinishText(form.getFinishText());
-//        formToUpdate.setPicture(form.getPicture());
         formToUpdate.setDateFinish(form.getDateFinish());
         formToUpdate.setMaximumForms(form.getMaximumForms());
         formToUpdate.setStatus(form.getStatus());

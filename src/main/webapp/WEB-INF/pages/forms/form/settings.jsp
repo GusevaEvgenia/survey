@@ -68,7 +68,7 @@
                     <input class="hidden statusFormSet" name="status" value="${form.status}" type="text">
                 </form>
             </div>
-            <div class="span4">
+            <%--<div class="span4">
                 <h4>
                     Вставьте свой логотип анкеты
                     <br>
@@ -81,7 +81,7 @@
                     </p>
                 </form>
                 <img src="${false ? param.picture : "/images/form.jpg"}" width="180" height="200"  alt="">
-            </div>
+            </div>--%>
         </div>
         <div class="row-fluid" >
             <div class="span3 offset0">

@@ -91,6 +91,7 @@ public class FormsController extends AbstractController {
     public String updateAction(@ModelAttribute("formUpdate") FormsEntity form, @PathVariable("id") Integer id) {
         formsService.updateForm(form);
         if(form.getStatus().equals("archive")){
+            formsService.setPicture("/uploads/archive.jpg", id);
             return "redirect:/forms/"+id;
         }else {
             return "redirect:/forms/" + id + "/settings";
