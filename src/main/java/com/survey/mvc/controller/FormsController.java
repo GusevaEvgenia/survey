@@ -122,6 +122,12 @@ public class FormsController extends AbstractController {
     public String survayThanksAction(ModelMap model, @PathVariable("hash") String hash) {
         int idForm = formsService.getFormByLink(hash).getIdForm();
         model.addAttribute("form", formsService.getForm(idForm));
+        if(formsService.getForm(idForm).getMaximumForms()!=null) {
+            if (completedFormsService.getCompletedFormsByForm(idForm).size() > formsService.getForm(idForm).getMaximumForms()) {
+                formsService.setArchive(idForm);
+            }
+        }
+
         return getView("linkEnd");
     }
 

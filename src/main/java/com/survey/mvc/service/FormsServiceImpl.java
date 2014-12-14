@@ -129,6 +129,13 @@ public class FormsServiceImpl implements FormsService {
     }
 
     @Override
+    public void setArchive(int id){
+        formsDAO.getForm(id).setStatus("archive");
+        setPicture("/uploads/archive.jpg", id);
+        deleteLink(id);
+    }
+
+    @Override
     public void setPicture(String name, int id) {
         formsDAO.getForm(id).setPicture(name);
     }

@@ -20,7 +20,7 @@
 <jsp:include page="/WEB-INF/pages/forms/form/_menu.jsp"/>
 
         <div class="row-fluid">
-            <div class="span8">
+            <div class="span7 offset3">
                 <form class="margin-button0" id="hh" action="/forms/${form.idForm}/settings" method="POST"
                       commandName="formUpdate" accept-charset="UTF-8">
                     <div class="margin-button15">
@@ -48,12 +48,6 @@
                         </p>
                     </div>
                     <div class="margin-button15">
-                        <h4>Конечная дата иследования:</h4>
-                        <p>
-                            <input class="input-medium" name="dateFinish" type="date"  value="${form.dateFinish}" >
-                        </p>
-                    </div>
-                    <div class="margin-button15">
                         <h4>Введите количество анкет необходимых для исследования</h4>
                         <p>
                             <input class="input-mini" name="maximumForms" type="number"  value="${form.maximumForms}" >
@@ -65,7 +59,7 @@
                             </label>
                     </div>
                     <textarea class="hidden" name="idForm" rows="3">${form.idForm}</textarea>
-                    <input class="hidden statusFormSet" name="status" value="${form.status}" type="text">
+                    <input type="hidden" class="statusFormSet" name="status" value="${form.status}" type="text">
                 </form>
             </div>
             <%--<div class="span4">
@@ -84,7 +78,7 @@
             </div>--%>
         </div>
         <div class="row-fluid" >
-            <div class="span3 offset0">
+            <div class="span2 offset3">
                 <button class="btn btn-primary btn-block" form="hh" type="submit">Сохранить</button>
             </div>
         </div>
