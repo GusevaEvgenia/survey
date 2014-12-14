@@ -12,7 +12,7 @@
         <%--Форма для создания новой анкеты--%>
         <div class="row-fluid">
             <%--Ввод информации--%>
-            <div class="span8">
+            <div class="span7 offset3">
                 <form class="margin-button0" id="save-form" action="/forms" method="POST" commandName="form">
                     <div class="margin-button15">
                         <h4>Введите название анкеты</h4>
@@ -61,7 +61,7 @@
             </div>--%>
         </div>
         <div class="row-fluid" >
-            <div class="span2">
+            <div class="span2 offset3">
                 <button class="btn btn-primary btn-block" id="btn_hash" type="submit" form="save-form">Создать</button>
             </div>
         </div>
