@@ -10,11 +10,11 @@ $(document).ready(function(){
         var id = $(this).val();
         $("#href-basic").attr("href", "/forms/" + id + "/analysis/basic");
     });
-    /*$("#select-form").bind('change focus', function(){
+    $("#select-form").bind('change focus', function(){
         var id = $(this).val();
         alert(id);
         $("#href-basic").attr("href", "/forms/" + id + "/analysis/basic");
-    });*/
+    });
 
 });
 </script>
@@ -28,8 +28,14 @@ $(document).ready(function(){
             <div class="span12 margine-botton15">
                 <h3>Выберите анкету для анализа из выпадающего списка:</h3>
                 <select id="select-form">
-                    <c:forEach items='${forms}' var="form">
+                    <c:forEach items='${activeForms}' var="form">
                         <option value="${form.idForm}">${form.title}</option>
+                    </c:forEach>
+                    <c:forEach items='${archiveForms}' var="form">
+                        <option value="${form.idForm}">${form.title}</option>
+                    </c:forEach>
+                    <c:forEach items='${smForms}' var="form">
+                        <option value="${form.id}">${form.title}</option>
                     </c:forEach>
                 </select>
                 <br><br>
