@@ -22,4 +22,5 @@ public interface FormsService {
     public FormsEntity getFormByLink(String hash);
     public void setActive(int id);
     public void setPicture(String name, int id);
+    public void deleteLink(int id);
 }

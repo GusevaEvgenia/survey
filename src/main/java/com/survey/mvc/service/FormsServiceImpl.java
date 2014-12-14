@@ -132,4 +132,9 @@ public class FormsServiceImpl implements FormsService {
     public void setPicture(String name, int id) {
         formsDAO.getForm(id).setPicture(name);
     }
+
+    @Override
+    public void deleteLink(int id) {
+        formsDAO.getForm(id).setLink(null);
+    }
 }
