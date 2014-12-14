@@ -32,8 +32,7 @@ public class FormsController extends AbstractController {
     //Стариница каталога анкет
     @RequestMapping(method = RequestMethod.GET)
     public String indexAction(ModelMap model) {
-        UsersEntity user = userService.getUser(1);
-        model.addAttribute("user", user);
+        model.addAttribute("user", getCurrentUser());
         model.addAttribute("active", formsService.getFormsByStatus("active"));
         model.addAttribute("draft", formsService.getFormsByStatus("draft"));
         model.addAttribute("archive", formsService.getFormsByStatus("archive"));
@@ -43,6 +42,7 @@ public class FormsController extends AbstractController {
     //Страница создания анкеты
     @RequestMapping(method = RequestMethod.GET, value = "/new")
     public String newAction(ModelMap model) {
+        model.addAttribute("user", getCurrentUser());
         return getView("new");
     }
 
@@ -67,7 +67,7 @@ public class FormsController extends AbstractController {
         model.addAttribute("newAnsEx", completedFormsService.newAnswersExist(id));
         model.addAttribute("form", formsService.getLoadedForm(id));
         model.addAttribute("designer", formsService.getDesignerByFormId(id));
-        model.addAttribute("user", userService.getUser(1));
+        model.addAttribute("user", getCurrentUser());
         return getView("form/show");
     }
 

@@ -47,14 +47,14 @@ public class IndexController extends AbstractController{
     //страница пользователя
     @RequestMapping(method = RequestMethod.GET, value = "/user")
     public String userAction(ModelMap model) {
-        model.addAttribute("user", userService.getUser(1));
+        model.addAttribute("user", getCurrentUser());
         return getView("user");
     }
 
     //обновление данных о пользователе
     @RequestMapping(method = RequestMethod.GET, value = "/user/update")
     public String userUpdateAction(ModelMap model) {
-        model.addAttribute("user", userService.getUser(1));
+        model.addAttribute("user", getCurrentUser());
         return getView("user");
     }
 

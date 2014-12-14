@@ -36,13 +36,14 @@
                                     <h4>У Вас пока нет вопросов в анкете!</h4>
                                     Можете изменить это перейдя в констурктор.
                                 </div>
+                                <div class="text-center">
+                                    <button class="btn btn-primary ${btnSave==1 ? "" : "disabled"}" ${btnSave==1 ? "" : "disabled"} type="submit">Сохранить</button>
+                                </div>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
                 </div>
-                <div class="text-center">
-                    <button class="btn btn-primary ${btnSave==1 ? "" : "disabled"}" ${btnSave==1 ? "" : "disabled"} type="submit">Сохранить</button>
-                </div>
+
             </form>
         </div>
     </div>

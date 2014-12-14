@@ -22,24 +22,21 @@ public class MonkeyFormsController extends AbstractController{
 
     @RequestMapping(method = RequestMethod.GET)
     public String indexAction(ModelMap model) {
-        UsersEntity user = userService.getUser(1);
-        surveyMonkey.setToken(user.getToken());
+        surveyMonkey.setToken(getCurrentUser().getToken());
         model.addAttribute("forms", surveyMonkey.getForms());
         return getView("index");
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id:[0-9]+}")
     public String showAction(ModelMap model, @PathVariable("id") Integer id) {
-        UsersEntity user = userService.getUser(1);
-        surveyMonkey.setToken(user.getToken());
+        surveyMonkey.setToken(getCurrentUser().getToken());
         model.addAttribute("form", surveyMonkey.getForm(id));
         return getView("show");
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id:[0-9]+}/answers")
     public String answersAction(ModelMap model, @PathVariable("id") Integer id) {
-        UsersEntity user = userService.getUser(1);
-        surveyMonkey.setToken(user.getToken());
+        surveyMonkey.setToken(getCurrentUser().getToken());
         Form form = surveyMonkey.getForm(id);
         model.addAttribute("form", form);
         model.addAttribute("answers", surveyMonkey.getAnswers(form));

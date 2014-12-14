@@ -39,7 +39,7 @@
                         </p>
                     </div>
                     <textarea class="hidden" name="status">draft</textarea>
-                    <textarea class="hidden" name="idUser">1</textarea>
+                    <textarea class="hidden" name="idUser">${user.idUser}</textarea>
                     <input type="hidden" id="link" name="link" value="1111">
                     <input type="hidden" name="picture" value="/uploads/draft.jpg">
                 </form>
