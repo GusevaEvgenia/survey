@@ -24,7 +24,7 @@ public class Basic extends Analysis {
 
     private ArrayList<Integer> types = new ArrayList<Integer>();
     private Double average;
-    private Double moda;
+    private long moda;
     private Double median;
     private Double variationScale;
     private Double interQuartile;
@@ -103,7 +103,7 @@ public class Basic extends Analysis {
                 double pct = Math.floor(count/size*10000)/100;
                 pctSum += pct;
                 ArrayList<String> row = new ArrayList<String>();
-                row.add(answerOption.get("text") != null ? answerOption.get("text") : null); //TODO найти вариаты на числовой вопрос
+                row.add(answerOption.get("text") != null ? answerOption.get("text") : null);
                 row.add("" + (int) count);
                 row.add(pct + "%");
                 frequency.add(row);
@@ -141,26 +141,42 @@ public class Basic extends Analysis {
         return average;
     }
 
-    //Мода 3
-    public double getModa(){
-        if (moda == null) {
-            moda = 7.5;
+    //Мода 3 НЕ протестированно
+    public long getModa(){
+        if (moda == 0) {
+            int m = 0;
+            for (HashMap<String, String> answer : getAnaliseData().getQuestion().getAnswers()) {
+                int f = getFrequency(Long.parseLong(answer.get("id")));
+                if(f>m){
+                    m=f;
+                    moda = Long.parseLong(answer.get("id"));
+                }
+            }
         }
         return moda;
     }
 
     //Медиана 4
     public double getMedian(){
-        if (median == null) {
-            median = 7.5;
+        if (median == null) { //четное число
+            double size = getAnaliseData().getQuestion().getAnswers().size();
+            double midel = size%2;
+            if(midel==0){
+                median = (size+1)/2;
+            }else {
+                median = (double) Math.round(size/2);
+            }
         }
         return median;
     }
 
-    //Размах вариации 5
+    //Размах вариации 5 Все варианты или только с ответами?
     public double getVariationScale(){
         if (variationScale == null) {
-            variationScale = 7.5;
+            int first = Integer.parseInt(getAnaliseData().getQuestion().getAnswers().get(0).get("id"));
+            int size = getAnaliseData().getQuestion().getAnswers().size();
+            int last = Integer.parseInt(getAnaliseData().getQuestion().getAnswers().get(size - 1).get("id"));
+            variationScale = (double) last-first;
         }
         return variationScale;
     }
@@ -168,7 +184,10 @@ public class Basic extends Analysis {
     //Межкватериальный размах 6
     public double getInterQuartile (){
         if (interQuartile == null) {
-            interQuartile = 7.5;
+            int size = getAnaliseData().getQuestion().getAnswers().size();
+            double prc75 = (int)(size*0.75);
+            double prc25 = (int)(size*0.25)+1;
+            interQuartile = prc75 - prc25;
         }
         return interQuartile;
     }
@@ -176,7 +195,7 @@ public class Basic extends Analysis {
     //Дисперсия 7
     public double getDispersion(){
         if (dispersion  == null) {
-            dispersion  = 7.5;
+            dispersion = (double) Math.round(centrMoment(2) / (getAnaliseData().getAnswers().size() - 1) * 100) / 100;
         }
         return dispersion ;
     }
@@ -184,7 +203,7 @@ public class Basic extends Analysis {
     //Среднекватериальное отклонение 8
     public double getDeviation(){
         if (deviation  == null) {
-            deviation  = 7.5;
+            deviation  = (double) Math.round(Math.sqrt(getDispersion()) *100) / 100;
         }
         return deviation ;
     }
@@ -192,7 +211,7 @@ public class Basic extends Analysis {
     //Коэфициент вариации 9
     public double getVariation(){
         if (variation  == null) {
-            variation  = 7.5;
+            variation  = (double) Math.round(getDeviation() / getAverage() *100) / 100;
         }
         return variation;
     }
@@ -200,7 +219,7 @@ public class Basic extends Analysis {
     //Ассиметрия 10
     public double getAsymmetry(){
         if (asymmetry  == null) {
-            asymmetry  = 7.5;
+            asymmetry  = (double) Math.round(centrMoment(3) / getAnaliseData().getAnswers().size() / Math.pow(getDeviation(), 3) * 100) / 100;
         }
         return asymmetry ;
     }
@@ -208,9 +227,19 @@ public class Basic extends Analysis {
     //Эксцесс 11
     public double getExcess(){
         if (excess  == null) {
-            excess  = 7.5;
+            excess  = (double) Math.round((centrMoment(4) / getAnaliseData().getAnswers().size() / Math.pow(getDeviation(), 4) - 3) * 100) / 100;
         }
         return excess;
+    }
+
+    private double centrMoment(int s){
+        double av = getAverage();
+        double summ = 0;
+        for (HashMap<String, String> answer : getAnaliseData().getQuestion().getAnswers()) {
+            int f = getFrequency(Long.parseLong(answer.get("id")));
+            summ += Math.pow((Integer.parseInt(answer.get("order"))-av), s)*f;
+        }
+        return summ;
     }
 
     public IQuestion getQuestion() {

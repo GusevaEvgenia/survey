@@ -148,7 +148,7 @@
             <th>Ассиметрия</th>
             <td>${basic.asymmetry}</td>
         </tr>
-        <tr>
+        <%--<tr>
             <td colspan="2">Коментарий</td>
         </tr>
         <tr>
@@ -188,14 +188,14 @@
                     });
                 </script>
             </td>
-        </tr>
+        </tr>--%>
     </c:if>
     <c:if test="${fn:contains(basic.types,11)}">
         <tr>
             <th>Эксцесс</th>
             <td>${basic.excess}</td>
         </tr>
-        <tr>
+        <%--<tr>
             <td colspan="2">Коментарий</td>
         </tr>
         <tr>
@@ -235,6 +235,6 @@
                     });
                 </script>
             </td>
-        </tr>
+        </tr>--%>
     </c:if>
 </table>

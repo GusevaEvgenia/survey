@@ -12,7 +12,7 @@ $(document).ready(function(){
     });
     $("#select-form").bind('change focus', function(){
         var id = $(this).val();
-        alert(id);
+        //alert(id);
         $("#href-basic").attr("href", "/forms/" + id + "/analysis/basic");
     });
 
