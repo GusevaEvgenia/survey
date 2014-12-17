@@ -6,17 +6,19 @@ import com.survey.mvc.model.analysis.data.Answer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.StringJoiner;
 
 /**
  * Created by Belkin on 09.12.2014.
  */
 public class Table extends Analysis  {
     private ArrayList<Integer> types;
-    private String dependens;
-    private String strengthLinks;
+    private double dependens;
+    private double strengthLinks;
     private ArrayList<ArrayList<String>> res;
+    private double a;
 
-    public Table(Collection<AnalysisData> data, String[] types) {
+    public Table(Collection<AnalysisData> data, String[] types, double a) {
         super(data);
         if(types!=null) {
             ArrayList<Integer> normalTypes = new ArrayList<Integer>();
@@ -25,6 +27,7 @@ public class Table extends Analysis  {
             }
             this.types = normalTypes;
         }
+        this.a = a;
     }
 
     public ArrayList<Integer> getTypes(){
@@ -69,7 +72,7 @@ public class Table extends Analysis  {
                 if(summ == 0) {
                     colum.add("0");
                 } else {
-                    double percent = ((double)getFrequency(mainId, firstId)) / summ;
+                    double percent = ((double)getFrequency(mainId, firstId))/ summ; //
                     double perc = Math.floor(percent*10000)/100;
                     colum.add(String.valueOf(perc));
                     prc += perc;
@@ -103,23 +106,6 @@ public class Table extends Analysis  {
         }
         return response.intValue();
     }
-    private int getFrequency(long mainId, long firstId, long secondId) {
-        ArrayList<Answer> mainData = getMainQuestionData().getAnswersWithOption(mainId);
-        ArrayList<Answer> firstData = getFirstQuestionData().getAnswersWithOption(firstId);
-        ArrayList<Answer> secondData = getSecondQuestionData().getAnswersWithOption(secondId);
-        int count = 0;
-        //TODO Написать это по нормальному!!!!( да-да, все еще стыдно=( )
-        for(Answer a: mainData) {
-            for(Answer firstA: firstData) {
-                for(Answer secA: secondData) {
-                    if(a.getIdCform() == firstA.getIdCform() && firstA.getIdCform() == secA.getIdCform()) {
-                        count++;
-                    }
-                }
-            }
-        }
-        return count;
-    }
     private int getColumnSumm(long firstId) {
         String cacheKey = "getColumnSumm::" + String.valueOf(firstId);
         Long result = cache.get(cacheKey);
@@ -135,15 +121,27 @@ public class Table extends Analysis  {
         return result.intValue();
 
     }
+    private int getRowSumm(long mainId) {
+        String cacheKey = "getRowSumm::" + String.valueOf(mainId);
+        Long result = cache.get(cacheKey);
+
+        if(result == null) {
+            ArrayList<HashMap<String, String>> answers = getFirstQuestionData().getQuestion().getAnswers();
+            int summ = 0;
+            for (HashMap<String, String> answer : answers) {
+                summ += getFrequency(mainId, Long.parseLong(answer.get("id")));
+            }
+            result = (long) summ;
+        }
+        return result.intValue();
+
+    }
 
     public AnalysisData getMainQuestionData() {
         return (AnalysisData) data.toArray()[0];
     }
     public AnalysisData getFirstQuestionData() {
         return (AnalysisData) data.toArray()[1];
-    }
-    public AnalysisData getSecondQuestionData() {
-        return (AnalysisData) data.toArray()[2];
     }
 
     public ArrayList<ArrayList<String>> getAnswerOptions(){
@@ -177,15 +175,59 @@ public class Table extends Analysis  {
         return res.size();
     }
 
-    public String getDependens(){
-        if (dependens == null) {
-            dependens = "dependens";
+    public double getXi2Calc(){
+        if (dependens == 0) {
+            ArrayList<ArrayList<String>> fe = getFe();
+            double summ = 0;
+            int i = 0;
+            for(HashMap<String, String> firstQanswer: getFirstQuestionData().getQuestion().getAnswers()) {
+                long firstId = Long.parseLong(firstQanswer.get("id"));
+                int j = 0;
+                for(HashMap<String, String> mainQanswer :getMainQuestionData().getQuestion().getAnswers()) {
+                    long mainId = Long.parseLong(mainQanswer.get("id"));
+                    double val = Double.parseDouble(fe.get(i).get(j));
+                    if(val != 0) {
+                        summ += Math.floor((Math.pow((getFrequency(mainId, firstId) - val), 2) / val) * 100) / 100;
+                    }
+                    j++;
+                }
+                i++;
+            }
+            dependens = summ;
         }
         return dependens;
     }
-    public String getStrengthLinks(){
-        if (strengthLinks == null) {
-            strengthLinks = "strengthLinks";
+    private ArrayList<ArrayList<String>> getFe(){
+        ArrayList<ArrayList<String>> fe = new ArrayList<ArrayList<String>>();
+        double n = getMainQuestionData().getAnswers().size() > getFirstQuestionData().getAnswers().size()
+                ? getMainQuestionData().getAnswers().size()
+                : getFirstQuestionData().getAnswers().size();
+        for(HashMap<String, String> firstQanswer: getFirstQuestionData().getQuestion().getAnswers()) {
+            long firstId = Long.parseLong(firstQanswer.get("id"));
+            ArrayList<String> colum = new ArrayList<String>();
+            for (HashMap<String, String> mainQanswer : getMainQuestionData().getQuestion().getAnswers()) {
+                long mainId = Long.parseLong(mainQanswer.get("id"));
+                double f = (double)getRowSumm(mainId) * (double) getColumnSumm(firstId) / n;
+                colum.add(String.valueOf(Math.floor(f*100)/100));
+            }
+            fe.add(colum);
+        }
+        return fe;
+    }
+    public String getXi2Tabl(){
+        int fredom = (getRowsLength()-1)*(getColumnsLength()-1);
+        return "getTableForXi2(fredom, a)";
+    }
+
+    public double getStrengthLinks(){
+        if (strengthLinks == 0) {
+            double n = getMainQuestionData().getAnswers().size() > getFirstQuestionData().getAnswers().size()
+                    ? getMainQuestionData().getAnswers().size() : getFirstQuestionData().getAnswers().size();
+            if(getColumnsLength()==2 && getRowsLength()==2){
+                strengthLinks = Math.floor(Math.sqrt(getXi2Calc() / n) * 100) / 100;
+            }else{
+                strengthLinks = Math.floor(Math.sqrt(getXi2Calc() / (getXi2Calc() + n)) * 100) / 100;
+            }
         }
         return strengthLinks;
     }

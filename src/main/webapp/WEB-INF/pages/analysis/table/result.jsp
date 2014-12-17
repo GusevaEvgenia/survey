@@ -13,9 +13,9 @@
 
         <jsp:include page="/WEB-INF/pages/analysis/_menu.jsp"/>
 
-        <script>
+       <%-- <script>
             $(document).ready(function() {
-                function tableToggle(size) {
+                /*function tableToggle(size) {
                     if (size === "2") {
                         $(".table_2parameter").removeClass("hidden");
                         $(".table_3parameter").addClass("hidden");
@@ -23,16 +23,16 @@
                         $(".table_3parameter").removeClass("hidden");
                         $(".table_2parameter").addClass("hidden");
                     }
-                }
+                }*/
                 tableToggle(getQueryVariable('parameter_size'));
 
-                function dependence(tstatictic) {
+                /*function dependence(tstatictic) {
                     if (tstatictic === "1") {
                         $(".dependence").removeClass("hidden");
                     } else {
                         $(".dependence").addClass("hidden");
                     }
-                }
+                }*/
                 dependence(getQueryVariable('dependence'));
 
                 function strength_links(tstatictic) {
@@ -57,7 +57,7 @@
                 }
                 return null;
             }
-        </script>
+        </script>--%>
         <table class="table table-bordered table_2parameter">
             <tr>
                 <th></th>
@@ -129,16 +129,16 @@
             </tr>
         </table>--%>
         <c:if test="${fn:contains(table.types,1)}">
-            <div class="dependence hidden margin-button15">
+            <div class="dependence margin-button15">
                 <strong>Зависимость наблюдаемой связи</strong><br>
                     <%--Расчитаное значение хи-квадрата = 3.88<br>
                     Критического значение хи-квадрата = 3.77<br>
                     3.77>3.88--%>
-                    ${table.dependens}
+                    ${table.xi2Calc}
             </div>
         </c:if>
         <c:if test="${fn:contains(table.types,2)}">
-            <div class="strength_links hidden margin-button15">
+            <div class="strength_links margin-button15">
                 <strong>Теснота связи</strong><br>
                 Теснота связи = 0.55<br>
                 ${table.strengthLinks}

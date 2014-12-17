@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.DoubleSummaryStatistics;
 
 @Controller
 @RequestMapping("/forms/{id}/analysis/table")
@@ -40,7 +41,8 @@ public class TableAnalysisController extends AbstractController {
         String [] types = request.getParameterValues("types");
         int[] questions = {Integer.parseInt(request.getParameter("main_parameter")),
                            Integer.parseInt(request.getParameter("first_parameter"))};
-        Table t = new Table(analysisService.getAnalysisData(questions), types);
+        double a = Double.parseDouble(request.getParameter("a"));
+        Table t = new Table(analysisService.getAnalysisData(questions), types, a);
         model.addAttribute("table", t);
         return getView("result");
     }
