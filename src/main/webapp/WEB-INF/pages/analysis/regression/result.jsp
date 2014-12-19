@@ -19,7 +19,7 @@
     <%--шаги анализа--%>
     <ul class="nav nav-tabs regression-tabs">
         <li class="active"><a href="#step1" data-toggle="tab">Шаг 1</a></li>
-        <c:forEach  begin="2" end="7" var="i">
+        <c:forEach  begin="2" end="8" var="i">
             <li class="hidden">
                 <a href="#step${i}" data-toggle="tab">Шаг ${i}</a>
             </li>
@@ -34,11 +34,17 @@
         <div class="tab-pane active" id="step1">
             <%--TODO график--%>
             <h3>Поле корреляции</h3>
-            <div class="thumbnail margin-cenrto" id="corelation-field">
-                <img src="/images/graf2.png" alt="">
+            <div class="thumbnail margin-cenrto" id="corelation-field" style="width: 700px">
             </div>
                 <script>
                     $(function () {
+                        var data = [
+                            <c:forEach items='${regress.answers}' var="answers">
+                                [${answers["codeX"]}, ${answers["codeY"]}],
+                            </c:forEach>
+
+                        ];
+
                         $('#corelation-field').highcharts({
                             chart: {
                                 type: 'scatter',
@@ -98,17 +104,17 @@
                             series: [{
                                 name: 'Точки',
                                 color: 'rgba(223, 83, 83, .5)',
-                                data: [
+                                data: data/*[
                                     [161.0, 53.6], [151.1, 73.2], [168.2, 53.4], [168.9, 69.0], [173.2, 58.4],
 
-                                    [176.5, 71.8], [164.4, 55.5], [160.7, 48.6], [174.0, 66.4], [163.8, 67.3]]
+                                    [176.5, 71.8], [164.4, 55.5], [160.7, 48.6], [174.0, 66.4], [163.8, 67.3]]*/
 
                             }]
                         });
                     });
                 </script>
             <br>
-            <%--TODO рисунок нелинейных форм, если неопределена то выход--%>
+            <%--&lt;%&ndash;TODO рисунок нелинейных форм, если неопределена то выход&ndash;%&gt;
             Определите форму зависимости между переменными
             <div class="row-fluid">
                 <div class="span4">
@@ -156,7 +162,7 @@
                     </label>
                     <img src="/images/non-regression.png">
                 </div>
-            </div>
+            </div>--%>
             <ul class="pager">
                 <li class="previous">
                     <a data-step="1" href="#">&larr; Назад</a>
@@ -168,10 +174,11 @@
         </div>
         <div class="tab-pane" id="step2" data-target="/forms/${form.idForm}/analysis/regression/step/2"></div>
         <div class="tab-pane" id="step3" data-target="/forms/${form.idForm}/analysis/regression/step/3"></div>
-        <div class="tab-pane" id="step4" data-target="/forms/${form.idForm}/analysis/regression/step/4"></div>
-        <div class="tab-pane" id="step5" data-target="/forms/${form.idForm}/analysis/regression/step/5"></div>
+        <div class="tab-pane" id="step4" data-target="/forms/${form.idForm}/analysis/regression/step/5"></div>
+        <div class="tab-pane" id="step5" data-target="/forms/${form.idForm}/analysis/regression/step/4"></div>
         <div class="tab-pane" id="step6" data-target="/forms/${form.idForm}/analysis/regression/step/6"></div>
         <div class="tab-pane" id="step7" data-target="/forms/${form.idForm}/analysis/regression/step/7"></div>
+        <div class="tab-pane" id="step8" data-target="/forms/${form.idForm}/analysis/regression/step/8"></div>
         <div class="tab-pane" id="finish">
             <h3>Результаты</h3>
 
@@ -179,9 +186,9 @@
                 <li class="previous">
                     <a href="#" data-step="finish">&larr; Назад</a>
                 </li>
-                <li class="next">
+                <%--<li class="next">
                     <a href="#">Далее &rarr;</a>
-                </li>
+                </li>--%>
             </ul>
         </div>
     </div>

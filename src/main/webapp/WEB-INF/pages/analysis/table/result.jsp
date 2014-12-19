@@ -84,57 +84,13 @@
                 </c:forEach>
             </tr>
         </table>
-       <%-- <table class="table table-bordered table_3parameter">
-            <tr>
-                <td></td>
-                <th colspan="<%=size_fird_param * 2%>">${table.firstQuestionData.question.text} (Независимая переменная 1)</th>
-            </tr>
-            <tr>
-                <td></td>
-                <%for (int i = 1; i <= size_second_param; i++) {%>
-                <td colspan="<%=size_fird_param%>">Вариант ответа№<%=i%></td>
-                <%}%>
-            </tr>
-            <tr>
-                <td></td>
-                <%for (int i = 1; i <= size_second_param; i++) {%>
-                <th colspan="<%=size_fird_param%>">${table.secondQuestionData.question.text} (Независимая переменная 2)</th>
-                <%}%>
-            </tr>
-            <tr>
-                <th>${table.questionText[0]} (Зависимая переменная)</th>
-                <%for (int i = 1; i <= size_second_param; i++) {%>
-                <%for (int j = 1; j <= size_fird_param; j++) {%>
-                <td>Вариант ответа№<%=i%></td>
-                <%}%>
-                <%}%>
-            </tr>
-            <%for (int i = 1; i <= size_first_param; i++) {%>
-            <tr>
-                <td>Вариант ответа№<%=i%></td>
-                <%for (int j = 1; j <= size_second_param; j++) {%>
-                <%for (int l = 1; l <= size_fird_param; l++) {%>
-                <td>Значение<%=j%><%=l%></td>
-                <%}%>
-                <%}%>
-            </tr>
-            <%}%>
-            <tr>
-                <th>Итого</th>
-                <%for (int i = 1; i <= size_second_param; i++) {%>
-                <%for (int j = 1; j <= size_fird_param; j++) {%>
-                <td>Сумма</td>
-                <%}%>
-                <%}%>
-            </tr>
-        </table>--%>
         <c:if test="${fn:contains(table.types,1)}">
             <div class="dependence margin-button15">
                 <strong>Зависимость наблюдаемой связи</strong><br>
-                    <%--Расчитаное значение хи-квадрата = 3.88<br>
-                    Критического значение хи-квадрата = 3.77<br>
-                    3.77>3.88--%>
-                    ${table.xi2Calc}
+                    Расчитаное значение хи-квадрата = ${table.xi2Calc}<br>
+                    Критического значение хи-квадрата = ${table.xi2Tabl}<br>
+                    ${table.xi2Calc} ${xi2Calc>table.xi2Tabl ? ">" : "<"} ${table.xi2Tabl}
+                    <br>
             </div>
         </c:if>
         <c:if test="${fn:contains(table.types,2)}">

@@ -19,13 +19,14 @@
     где a = ${regress.a}<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b = ${regress.b}<br><br>
 
-    Выберите уровень значимости l
+    Выберите уровень значимости для следущего шага
     <select name="important_level">
-        <% for (double i = 1; i < 6; i++) {%>
-        <option value="<%=i / 16%>">
-            <%=i / 16%>
-        </option>
-        <%}%>
+        <option>0.005</option>
+        <option>0.01</option>
+        <option>0.025</option>
+        <option>0.05</option>
+        <option>0.1</option>
+        <option>0.25</option>
     </select>
 </div>
 <ul class="pager">

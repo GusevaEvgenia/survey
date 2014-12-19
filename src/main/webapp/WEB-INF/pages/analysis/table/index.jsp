@@ -110,11 +110,12 @@
                     <div class="margin-left30 level hidden">
                         Выберите уровень значимости
                         <select name="a">
-                            <option>0.5</option>
-                            <option>0.25</option>
-                            <option>0.01</option>
                             <option>0.005</option>
-                            <option>0.001</option>
+                            <option>0.01</option>
+                            <option>0.025</option>
+                            <option>0.05</option>
+                            <option>0.1</option>
+                            <option>0.25</option>
                         </select>
                     </div>
                     <label class="checkbox">

@@ -32,6 +32,7 @@ public class RegressionAnalysesController extends AbstractController {
         return getView("index");
     }
 
+    //запись вопросов в сессию
     @RequestMapping(method = RequestMethod.POST, value = "/result")
     public String resultAction(ModelMap model, @PathVariable("id") int id, HttpServletRequest request) {
         int[] questions = {
@@ -42,6 +43,7 @@ public class RegressionAnalysesController extends AbstractController {
         return "redirect:/forms/"+id+"/analysis/regression/result";
     }
 
+    //переход на страницу результата, на первый таб
     @RequestMapping(method = RequestMethod.GET, value = "/result")
     public String getResultAction(ModelMap model, @PathVariable("id") int id) {
         model.addAttribute("form", formsService.getForm(id));
@@ -54,6 +56,28 @@ public class RegressionAnalysesController extends AbstractController {
         return getView("result");
     }
 
+    //переход на следующий таб
+    @RequestMapping(method = RequestMethod.GET, value = "/step/{step:[0-9]+}")
+    public String getPageAction(ModelMap model, @PathVariable("step") String step, HttpServletRequest request) {
+        int[] questions = getQuestions();
+        Regression r = new Regression(analysisService.getAnalysisData(questions));
+        switch (Integer.parseInt(step)){
+            case 2: //со 1-ого на 2-ий
+                //TODO преобразование в лин форму если нужно
+                break;
+            case 3: //со 2-ого на 3-ий
+                r.setImportant_level(Double.parseDouble(request.getParameter("important_level")));
+                break;
+            case 5: //со 3-ого на 5-ий
+                r.setImportant_level(Double.parseDouble(request.getParameter("important_level")));
+                break;
+        }
+
+        model.addAttribute("regress", r);
+        return getView("steps/"+step);
+    }
+
+    //последняя страница анализа
     @RequestMapping(method = RequestMethod.POST, value = "/prognoz")
     public String prognozAction(ModelMap model, @PathVariable("id") int id,  HttpServletRequest request) {
         model.addAttribute("form", formsService.getForm(id));
@@ -64,19 +88,10 @@ public class RegressionAnalysesController extends AbstractController {
         return getView("prognoz");
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/step/{step:[0-9]+}")
-    public String getPageAction(ModelMap model, @PathVariable("step") String step, HttpServletRequest request) {
-        int[] questions = getQuestions();
-        Regression r = new Regression(analysisService.getAnalysisData(questions));
-        model.addAttribute("regress", r);
-        return getView("steps/"+step);
-    }
-
     @Override
     protected String getViewPath() {
         return "analysis/regression";
     }
-
     protected int[] getQuestions() {
         return (int[]) getFromSession(SESSION_KEY);
     }

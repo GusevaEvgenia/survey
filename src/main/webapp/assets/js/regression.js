@@ -6,27 +6,45 @@ $(document).ready(function () {
             $targetTab = $($target.attr('href')),
             targetUrl = $targetTab.data("target"),
             params = {};
+        var flag = false;
         switch ($(this).data("step")) {
             case 1:
                 reset_results();
                 break;
             case 2:
                 reset_results();
-                //TODO фигня какая то непонятная. проверить!
-//                if (Math.abs(parseFloat($("#corelation").text())) >= 0.8) {
-//                    switch_tab();
-//                } else {
-//                    finishTab();
-//                }
                 params.important_level = $("select[name='important_level']").val();
                 break;
             case 3:
+                reset_results();
+                params.important_level = $("select[name='important_level2']").val();
+                if ($("#flag").data("val")) {
+                    flag = true;
+                }
+                break;
+            case 5:
+                reset_results();
+                if ($("#flag").data("val")) {
+                    flag = true;
+                }
+                break;
+            case 4:
+                reset_results();
+                if ($("#flag").data("val")) {
+                    flag = true;
+                }
+                break;
+            case 6:
+                reset_results();
                 break;
             default:
 //                switch_tab();
         }
-
-        getTab($targetTab, targetUrl + '?' + $.param(params));
+        if (flag) {
+            finishTab();
+        }else {
+            getTab($targetTab, targetUrl + '?' + $.param(params));
+        }
     });
     $tabs.delegate("select[name='important_level']", "change", function () {
         type_changed = true;

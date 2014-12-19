@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <h3>Оценка тесноты и оценка значимости уравнения</h3><br>
-Коэффициентом детерминации г2 (теснота связи) = 0,87<br><br>
+Коэффициентом детерминации г2 (теснота связи) = ${regress.determination}<br><br>
 Проверка значимости коэффициента детерминации с помощью F-критерия.<br>
 
-F-вычисленное = 8,414<br>
-F-расчетное = 2,414<br><br>
-8,414>2,414 Следовательно нулевую гипотезу отклоняют <br>
+F-вычисленное = ${regress.f}<br>
+F-расчетное = ${regress.fTable}<br><br>
+|${regress.f}| ${regress.fMod>regress.fTable ? ">" : "<"}  ${regress.fTable}
+<%--<input type="hidden" id="flag" data-val="${regress.fMod>regress.fable ? false : true}">Вернуть--%>
 <ul class="pager">
     <li class="previous">
         <a href="#" data-step="4">&larr; Назад</a>
