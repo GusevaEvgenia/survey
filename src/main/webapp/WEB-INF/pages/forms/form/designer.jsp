@@ -56,7 +56,7 @@
                                 <div>
                                     <select class="question-scale" name="question[0].scale">
                                         <option value="nominal">номинальная</option>
-                                        <option value="ordinal">ординарная</option>
+                                        <option value="ordinal">порядковая</option>
                                         <option value="interval">интервальная</option>
                                         <option value="ratio">абсолютная</option>
                                     </select>

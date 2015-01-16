@@ -1,13 +1,12 @@
 package com.survey.mvc.controller;
 
 import com.survey.mvc.entity.UsersEntity;
+import com.survey.mvc.model.integration.ThirdPartySurvey;
 import com.survey.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +16,9 @@ public class IndexController extends AbstractController{
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ThirdPartySurvey surveyMonkey;
 
     //главная страница сайта
     @RequestMapping(method = RequestMethod.GET)
@@ -42,6 +44,44 @@ public class IndexController extends AbstractController{
             return "redirect:/";
         }
 
+    }
+
+    /**
+     * We use it for auth callback. We will be redirected here with code(token)
+     * after auth on 3rd party server will be done
+     * @param id
+     * @param code
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "auth/{id:[0-9]+}/assign/callback")
+    public @ResponseBody String assignCallbackAction(@PathVariable("id") Integer id, @RequestParam String code) {
+        UsersEntity u = userService.getUser(id);
+        u.setToken(code);
+        userService.updateUser(u);
+        return "<script>window.close();</script>";
+    }
+
+    /**
+     * We use it to open popup and redirect to 3rd party auth url
+     * @param id
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "auth/{id:[0-9]+}/assign")
+    public String assignAction(@PathVariable("id") Integer id) {
+        return "redirect:"+surveyMonkey.getAuthUrl(id);
+    }
+
+    /**
+     * we use it to remove association with 3rd party api
+     * @param id
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.DELETE, value = "auth/{id:[0-9]+}/unassign")
+    public @ResponseBody String unassignAction(@PathVariable("id") Integer id) {
+        UsersEntity u = userService.getUser(id);
+        u.setToken(null);
+        userService.updateUser(u);
+        return "redirect:/user/update";
     }
 
     //страница пользователя

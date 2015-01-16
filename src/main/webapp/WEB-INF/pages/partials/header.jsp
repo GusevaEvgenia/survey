@@ -14,6 +14,9 @@
         <script type="text/javascript" src="/js/designer.js"></script>
         <script type="text/javascript" src="/js/template.js"></script>
         <script type="text/javascript" src="/js/highcharts/highcharts.js"></script>
+        <script type="text/javascript" src="/js/jsMath.js"></script>
+        <script type="text/javascript" src="/js/noImageFonts.js"></script>
+        <script type="text/javascript" src="/js/jsMath-fallback-pc.js"></script>
 
         <script>
             $(document).ready(function() {

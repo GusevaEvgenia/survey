@@ -51,6 +51,7 @@
         <form id="table-an-q" action="/forms/${form.idForm}/analysis/table/result">
             <div class="row-fluid">
                 <div class="span12">
+<c:if test='${questions.size()>0}'>
                     <h4>Выберите параметры для построения таблиц сопряженности признаков</h4>
                     <%--<strong>Выберите количество переменных:</strong>
                     <div class="form-inline">
@@ -125,6 +126,10 @@
 
                     <button class="btn btn-primary">Провести анализ</button>
                 </div>
+                </c:if>
+                <c:if test='${questions.size()==0}'>
+                    <h4 class="text-center">У вас нет ответов на анкету.</h4>
+                </c:if>
             </div>
         </form>
         <br>

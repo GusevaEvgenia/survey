@@ -43,6 +43,7 @@ public class DesignerController extends AbstractController{
         model.addAttribute("newForm", newForm);
         if(!formsService.getForm(id).getStatus().equals("draft")){
             model.addAttribute("flag", true);
+            formsService.setPicture("/uploads/draft.jpg", newForm.getIdForm());
         }
         return getView("designer");
     }

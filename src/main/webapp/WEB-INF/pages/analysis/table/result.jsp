@@ -95,9 +95,7 @@
         </c:if>
         <c:if test="${fn:contains(table.types,2)}">
             <div class="strength_links margin-button15">
-                <strong>Теснота связи</strong><br>
-                Теснота связи = 0.55<br>
-                ${table.strengthLinks}
+                <strong>Теснота связи </strong>= ${table.strengthLinks}
             </div>
         </c:if>
 

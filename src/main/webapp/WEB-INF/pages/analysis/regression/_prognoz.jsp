@@ -1,8 +1,9 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <h3>Прогнозирование</h3>
 <div class="row-fluid">
     <div class="span4">
-        Модель y = ${prognoz.a} + ${prognoz.b}x<br><br>
+        Модель y = <span id="parA">${regress.a}</span> + <span id="parB">${regress.b}</span>x<br><br>
         Расчитать у<br>
         <table>
             <tr>
@@ -15,10 +16,16 @@
             </tr>
         </table><br>
     </div>
-    <div class="span8">
+    <div class="span6 offset1">
         <div id="prognoz-graf" style="width: 500px; height: 400px;"></div>
         <script>
             $(function () {
+                var data = [
+                    <c:forEach items='${regress.result}' var="result">
+                        [${result[0]}, ${result[1]}],
+                    </c:forEach>
+
+                ];
                 $('#prognoz-graf').highcharts({
                     title: {
                         text: ''
@@ -44,7 +51,7 @@
                         enabled: false
                     },
                     series: [{
-                        data: [[-7.0, 6.9], [9.5, 14.5], [18.2, 21.5]]
+                        data: data
                     }
                     ]
                 });

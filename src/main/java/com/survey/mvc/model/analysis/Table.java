@@ -72,7 +72,7 @@ public class Table extends Analysis  {
                 if(summ == 0) {
                     colum.add("0");
                 } else {
-                    double percent = ((double)getFrequency(mainId, firstId))/ summ; //
+                    double percent = ((double)getFrequency(mainId, firstId))/ summ;
                     double perc = Math.floor(percent*10000)/100;
                     colum.add(String.valueOf(perc));
                     prc += perc;
@@ -215,7 +215,7 @@ public class Table extends Analysis  {
         return fe;
     }
     public String getXi2Tabl(){
-        int fredom = (getRowsLength()-1)*(getColumnsLength()-1);
+        int fredom = (getRowsLength()-2)*(getColumnsLength()-1);
         ArrayList<HashMap<String, String>> tablXi = initTab();
         return tablXi.get(fredom-1).get(String.valueOf(a));
     }
@@ -396,6 +396,38 @@ public class Table extends Analysis  {
         row20.put("0.01", "37.566");
         row20.put("0.005", "39.997");
         tablXi2.add(row20);
+        HashMap<String, String> row21 = new HashMap<String, String>();
+        row21.put("0.25", "23.328");
+        row21.put("0.1", "28.412");
+        row21.put("0.05", "31.410");
+        row21.put("0.025", "34.170");
+        row21.put("0.01", "37.566");
+        row21.put("0.005", "39.997");
+        tablXi2.add(row21);
+        HashMap<String, String> row22 = new HashMap<String, String>();
+        row22.put("0.25", "23.328");
+        row22.put("0.1", "28.412");
+        row22.put("0.05", "31.410");
+        row22.put("0.025", "34.170");
+        row22.put("0.01", "37.566");
+        row22.put("0.005", "39.997");
+        tablXi2.add(row22);
+        HashMap<String, String> row23 = new HashMap<String, String>();
+        row23.put("0.25", "23.328");
+        row23.put("0.1", "28.412");
+        row23.put("0.05", "31.410");
+        row23.put("0.025", "34.170");
+        row23.put("0.01", "37.566");
+        row23.put("0.005", "39.997");
+        tablXi2.add(row23);
+        HashMap<String, String> row24 = new HashMap<String, String>();
+        row24.put("0.25", "");
+        row24.put("0.1", "33.196");
+        row24.put("0.05", "36.42");
+        row24.put("0.025", "");
+        row24.put("0.01", "42.989");
+        row24.put("0.005", "");
+        tablXi2.add(row24);
         HashMap<String, String> row30 = new HashMap<String, String>();
         row30.put("0.25", "34.8");
         row30.put("0.1", "40.256");

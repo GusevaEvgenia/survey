@@ -44,7 +44,9 @@
                             <i class="icon-wrench"></i> Настройки
                         </a>
                     </li>
-                    <li><a href="/forms/${form.idForm}/analysis/basic"><i class="icon-tasks"></i> Анализ</a></li>
+                    <li class="${form.status=="draft" ? "hidden": ""}">
+                        <a href="/forms/${form.idForm}/analysis/basic"><i class="icon-tasks"></i> Анализ</a>
+                    </li>
                 </ul>
             </div>
             <div class="span5">
@@ -58,7 +60,7 @@
                             <a class="btn btn-info" id="btn-link" data-href="${form.link}"><i class="icon-globe"></i> Получить ссылку</a>
                         </c:if>
                     </c:if>
-                    <a class="btn btn-info" href=""><i class="icon-download-alt"></i> Сохранить в файл</a>
+                    <%--<a class="btn btn-info" href=""><i class="icon-download-alt"></i> Сохранить в файл</a>--%>
                 </div>
             </div>
         </div>

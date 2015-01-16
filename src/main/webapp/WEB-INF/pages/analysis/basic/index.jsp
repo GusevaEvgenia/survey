@@ -27,8 +27,8 @@
             });
         </script>
 
-        <h4>Выберите вопросы для проведения анализа</h4>
         <c:if test='${questions.size()>0}'>
+            <h4>Выберите вопросы для проведения анализа</h4>
             <form class="margin-left50" action="/forms/${form.idForm}/analysis/basic/methods" id="questions-form" method="GET">
                     <%-- <input type="hidden" name="page" value="2">--%>
                 <label class="checkbox">

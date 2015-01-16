@@ -4,7 +4,9 @@
 У<br><br>
 SEE = 0.3 <br>--%>
 <h3>Критерии Дарбина-Уотсона</h3>
-${regress.darbin}
+<div class="math">
+    \Large Критерии = ${regress.darbin}
+</div>
 <ul class="pager">
     <li class="previous">
         <a href="#" data-step="6">&larr; Назад</a>
@@ -13,3 +15,7 @@ ${regress.darbin}
         <a href="#" data-step="6">Далее &rarr;</a>
     </li>
 </ul>
+
+<SCRIPT>
+    jsMath.Process(document);
+</SCRIPT>

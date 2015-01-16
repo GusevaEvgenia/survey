@@ -36,6 +36,14 @@ public class SurveyMonkey implements ThirdPartySurvey{
         this.token = token;
     }
 
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
     @Override
     public Collection<Form> getForms() {
         JsonObject requestBody = new JsonObject();
@@ -88,7 +96,7 @@ public class SurveyMonkey implements ThirdPartySurvey{
                         long answerId = a.getAsJsonObject().get("row").getAsLong();
                         answerText = formQuestion.getOptions().get(answerId);
                     } else {
-                         answerText = "Опять  хуйня какая-то=(";
+                         answerText = "";
                     }
 
                     int i = 0;
@@ -116,6 +124,18 @@ public class SurveyMonkey implements ThirdPartySurvey{
             answers.add(completedForm);
         }
         return answers;
+    }
+
+    /**
+     * get URl for auth
+     * @param user
+     * @return
+     */
+    @Override
+    public String getAuthUrl(int user) {
+        String base = "https://ru.surveymonkey.com/user/oauth/authorize";
+        String redirectUrl = "http://localhost:8080/auth/" + user + "/assign/callback";
+        return base + "?" + getAuthParams() + "&redirect_uri="+redirectUrl;
     }
 
     private Long getIdCollector(Form form){
@@ -173,7 +193,13 @@ public class SurveyMonkey implements ThirdPartySurvey{
         return form;
     }
 
-
+    /**
+     * Get parameters for auth in url query string format
+     * @return
+     */
+    private String getAuthParams() {
+        return "client_id=" + clientId + "&api_key=" + apiKey + "&response_type=code";
+    }
 
     private JsonObject call(String url, String body){
         ResponseEntity<String> response  = restTemplate.exchange(

@@ -12,8 +12,8 @@ import java.util.HashMap;
  * Created by Belkin on 12.12.2014.
  */
 public class Regression  extends Analysis{
-    private Basic basicX = new Basic((AnalysisData) getXQuestionData());
-    private Basic basicY = new Basic((AnalysisData) getYQuestionData());
+    private Basic basicX;
+    /*private Basic basicY = new Basic((AnalysisData) getYQuestionData());*/
     private double averageX;
     private double averageY;
     private double a; //параметр а
@@ -26,6 +26,8 @@ public class Regression  extends Analysis{
     private double determination; //детерминиция
     private double tParam; //
     private double f; //
+    private double from = 0; //
+    private double to = 20; //
     private ArrayList<HashMap<String, String>> answers;
 
     public Regression(Collection<AnalysisData> data) {
@@ -109,20 +111,22 @@ public class Regression  extends Analysis{
             }
         }
         int n = getAnswers().size();
-        return Math.round(determination / (1 - determination) * (n - 2) *100) / 100.00;
+        f  = Math.round(determination / (1 - determination) * (n - 2) *100) / 100.00;
+        return f;
     }
     public double getfMod(){
         return Math.abs(f);
     }
     //сделать массив
     public double getfTable(){
-        return 4.11;
+        return 4.414;
     }
     //видимо нужно сравнить с таблицей
     public double getDarbin(){
         return Math.rint(sumE2()/sumE_E12() *100) / 100.00;
     }
     public double getAcym(){
+        basicX = new Basic((AnalysisData) getXQuestionData());
         return basicX.getAsymmetry();
     }
     public double getAcymParam(){
@@ -131,6 +135,7 @@ public class Regression  extends Analysis{
         return Math.round((3 * Math.sqrt(6 /n)) * 100) / 100.00;
     }
     public double getEx(){
+        basicX = new Basic((AnalysisData) getXQuestionData());
         return basicX.getExcess();
     }
     public double getExParam(){
@@ -138,9 +143,19 @@ public class Regression  extends Analysis{
         //return Math.round(5 * Math.sqrt(24 * n * (n - 2) * (n - 3) / (Math.pow(n - 1, 2) * (n + 3) * (n + 5))) * 100) / 100.00;
         return Math.round((6 * Math.sqrt(6 /n)) * 100) / 100.00;
     }
+    public double getExepOproc(){
+        double n  = getAnswers().size();
+        return Math.round((1 / n * summA()) * 10000) / 100.00;
+    }
 
     public void setImportant_level(double important_level) {
         this.important_level = important_level;
+    }
+    public void setA(double a) {
+        this.a = a;
+    }
+    public void setB(double b) {
+        this.b = b;
     }
 
     private double sumX(){
@@ -221,6 +236,15 @@ public class Regression  extends Analysis{
         }
         return Math.round(sum * 100) / 100.00;
     }
+    private double summA(){
+        double sum = 0;
+        for (HashMap<String, String> value : getAnswers()) {
+            double x = Integer.parseInt(value.get("codeX"));
+            double y = Integer.parseInt(value.get("codeY"));
+            sum += Math.abs((y - getY(x)) / y);
+        }
+        return Math.round(sum * 10)/10.00;
+    }
 
     private double getAverageX() {
         if(averageX == 0){
@@ -272,15 +296,26 @@ public class Regression  extends Analysis{
         }
         return answers;
     }
+    public ArrayList<ArrayList<Double>> getResult(){
+        ArrayList<ArrayList<Double>> result = new ArrayList<ArrayList<Double>>();
+        for(double i=from; i<=to; i+=0.5){
+            ArrayList<Double> point = new ArrayList<Double>();
+            point.add(i);
+            point.add(getY(i));
+            result.add(point);
+        }
+        return result;
+    }
 
+    //t
     private ArrayList<HashMap<String, String>> initTab(){
         ArrayList<HashMap<String, String>> tablXi2 = new ArrayList<HashMap<String, String>>();
         HashMap<String, String> row18 = new HashMap<String, String>();
         row18.put("0.25", "");
-        row18.put("0.1", "");
-        row18.put("0.05", "");
+        row18.put("0.1", "1.734");
+        row18.put("0.05", "2.101");
         row18.put("0.025", "");
-        row18.put("0.01", "");
+        row18.put("0.01", "2.878");
         row18.put("0.005", "");
         tablXi2.add(row18);
         HashMap<String, String> row19 = new HashMap<String, String>();

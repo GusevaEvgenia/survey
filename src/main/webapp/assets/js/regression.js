@@ -37,6 +37,17 @@ $(document).ready(function () {
             case 6:
                 reset_results();
                 break;
+            case 7:
+                reset_results();
+                if ($("#flag").data("val")) {
+                    flag = true;
+                }
+                break;
+            case 8:
+                reset_results();
+                params.a = $("#a").data("val");
+                params.b = $("#b").data("val");
+                break;
             default:
 //                switch_tab();
         }
@@ -73,8 +84,8 @@ $(document).ready(function () {
             $(".unline_form").addClass("hidden");
         }
     });
-    $tabs.delegate("#prognoz_value", "keypress", function () {
-        $("#prognoz_result").text(prognoz($(this).val()));
+    $tabs.delegate("#prognoz_value", "keyup", function () {
+        $("#prognoz_result").text(prognoz(parseFloat($(this).val()), parseFloat($("#parA").text()), parseFloat($("#parB").text())));
     });
 
     function getTab(tab, url) {
@@ -101,7 +112,7 @@ $(document).ready(function () {
         }
     }
 
-    function prognoz(x) {
-        return x * 12 + 0.45;
+    function prognoz(x, a, b) {
+        return Math.ceil((x * b + a) *100)/100;
     }
 });

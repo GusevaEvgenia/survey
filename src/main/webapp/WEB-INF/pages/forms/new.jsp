@@ -3,6 +3,18 @@
 <jsp:include page="/WEB-INF/pages/partials/header.jsp">
     <jsp:param name="title" value=""/>
 </jsp:include>
+<script>
+    function validate() {
+        var title = document.getElementsByName("title")[0].value;
+        if (title.length == 0) {
+            $("#title").removeClass("hidden");
+            document.getElementById('title').innerHTML = 'Введите загаловок анкеты';
+            return false;
+        } else {
+            $("#title").addClass("hidden");
+        }
+    }
+</script>
 <div class="row-fluid">
     <div class="span10 offset1">
         <%--Заголовок страницы--%>
@@ -13,10 +25,11 @@
         <div class="row-fluid">
             <%--Ввод информации--%>
             <div class="span7 offset3">
-                <form class="margin-button0" id="save-form" action="/forms" method="POST" commandName="form">
+                <form onsubmit='return validate()' class="margin-button0" id="save-form" action="/forms" method="POST" commandName="form">
                     <div class="margin-button15">
                         <h4>Введите название анкеты</h4>
                         <p>
+                            <span style='color:red' class="hidden" id="title"></span>
                             <input class="input-xxlarge" name="title" type="type" size="100">
                         </p>
                     </div>

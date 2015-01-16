@@ -45,6 +45,8 @@
 
     <bean id="surveyMonkey" class="com.survey.mvc.model.integration.SurveyMonkey">
         <constructor-arg name="apiKey" value="h72xc3wm4svxkvuuhm4eeu6m" type="java.lang.String" />
+        <property name="secret" value="3BpUZtbXxKwTTdR9QEzGBCQ37H9tHQ7W"/>
+        <property name="clientId" value="shk0dinka" />
     </bean>
 
     <tx:annotation-driven />

@@ -40,10 +40,11 @@
                         </c:choose>
                     </c:forEach>
                 </div>
-                <div class="text-center ${designer.size==0 ? "hidden" : ""}">
+                <%--TODO непонятно что происходит!--%>
+                <div class="text-center ${designer.size<0 ? "hidden" : ""}">
                     <button class="btn btn-primary ${btnSave==1 ? "" : "disabled"}" ${btnSave==1 ? "" : "disabled"} type="submit">Сохранить</button>
                 </div>
             </form>
         </div>
-    </div>
+    </div
 </div>

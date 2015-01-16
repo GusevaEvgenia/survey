@@ -49,6 +49,7 @@ public class FormsController extends AbstractController {
     //Создание анкеты
     @RequestMapping(method = RequestMethod.POST)
     public String createAction(@ModelAttribute("form") FormsEntity form) {
+        form.setLink(formsService.getLink());
         formsService.addForm(form);
         List<FormsEntity> forms = formsService.getForms();
         int p=0;

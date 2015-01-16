@@ -3,6 +3,10 @@
     <jsp:param name="title" value=""/>
 </jsp:include>
 
+<script type="text/javascript" src="/js/regression.js">
+
+</script>
+
 <div class="row-fluid">
     <div class="span10 offset1">
         <div class="hero-unit hero">
@@ -11,7 +15,7 @@
 
         <jsp:include page="/WEB-INF/pages/analysis/_menu.jsp"/>
 
-        <div>
+        <div class="tab-content">
             <jsp:include page="/WEB-INF/pages/analysis/regression/_prognoz.jsp" />
 
             <ul class="pager">

@@ -2,7 +2,7 @@ $(document).ready(function(){
     $('.remove-btn').on('click', function(e){
         e.preventDefault();
         var id = $(this).data('id');
-        if(confirm("Чё, реально?")) {
+        if(confirm("Вы уверены что хотите удалить эту анкету?")) {
             $.ajax('/forms/'+id, {
                 method: 'DELETE',
                 success: function() {
@@ -14,7 +14,7 @@ $(document).ready(function(){
     $('.remove-btn1').on('click', function(e){
         e.preventDefault();
         var id = $(this).data('id');
-        if(confirm("Чё, реально?")) {
+        if(confirm("Вы уверены что хотите удалить эту анкету?")) {
             $.ajax('/forms/'+id, {
                 method: 'DELETE',
                 success: function() {

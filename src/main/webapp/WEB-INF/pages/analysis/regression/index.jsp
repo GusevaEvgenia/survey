@@ -41,10 +41,10 @@
                 });
             });
         </script>
-        <%--<input type="hidden" name="page" value="2">--%>
+        <c:if test='${questions.size()>0}'>
         <label class="radio">
             <input class="regOrProg" type="radio" name="regOrProg" value="1" checked>
-            <h4>Выберите параметры для проведения регрессионого анализа</h4>
+            <h4>Выберите цель для проведения регрессионого анализа</h4>
         </label>
 
         <form action="/forms/${form.idForm}/analysis/regression/result" method="post" id="table-reg-q">
@@ -86,15 +86,24 @@
         <form action="/forms/${form.idForm}/analysis/regression/prognoz" method="post">
             <div class="hidden" id="progress">
                 Модель парной регрессии<br>
-                Уравнение в виде линейной регресии имеет вид<br>
-                yi = a + b * xi<br><br>
+                Уравнение в виде линейной регресии имеет вид
+                <div class="math">
+                    \Large y_{i} = a + b * x
+                </div>
                 Введите параметры модели<br><br>
                 a = <input class="input-mini" type="text" name="paramA"><br>
                 b = <input class="input-mini" type="text" name="paramB"><br>
                 <button class="btn btn-primary">Прогноз</button>
             </div>
         </form>
+        </c:if>
+        <c:if test='${questions.size()==0}'>
+            <h4 class="text-center">У вас нет ответов на анкету.</h4>
+        </c:if>
     </div>
 </div>
 
+<SCRIPT>
+    jsMath.Process(document);
+</SCRIPT>
 <jsp:include page="/WEB-INF/pages/partials/footer.jsp"/>

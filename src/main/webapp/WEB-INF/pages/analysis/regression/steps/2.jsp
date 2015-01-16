@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="model-regression" id="function-1">
     <h3>Модель парной регрессии</h3>
-    Уравнение в виде линейной регресии имеет вид<br><br>
-    yi = a + b * xi<br><br>
+    Уравнение в виде линейной регресии имеет вид
+    <div class="math">
+        \Large y_{i} = a + b * x
+    </div>
 </div>
 <%--TODO преобразование нелинейных форм--%>
 <div class="model-regression hidden" id="function-2">
@@ -16,9 +18,14 @@
     <br>
 </div>
 <div>
-    где a = ${regress.a}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b = ${regress.b}<br><br>
-
+    где
+    <div class="math">
+        \Large  a = ${regress.a}
+    </div>
+    <div class="math">
+        \Large  b = ${regress.b}
+    </div>
+    <br>
     Выберите уровень значимости для следущего шага
     <select name="important_level">
         <option>0.005</option>
@@ -37,3 +44,7 @@
         <a href="#" data-step="2">Далее &rarr;</a>
     </li>
 </ul>
+
+<SCRIPT>
+    jsMath.Process(document);
+</SCRIPT>

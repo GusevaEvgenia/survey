@@ -3,15 +3,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <h3>Проверка значимости с помощью t-критерия</h3><br>
 <strong>Гипотеза</strong><br><br>
-H0:β1=0<br>
-H1:β1≠0<br><br>
-Нулевая гипотеза предполагает, что между Х и У не существует линейной зависимости.<br>
-Альтернативная гипотеза утверждает, что между X и У существует зависимость, либо положительная, либо
-отрицательная.<br><br>
-t-вычисленное = ${regress.tCount}<br>
-t-расчетное = ${regress.tTable}<br><br>
-|${regress.tCount}| ${regress.tCountMod>regress.tTable ? ">" : "<"}  ${regress.tTable} Следовательно нулевую гипотезу ${regress.tCountMod>regress.tTable ? "подтверждают" : "отклоняют"}
-<%--<c:if test="${regress.tCountMod>regress.tTable}"> Вернеть--%>
+Предположим что чежду переменными не существует линейной зависимости.<br>
+<div class="math">
+    \Large t_{вычисленное} = ${regress.tCount}
+</div>
+<div class="math">
+    \Large t_{критическое} = ${regress.tTable}
+</div>
+<div class="math">
+    \Large |${regress.tCount}| ${regress.tCountMod>regress.tTable ? ">" : "<"}  ${regress.tTable}
+</div>
+Следовательно гипотезу ${regress.tCountMod>regress.tTable ? "подтверждают" : "отклоняют"}
+<c:if test="${regress.tCountMod>regress.tTable}"></c:if>
 <br>
 Выберите уровень значимости для следующего шага
 <select name="important_level2">
@@ -32,3 +35,7 @@ t-расчетное = ${regress.tTable}<br><br>
         <a href="#" data-step="3">Далее &rarr;</a>
     </li>
 </ul>
+
+<SCRIPT>
+    jsMath.Process(document);
+</SCRIPT>

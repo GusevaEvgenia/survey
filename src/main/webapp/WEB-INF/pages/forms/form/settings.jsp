@@ -15,17 +15,29 @@
             }
         });
     });
+
+    function validate() {
+        var title = document.getElementsByName("title")[0].value;
+        if (title.length == 0) {
+            $("#title").removeClass("hidden");
+            document.getElementById('title').innerHTML = 'Введите загаловок анкеты';
+            return false;
+        } else {
+            $("#title").addClass("hidden");
+        }
+    }
 </script>
 
 <jsp:include page="/WEB-INF/pages/forms/form/_menu.jsp"/>
 
         <div class="row-fluid">
             <div class="span7 offset3">
-                <form class="margin-button0" id="hh" action="/forms/${form.idForm}/settings" method="POST"
+                <form onsubmit='return validate()' class="margin-button0" id="hh" action="/forms/${form.idForm}/settings" method="POST"
                       commandName="formUpdate" accept-charset="UTF-8">
                     <div class="margin-button15">
                         <h4>Название анкеты:</h4>
                         <p>
+                            <span style='color:red' class="hidden" id="title"></span>
                             <input class="input-xxlarge" name="title" value="${form.title}" type="text" size="100">
                         </p>
                     </div>
@@ -53,29 +65,17 @@
                             <input class="input-mini" name="maximumForms" type="number"  value="${form.maximumForms}" >
                         </p>
                     </div>
-                    <div class="margin-button15">
+                    <c:if test="${form.status!='draft'}">
+                        <div class="margin-button15">
                             <label class="checkbox">
                                 <h4>Переместить анкету в архив <input class="statusForm" type="checkbox" name="arch" value="true"></h4>
                             </label>
-                    </div>
+                        </div>
+                    </c:if>
                     <textarea class="hidden" name="idForm" rows="3">${form.idForm}</textarea>
                     <input type="hidden" class="statusFormSet" name="status" value="${form.status}" type="text">
                 </form>
             </div>
-            <%--<div class="span4">
-                <h4>
-                    Вставьте свой логотип анкеты
-                    <br>
-                    <small>Его будете видеть только вы</small>
-                </h4>
-                <form action="" enctype="multipart/form-data" method="post">
-                    <p>
-                        <input class="hidden" type="file" name="picture" accept="image/*,image/jpeg">
-                        <input class="btn btn-primary" type="submit" value="Загрузить">
-                    </p>
-                </form>
-                <img src="${false ? param.picture : "/images/form.jpg"}" width="180" height="200"  alt="">
-            </div>--%>
         </div>
         <div class="row-fluid" >
             <div class="span2 offset3">

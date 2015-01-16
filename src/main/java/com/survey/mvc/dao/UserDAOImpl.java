@@ -29,6 +29,7 @@ public class UserDAOImpl implements UserDAO {
         userToUpdate.setName(user.getName());
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPassword(user.getPassword());
+        userToUpdate.setToken(user.getToken());
         getCurrentSession().update(userToUpdate);
     }
 

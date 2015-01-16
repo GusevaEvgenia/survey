@@ -1,7 +1,6 @@
 package com.survey.mvc.model.analysis;
 
 import com.survey.mvc.model.analysis.data.AnalysisData;
-import com.survey.mvc.model.analysis.data.Answer;
 import com.survey.mvc.model.interfaces.IQuestion;
 
 import java.util.ArrayList;
@@ -17,10 +16,10 @@ public class Basic extends Analysis {
     public static final String SCALE_RATIO = "ratio";
     public static final String SCALE_ORDINAL = "ordinal";
     public static final String SCALE_INTERVAL = "interval";
-    public static final Integer[] NOMINAL_AVAILABLE  = {1, 2, 4, 5, 6, 7, 8, 9, 10, 11 };
-    public static final Integer[] RATIO_AVAILABLE    = {1, 4, 10, 11};
-    public static final Integer[] ORDINAL_AVAILABLE  = {1, 2, 4, 5, 6, 7, 8, 9, 10, 11};
-    public static final Integer[] INTERVAL_AVAILABLE = {1, 3, 10, 11};
+    public static final Integer[] NOMINAL_AVAILABLE  = {1, 3};
+    public static final Integer[] OTNOSITELNAIA_AVAILABLE = {1, 2, 5, 6, 7, 8, 9, 10, 11};
+    public static final Integer[] PORADKOVAIA_AVAILABLE = {1, 4};
+    public static final Integer[] INTERVAL_AVAILABLE = {1, 2, 5, 6, 7, 8, 9, 10, 11};
 
     private ArrayList<Integer> types = new ArrayList<Integer>();
     private Double average;
@@ -73,11 +72,11 @@ public class Basic extends Analysis {
         if(scale.equals(SCALE_NOMINAL)) {
             response = Arrays.asList(NOMINAL_AVAILABLE);
         } else if(scale.equals(SCALE_RATIO)) {
-            response = Arrays.asList(RATIO_AVAILABLE);
+            response = Arrays.asList(OTNOSITELNAIA_AVAILABLE);
         } else if(scale.equals(SCALE_INTERVAL)) {
             response = Arrays.asList(INTERVAL_AVAILABLE);
         } else if(scale.equals(SCALE_ORDINAL)) {
-            response = Arrays.asList(ORDINAL_AVAILABLE);
+            response = Arrays.asList(PORADKOVAIA_AVAILABLE);
         } else {
             response = new ArrayList<Integer>();
         }
@@ -149,7 +148,7 @@ public class Basic extends Analysis {
                 int f = getFrequency(Long.parseLong(answer.get("id")));
                 if(f>m){
                     m=f;
-                    moda = Long.parseLong(answer.get("id"));
+                    moda = Long.parseLong(answer.get("order"));
                 }
             }
         }

@@ -71,6 +71,10 @@ public class RegressionAnalysesController extends AbstractController {
             case 5: //со 3-ого на 5-ий
                 r.setImportant_level(Double.parseDouble(request.getParameter("important_level")));
                 break;
+            case 9: //со 3-ого на 5-ий
+                r.setA(Double.parseDouble(request.getParameter("a")));
+                r.setB(Double.parseDouble(request.getParameter("b")));
+                break;
         }
 
         model.addAttribute("regress", r);
@@ -83,8 +87,8 @@ public class RegressionAnalysesController extends AbstractController {
         model.addAttribute("form", formsService.getForm(id));
         double a = Double.parseDouble(request.getParameter("paramA"));
         double b = Double.parseDouble(request.getParameter("paramB"));
-        /*Regression r = new Regression(a, b);
-        model.addAttribute("prognoz", r);*/
+        Regression r = new Regression(a, b);
+        model.addAttribute("regress", r);
         return getView("prognoz");
     }
 

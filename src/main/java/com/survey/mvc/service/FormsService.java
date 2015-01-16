@@ -24,4 +24,5 @@ public interface FormsService {
     public void setPicture(String name, int id);
     public void setArchive(int id);
     public void deleteLink(int id);
+    public String getLink();
 }

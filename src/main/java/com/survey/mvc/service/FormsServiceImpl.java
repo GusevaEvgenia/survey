@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +74,7 @@ public class FormsServiceImpl implements FormsService {
         FormsEntity f = getForm(formId);
         if(!f.getStatus().equals("draft")){
             f = formsDAO.clone(f);
+            f.setLink(getLink());
             formsDAO.saveOrUpdateForm(f, true);
             formId = f.getIdForm();
         }
@@ -143,5 +146,11 @@ public class FormsServiceImpl implements FormsService {
     @Override
     public void deleteLink(int id) {
         formsDAO.getForm(id).setLink(null);
+    }
+
+    @Override
+    public String getLink(){
+        SecureRandom random = new SecureRandom();
+        return new BigInteger(130, random).toString(32);
     }
 }

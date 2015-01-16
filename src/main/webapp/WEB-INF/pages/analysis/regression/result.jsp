@@ -19,7 +19,7 @@
     <%--шаги анализа--%>
     <ul class="nav nav-tabs regression-tabs">
         <li class="active"><a href="#step1" data-toggle="tab">Шаг 1</a></li>
-        <c:forEach  begin="2" end="8" var="i">
+        <c:forEach  begin="2" end="9" var="i">
             <li class="hidden">
                 <a href="#step${i}" data-toggle="tab">Шаг ${i}</a>
             </li>
@@ -179,6 +179,7 @@
         <div class="tab-pane" id="step6" data-target="/forms/${form.idForm}/analysis/regression/step/6"></div>
         <div class="tab-pane" id="step7" data-target="/forms/${form.idForm}/analysis/regression/step/7"></div>
         <div class="tab-pane" id="step8" data-target="/forms/${form.idForm}/analysis/regression/step/8"></div>
+        <div class="tab-pane" id="step9" data-target="/forms/${form.idForm}/analysis/regression/step/9"></div>
         <div class="tab-pane" id="finish">
             <h3>Результаты</h3>
 

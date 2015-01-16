@@ -16,4 +16,5 @@ public interface ThirdPartySurvey {
     public Collection<Form> getForms();
     public Form getForm(int id);
     public ArrayList<CompletedFormRow> getAnswers(Form form);
+    public String getAuthUrl(int user);
 }
